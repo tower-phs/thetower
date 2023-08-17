@@ -1,0 +1,159 @@
+{
+	"sections": [
+		{
+			"name": "Senior Editors",
+			"members": [
+				{
+					"name": "Jessica Chen",
+					"position": "Editor-in-Chief"
+				},
+				{
+					"name": "Peter Eaton",
+					"position": "Managing Editor"
+				},
+				{
+					"name": "Shumona Bhattacharjya",
+					"position": "Managing Editor"
+				}
+			]
+		},
+		{
+			"name": "Online",
+			"members": [
+				{
+					"name": "Jieruei Chang",
+					"position": "Online Co-Editor"
+				},
+				{
+					"name": "Athena Huan",
+					"position": "Online Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "News & Features",
+			"members": [
+				{
+					"name": "Chris Cheong",
+					"position": "News & Features Co-Editor"
+				},
+				{
+					"name": "Daniel Guo",
+					"position": "News & Features Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Multimedia",
+			"members": [
+				{
+					"name": "Alexander Margulis",
+					"position": "Multimedia Co-Editor"
+				},
+				{
+					"name": "Thomas Zhang",
+					"position": "Multimedia Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Opinions",
+			"members": [
+				{
+					"name": "Tamar Assayag",
+					"position": "Opinions Co-Editor"
+				},
+				{
+					"name": "Jane Bennett",
+					"position": "Opinions Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Vanguard",
+			"members": [
+				{
+					"name": "Syra Bhatt",
+					"position": "Vanguard Co-Editor"
+				},
+				{
+					"name": "Will Pittman",
+					"position": "Vanguard Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Arts & Entertainment",
+			"members": [
+				{
+					"name": "Marina Yazbek Dias Peres",
+					"position": "Arts & Entertainment Co-Editor"
+				},
+				{
+					"name": "Sara Shahab Diaz",
+					"position": "Arts & Entertainment Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Sports",
+			"members": [
+				{
+					"name": "Matthew Chen",
+					"position": "Sports Co-Editor"
+				},
+				{
+					"name": "Dester Selby-Salazar",
+					"position": "Sports Co-Editor"
+				},
+				{
+					"name": "Sophie Zhang",
+					"position": "Sports Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Visuals",
+			"members": [
+				{
+					"name": "Caroline Gu",
+					"position": "Visuals Co-Editor"
+				},
+				{
+					"name": "Sara Hu",
+					"position": "Visuals Co-Editor"
+				},
+				{
+					"name": "Wenya Huan",
+					"position": "Visuals Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Copy",
+			"members": [
+				{
+					"name": "Holly Christiansen",
+					"position": "Co-Head Copy Editor"
+				},
+				{
+					"name": "Joseph Hu",
+					"position": "Co-Head Copy Editor"
+				}
+			]
+		},
+		{
+			"name": "Business",
+			"members": [
+				{
+					"name": "Anika Hadap",
+					"position": "Business Co-Editor"
+				},
+				{
+					"name": "Natalie Ruzich",
+					"position": "Business Co-Editor"
+				}
+			]
+		}
+	]
+}

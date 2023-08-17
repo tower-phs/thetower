@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model article {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar
+  content     String
+  published   Boolean  @default(false)
+  category    String   @db.VarChar
+  subcategory String   @db.VarChar
+  authors     String[] @db.VarChar
+  month       Int      @db.SmallInt
+  year        Int      @db.SmallInt
+  img         String   @db.VarChar
+}
+
+model spreads {
+  id    Int    @id @default(autoincrement())
+  title String @db.VarChar
+  src   String @db.VarChar
+  month Int    @db.SmallInt
+  year  Int    @db.SmallInt
+}

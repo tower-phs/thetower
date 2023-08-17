@@ -1,0 +1,9 @@
+.prettierrc
+.eslintrc.json
+tsconfig.json
+next-env.d.ts
+next.config.js
+package.json
+pnpm-lock.yaml
+cypress.json
+*.md

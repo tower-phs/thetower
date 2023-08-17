@@ -1,0 +1,142 @@
+{
+	"sections": [
+		{
+			"name": "Senior Editors",
+			"members": [
+				{
+					"name": "Christopher Bao",
+					"position": "Co-Editor-in-Chief"
+				},
+				{
+					"name": "Julie Liu",
+					"position": "Co-Editor-in-Chief"
+				},
+				{
+					"name": "Cherie Sun",
+					"position": "Managing Editor"
+				}
+			]
+		},
+		{
+			"name": "Online",
+			"members": [
+				{
+					"name": "Bella Cui",
+					"position": "Online Co-Editor"
+				},
+				{
+					"name": "Luke Tong",
+					"position": "Online Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "News & Features",
+			"members": [
+				{
+					"name": "Peter Eaton",
+					"position": "News & Features Co-Editor"
+				},
+				{
+					"name": "Olivia Mao",
+					"position": "News & Features Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Opinions",
+			"members": [
+				{
+					"name": "Alexander Margulis",
+					"position": "Opinions Co-Editor"
+				},
+				{
+					"name": "Thomas Zhang",
+					"position": "Opinions Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Vanguard",
+			"members": [
+				{
+					"name": "Sophie Miller",
+					"position": "Vanguard Co-Editor"
+				},
+				{
+					"name": "Andrew Zhao",
+					"position": "Vanguard Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Arts & Entertainment",
+			"members": [
+				{
+					"name": "Shumona Bhattacharjya",
+					"position": "Arts & Entertainment Co-Editor"
+				},
+				{
+					"name": "Rida Mian",
+					"position": "Arts & Entertainment Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Sports",
+			"members": [
+				{
+					"name": "Jessica Chen",
+					"position": "Sports Co-Editor"
+				},
+				{
+					"name": "Francesca Gamio",
+					"position": "Sports Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Visuals",
+			"members": [
+				{
+					"name": "Wenya Huan",
+					"position": "Visuals Co-Editor"
+				},
+				{
+					"name": "Emily Qian",
+					"position": "Visuals Co-Editor"
+				},
+				{
+					"name": "Lydia Madamopoulou",
+					"position": "Visuals Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Copy",
+			"members": [
+				{
+					"name": "Holly Christiansen",
+					"position": "Co-Head Copy Editor"
+				},
+				{
+					"name": "Sophie Feldman",
+					"position": "Co-Head Copy Editor"
+				}
+			]
+		},
+		{
+			"name": "Business",
+			"members": [
+				{
+					"name": "Ronil Mishra",
+					"position": "Business Co-Editor"
+				},
+				{
+					"name": "Debolina Sen",
+					"position": "Business Co-Editor"
+				}
+			]
+		}
+	]
+}
