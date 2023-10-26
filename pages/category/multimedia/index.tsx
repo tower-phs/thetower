@@ -86,6 +86,8 @@ export default function Category(/*{ spreads }: Props*/) {
 					</section>*/}
 					<section className="papercasts">
 						<h2>PHS Talks</h2>
+						<Podcast link="1187999" />
+						<Podcast link="1143064" />
 						<Podcast link="937713" />
 						<Podcast link="927613" />
 						<Podcast link="844939" />

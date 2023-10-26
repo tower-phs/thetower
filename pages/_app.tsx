@@ -325,7 +325,11 @@ function NavBar() {
 					<Link href="/category/opinions/cheers-jeers">Cheers & Jeers</Link>
 				</Button>
 
-				<Button name="Vanguard" href="/category/vanguard" />
+				<Button name="Vanguard" href="/category/vanguard">
+					<Link href="/category/vanguard">Spreads</Link>
+					<hr />
+					<Link href="/category/vanguard/vanguard">Articles</Link>
+				</Button>
 
 				<Button name="Arts & Entertainment" href="/category/arts-entertainment">
 					<Link href="/category/arts-entertainment/student-artists">Student Artists</Link>
