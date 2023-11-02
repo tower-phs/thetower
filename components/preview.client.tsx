@@ -44,10 +44,11 @@ export default function ArticlePreview({ article, category, style = "row", size 
 		}
 	}
 
-	if (!article.img?.includes(".")) article.img = "/assets/default.png";
+	let showimg = "";
+	if (!article.img?.includes(".")) showimg = "noimg"; // article.img = "/assets/default.png";
 
 	return (
-		<div className={"article-preview " + style + " " + size}>
+		<div className={"article-preview " + style + " " + size + " " + showimg}>
 			<style jsx>{`
 				.article-preview a:hover {
 					text-decoration: underline;
@@ -125,6 +126,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 					background-color: #f5f5f5;
 					padding: 10px;
 					margin-bottom: 10px;
+					border: 1px solid gainsboro;
 					border-left: 2px solid ${styles.color.secondary};
 				}
 				.article-preview > .large-preview:hover {
@@ -136,11 +138,13 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				.article-preview > .small-preview {
 					display: contents;
 				}
+				.noimg {
+					display: grid;
+					grid-template-columns: 1fr !important;
+				}
 			`}</style>
 			<div className={size + "-preview"}>
-				<div className="img-wrapper">
-					<img src={article.img} className={size}></img>
-				</div>
+				<div className="img-wrapper">{!article.img?.includes(".") ? <></> : <img src={article.img} className={size}></img>}</div>
 				<div>
 					<section className="category">
 						<em>
@@ -152,11 +156,15 @@ export default function ArticlePreview({ article, category, style = "row", size 
 						</em>
 					</section>
 					<section className="title">
-						<Link href={"/articles/" + article.year + "/" + article.month + "/" + article.category + "/" + encodeURI(article.title)}>
+						<Link
+							href={`/articles/${article.year}/${article.month}/${article.category}/${article.title
+								.replaceAll(" ", "-")
+								.replaceAll(/[^0-9a-z\-]/gi, "")}-${article.id}`}
+						>
 							<a className={size}>{article.title}</a>
 						</Link>
 					</section>
-					<br></br>
+
 					<section className="authors">
 						{article.authors?.map((author, index) => (
 							<>

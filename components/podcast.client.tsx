@@ -14,6 +14,7 @@ export default function Podcast({ link }: Props) {
 			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 			allowFullScreen
 			width={"99%"}
+			scrolling="no"
 		/>
 	);
 }
