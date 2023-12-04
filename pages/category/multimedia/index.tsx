@@ -5,6 +5,7 @@ import shuffle from "lodash/shuffle";
 import Head from "next/head";
 import ArticlePreview from "~/components/preview.client";
 import Video from "~/components/video.client";
+import Podcast from "~/components/podcast.client";
 import { getArticlesByCategory } from "~/lib/queries";
 import NoSSR from "~/components/nossr.client";
 
@@ -37,7 +38,12 @@ export default function Category(/*{ spreads }: Props*/) {
 				.grid {
 					display: grid;
 					grid-template-columns: 2fr 1fr 1fr;
-					height: 100vh;
+					/*height: 100vh;*/
+				}
+				@media (max-width: 1000px) {
+					.grid {
+						grid-template-columns: 1fr;
+					}
 				}
 				.grid > section:nth-child(even) {
 					border-left: 1px solid gainsboro;
@@ -52,11 +58,6 @@ export default function Category(/*{ spreads }: Props*/) {
 					grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 					gap: 1vw;
 				}
-				.rightbar section {
-					height: 50vh;
-					/*overflow-y: scroll;
-					overflow-x: hidden;*/
-				}
 				.videos,
 				.papercasts {
 					height: 100%;
@@ -70,48 +71,33 @@ export default function Category(/*{ spreads }: Props*/) {
 			<div className="grid">
 				<NoSSR>
 					<section className="videos">
+						<Video link="GDDGmRkkS5A" title="Soccer Practice with Nick Matese" />
+						<br />
+						<Video link="NlVjqI7eSfc" title="To Track or Not To Track? - A Math Talk with NCTM President Kevin Dykema" />
+						<br />
+						<Video link="VEcVyFME3M0" title="The Making of Newsies" />
+						<br />
 						<Video link="Z4bZBXoVseo" title="Artist of the Month: Kevin Huang Profile" />
-						<br />
-						<hr></hr>
-						<br />
 						{/*
 						<div className="sm-grid">
 							<Video link="Z4bZBXoVseo" title="Artist of the Month: Kevin Huang Profile" />
 						</div>*/}
 					</section>
-					<section className="papercasts">
+					{/*<section className="papercasts">
 						<h2>Papercasts</h2>
+					</section>*/}
+					<section className="papercasts">
+						<h2>PHS Talks</h2>
+						<Podcast link="1187999" />
+						<Podcast link="1143064" />
+						<Podcast link="937713" />
+						<Podcast link="927613" />
+						<Podcast link="844939" />
 					</section>
-					<div className="rightbar">
-						<section className="talks">
-							<h2>PHS Talks</h2>
-							<iframe
-								className="podcast"
-								src="https://player.rss.com/phstalks/844939?theme=light"
-								title="rss embed thingy"
-								frameBorder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowFullScreen
-							>
-								<a href="https://rss.com/podcasts/phstalks/844939/">
-									Brent Ferguson on the intersection of math and religion | RSS.com
-								</a>
-							</iframe>
-						</section>
-						<section className="inside">
-							<h2>Inside PHS</h2>
-							<iframe
-								className="podcast"
-								src="https://player.rss.com/phstalks/876635?theme=light"
-								title="rss embed thingy"
-								frameBorder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowFullScreen
-							>
-								<a href="https://rss.com/podcasts/phstalks/876635/">Inside PHS: What happened to Mr. Chmiel?</a>
-							</iframe>
-						</section>
-					</div>
+					<section className="rightbar">
+						<h2>Inside PHS</h2>
+						<Podcast link="876635" />
+					</section>
 				</NoSSR>
 			</div>
 		</div>

@@ -113,7 +113,7 @@ function Banner() {
 					<span style={{ color: "white", cursor: "pointer", fontFamily: "Open Sans" }}>SUBSCRIBE</span>
 				</Link>
 				<br />
-				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/423-full.pdf">
+				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/1023-full.pdf">
 					<span style={{ color: "white", cursor: "pointer", fontFamily: "Open Sans" }}>PRINT EDITION</span>
 				</Link>
 				<br />
@@ -325,7 +325,11 @@ function NavBar() {
 					<Link href="/category/opinions/cheers-jeers">Cheers & Jeers</Link>
 				</Button>
 
-				<Button name="Vanguard" href="/category/vanguard" />
+				<Button name="Vanguard" href="/category/vanguard">
+					<Link href="/category/vanguard">Spreads</Link>
+					<hr />
+					<Link href="/category/vanguard/vanguard">Articles</Link>
+				</Button>
 
 				<Button name="Arts & Entertainment" href="/category/arts-entertainment">
 					<Link href="/category/arts-entertainment/student-artists">Student Artists</Link>

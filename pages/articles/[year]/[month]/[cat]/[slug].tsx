@@ -28,9 +28,21 @@ interface Params {
 }
 
 export async function getServerSideProps({ params }: Params) {
+	// get id from slug
+	const article_id = params.slug.split("-").slice(-1)[0];
+	// test if id is a number
+	if (isNaN(Number(article_id))) {
+		// old scheme
+		return {
+			props: {
+				article: await getArticle(params.year, params.month, params.cat, "null", params.slug),
+			},
+		};
+	}
+	// new scheme
 	return {
 		props: {
-			article: await getArticle(params.year, params.month, params.cat, params.slug),
+			article: await getArticle(params.year, params.month, params.cat, article_id, params.slug),
 		},
 	};
 }
@@ -123,10 +135,7 @@ export default function Article({ article }: Props) {
 						paragraph.startsWith("@img=") ? (
 							<img src={paragraph.substring(5)} width="100%" height="auto" key={index}></img>
 						) : (
-							<p key={index}>
-								{paragraph}
-								{index < paragraphs.length - 1 ? "" : "∎"}
-							</p>
+							<p key={index}>{paragraph.replace("&lt;", "<").replace("&gt;", ">")}</p>
 						)
 					)}
 				</div>

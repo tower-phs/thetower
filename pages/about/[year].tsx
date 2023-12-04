@@ -87,15 +87,16 @@ export default function Year({ year, sections }: Props) {
 					{section.members.map((member, index) => (
 						<>
 							<CreditLink key={index} author={member.name} />
-							<span style={{ marginLeft: "10px" }}>{member.position}</span>
+							<span style={{ fontSize: "18px" }}>, {member.position}</span>
 							<br />
 						</>
 					))}
 				</>
 			))}
 			<h2>Advisors</h2>
-			<p>Lauren King</p>
-			<p>Doug Levandowski</p>
+			<span style={{ fontSize: "18px" }}>Lauren King</span>
+			<br></br>
+			<span style={{ fontSize: "18px" }}>Doug Levandowski</span>
 		</div>
 	);
 }

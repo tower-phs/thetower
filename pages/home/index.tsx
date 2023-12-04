@@ -2,7 +2,10 @@
 
 import { article } from "@prisma/client";
 import Head from "next/head";
+import Link from "next/link";
 import ArticlePreview from "~/components/preview.client";
+import Video from "~/components/video.client";
+import Podcast from "~/components/podcast.client";
 import { getFrontpageArticles } from "~/lib/queries";
 
 export async function getServerSideProps() {
@@ -58,7 +61,10 @@ export default function FrontPage({ articles }: Props) {
 						<NewsFeatures {...articles["news-features"]} />
 						<Sports {...articles["sports"]} />
 					</div>
-					<Opinions {...articles["opinions"]} />
+					<div>
+						<Multimedia />
+						<Opinions {...articles["opinions"]} />
+					</div>
 					<ArtsEntertainment {...articles["arts-entertainment"]} />
 				</div>
 			</div>
@@ -157,46 +163,19 @@ export function Sports(articles: article[]) {
 	);
 }
 
-export function ArtsEntertainmentOld(articles: article[]) {
+export function Multimedia() {
 	return (
-		<div className="ane">
-			<style jsx>{`
-				.ane {
-					padding-right: 10px;
-					border-right: 1px solid gainsboro;
-				}
-			`}</style>
-			<ArticlePreview article={articles[0]} style="box" size="large" category />
+		<div className="multimedia">
 			<div>
-				{Object.values(articles)
-					.slice(1)
-					.map(article => (
-						<ArticlePreview key={article.id} style="row" size="medium" article={article} category />
-					))}
-			</div>
-		</div>
-	);
-}
-
-export function SportsOld(articles: article[]) {
-	return (
-		<div className="ane">
-			<style jsx>{`
-				.double {
-					display: grid;
-					grid-gap: 10px;
-					grid-template-columns: 1fr 1fr;
-				}
-			`}</style>
-			<div className="sports">
-				<ArticlePreview article={articles[0]} style="box" size="large" category />
-				<div className="double">
-					{Object.values(articles)
-						.slice(1)
-						.map(article => (
-							<ArticlePreview key={article.id} style="row" size="small" article={article} category />
-						))}
-				</div>
+				<section className="category">
+					<em>
+						<Link href={"/category/multimedia"}>
+							<span style={{ margin: "0px", fontFamily: "Open Sans" }}>Multimedia</span>
+						</Link>
+					</em>
+				</section>
+				<Video link="GDDGmRkkS5A" title="Soccer Practice with Nick Matese" />
+				<Podcast link="1187999" />
 			</div>
 		</div>
 	);

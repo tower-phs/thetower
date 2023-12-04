@@ -44,7 +44,7 @@ export default function About() {
 			<br />
 
 			<p>
-				<b>Editorial Board:</b> The Editoral Board of the Tower consists of a select group of 13 Tower 2022 staff members. The views of board
+				<b>Editorial Board:</b> The Editoral Board of the Tower consists of a select group of 14 Tower 2023 staff members. The views of board
 				members are accurately reflected in the editorial, which is co-written each month by the Board with primary authorship changing
 				monthly.
 			</p>
