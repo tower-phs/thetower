@@ -32,7 +32,7 @@ export async function getFrontpageArticles() {
 			});
 			articles[categories[i]] = temp;
 			if (month === 0) {
-				month = 12;
+				month = 13;
 				year--;
 			}
 		}
