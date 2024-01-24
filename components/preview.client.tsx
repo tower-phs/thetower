@@ -160,6 +160,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 							href={`/articles/${article.year}/${article.month}/${article.category}/${article.title
 								.replaceAll(" ", "-")
 								.replaceAll(/[^0-9a-z\-]/gi, "")}-${article.id}`}
+							legacyBehavior
 						>
 							<a className={size}>{article.title}</a>
 						</Link>

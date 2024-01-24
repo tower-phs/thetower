@@ -8,7 +8,6 @@ import dayjs from "dayjs";
 import { FaFacebookSquare } from "@react-icons/all-files/fa/FaFacebookSquare";
 import { FaInstagramSquare } from "@react-icons/all-files/fa/FaInstagramSquare";
 import Button from "~/components/button.client";
-import { years } from "~/lib/constants";
 
 import "~/styles/styles.scss";
 import styles from "~/lib/styles";
@@ -139,7 +138,7 @@ function Banner() {
 			</div>
 			<div className="image">
 				<Link href="/home" passHref>
-					<Image src="/assets/logo.png" alt="Tower banner" width="350px" height="105px" priority />
+					<Image src="/assets/logo.png" alt="Tower banner" width={350} height={105} priority />
 				</Link>
 			</div>
 		</div>
@@ -212,7 +211,7 @@ function Footer() {
 				<a href="https://www.facebook.com/phstower" target="_blank" rel="noopener noreferrer">
 					<FaFacebookSquare size="2.2em" />
 				</a>
-				<Link href="/home">
+				<Link href="/home" legacyBehavior>
 					<a className="home-btn">Go to home page »</a>
 				</Link>
 			</div>

@@ -8,7 +8,6 @@ export async function getFrontpageArticles() {
 	let articles: Record<string, article[]> = { "news-features": [], opinions: [], "arts-entertainment": [], sports: [] };
 	const categories = Object.keys(articles);
 
-	await prisma.$connect();
 	for (let i = 0; i < categories.length; i++) {
 		const curr = new Date();
 		let month = curr.getMonth() + 3;
@@ -38,28 +37,20 @@ export async function getFrontpageArticles() {
 		}
 	}
 
-	prisma.$disconnect();
-
 	return articles;
 }
 
 export async function getPublishedArticles() {
-	await prisma.$connect();
-
 	const articles = await prisma.article.findMany({
 		where: {
 			published: true,
 		},
 	});
 
-	prisma.$disconnect();
-
 	return articles;
 }
 
 export async function getArticle(year: string, month: string, cat: string, id: string, slug: string) {
-	await prisma.$connect();
-
 	// new scheme
 	if (id !== "null") {
 		const article = await prisma.article.findFirst({
@@ -68,8 +59,6 @@ export async function getArticle(year: string, month: string, cat: string, id: s
 				published: true,
 			},
 		});
-
-		prisma.$disconnect();
 
 		return article;
 	}
@@ -85,14 +74,10 @@ export async function getArticle(year: string, month: string, cat: string, id: s
 		},
 	});
 
-	prisma.$disconnect();
-
 	return article;
 }
 
 export async function getCurrArticles() {
-	await prisma.$connect();
-
 	const curr = new Date();
 	let month = curr.getMonth() + 1;
 	let year = curr.getFullYear();
@@ -107,15 +92,11 @@ export async function getCurrArticles() {
 		articles = await getArticlesByDateOld(year.toString(), month.toString());
 	}
 
-	prisma.$disconnect();
-
 	return articles;
 }
 
 export async function getArticlesByDateOld(year: string, month: string) {
 	let articles: article[] = [];
-
-	await prisma.$connect();
 
 	articles = await prisma.article.findMany({
 		orderBy: [
@@ -130,16 +111,12 @@ export async function getArticlesByDateOld(year: string, month: string) {
 		},
 	});
 
-	prisma.$disconnect();
-
 	return articles;
 }
 
 export async function getArticlesByDate(year: string, month: string) {
 	let articles: Record<string, article[]> = { "news-features": [], opinions: [], "arts-entertainment": [], sports: [] };
 	const categories = Object.keys(articles);
-
-	await prisma.$connect();
 
 	for (let category of categories) {
 		articles[category] = await prisma.article.findMany({
@@ -157,14 +134,10 @@ export async function getArticlesByDate(year: string, month: string) {
 		});
 	}
 
-	prisma.$disconnect();
-
 	return articles;
 }
 
 export async function getArticlesByCategory(cat: string) {
-	await prisma.$connect();
-
 	const articles = await prisma.article.findMany({
 		orderBy: [
 			{
@@ -180,13 +153,10 @@ export async function getArticlesByCategory(cat: string) {
 		},
 	});
 
-	prisma.$disconnect();
-
 	return articles;
 }
 
 export async function getArticlesBySearch(cat: string) {
-	await prisma.$connect();
 	const articles = await prisma.article.findMany({
 		orderBy: [
 			{
@@ -224,14 +194,10 @@ export async function getArticlesBySearch(cat: string) {
 		},
 	});
 
-	prisma.$disconnect();
-
 	return articles;
 }
 
 export async function getArticlesBySubcategory(subcat: string) {
-	await prisma.$connect();
-
 	const articles = await prisma.article.findMany({
 		orderBy: [
 			{
@@ -247,14 +213,10 @@ export async function getArticlesBySubcategory(subcat: string) {
 		},
 	});
 
-	prisma.$disconnect();
-
 	return articles;
 }
 
 export async function getArticlesByAuthor(author: string) {
-	await prisma.$connect();
-
 	const articles = await prisma.article.findMany({
 		orderBy: [
 			{
@@ -272,14 +234,10 @@ export async function getArticlesByAuthor(author: string) {
 		},
 	});
 
-	prisma.$disconnect();
-
 	return articles;
 }
 
 export async function getSpreadsByCategory(category: string) {
-	await prisma.$connect();
-
 	const spreads = await prisma.spreads.findMany({
 		orderBy: [
 			{
@@ -296,21 +254,15 @@ export async function getSpreadsByCategory(category: string) {
 		},
 	});
 
-	prisma.$disconnect();
-
 	return spreads;
 }
 
 export async function getSpread(slug: string) {
-	await prisma.$connect();
-
 	const spreads = await prisma.spreads.findFirst({
 		where: {
 			title: decodeURI(slug),
 		},
 	});
-
-	prisma.$disconnect();
 
 	return spreads;
 }
