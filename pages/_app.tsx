@@ -343,6 +343,8 @@ function NavBar() {
 				</Button>
 
 				<Button name="About" href="/about">
+					<Link href="/about/2024">2024 Staff</Link>
+					<hr />
 					<Link href="/about/2023">2023 Staff</Link>
 					<hr />
 					<Link href="/about/2022">2022 Staff</Link>
