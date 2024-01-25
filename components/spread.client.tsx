@@ -35,7 +35,7 @@ export default function Spread({ spread }: Props) {
 				}
 			`}</style>
 			<section className="title">
-				<Link href={"/spreads/" + spread.year + "/" + spread.month + "/vanguard/" + encodeURI(spread.title)}>
+				<Link legacyBehavior href={"/spreads/" + spread.year + "/" + spread.month + "/vanguard/" + encodeURI(spread.title)}>
 					<a>{spread.title}</a>
 				</Link>
 			</section>

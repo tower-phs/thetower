@@ -12,6 +12,7 @@ export const categorySlugs = new Map<string, string>([
 	["nsi", "New Student Issues"],
 ]);
 
+export const normalCategories = ["news-features", "opinions", "arts-entertainment", "sports", "special"];
 export const categories = ["news-features", "multimedia", "opinions", "vanguard", "arts-entertainment", "sports", "special"];
 
 export const subcategories = [
