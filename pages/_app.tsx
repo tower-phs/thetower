@@ -113,7 +113,7 @@ function Banner() {
 					<span style={{ color: "white", cursor: "pointer", fontFamily: "Open Sans" }}>SUBSCRIBE</span>
 				</Link>
 				<br />
-				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/1023-full.pdf">
+				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/1223-full.pdf">
 					<span style={{ color: "white", cursor: "pointer", fontFamily: "Open Sans" }}>PRINT EDITION</span>
 				</Link>
 				<br />
@@ -139,7 +139,7 @@ function Banner() {
 			</div>
 			<div className="image">
 				<Link href="/home" passHref>
-					<Image src="/assets/logo.png" alt="Tower banner" width="350px" height="105px" priority />
+					<Image src="/assets/logo.png" alt="Tower banner" width={350} height={105} priority />
 				</Link>
 			</div>
 		</div>
