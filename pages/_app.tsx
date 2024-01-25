@@ -65,7 +65,8 @@ function Banner() {
 				.sub {
 					position: absolute;
 					left: 1vw;
-					bottom: 20px;
+					top: 5px;
+					bottom: 5px;
 				}
 				.search {
 					position: absolute;
@@ -138,7 +139,7 @@ function Banner() {
 			</div>
 			<div className="image">
 				<Link href="/home" passHref>
-					<Image src="/assets/logo.png" alt="Tower banner" width={350} height={105} priority />
+					<Image src="/assets/logo.png" alt="Tower banner" width={250} height={75} priority />
 				</Link>
 			</div>
 		</div>
