@@ -12,7 +12,7 @@ const styles = {
 		secondary: "#a8133f",
 		tertiary: "#061b40",
 		navbar: "#041a38",
-		accent: "#c1d2d9;",
+		accent: "#c1d2d9",
 	},
 	lineHeight: 2,
 };

@@ -1,0 +1,164 @@
+{
+	"sections": [
+		{
+			"name": "Senior Editors",
+			"members": [
+				{
+					"name": "Daniel Guo",
+					"position": "Editor-in-Chief"
+				},
+				{
+					"name": "Tamar Assayag",
+					"position": "Managing Editor"
+				},
+				{
+					"name": "Matthew Chen",
+					"position": "Managing Editor"
+				}
+			]
+		},
+		{
+			"name": "Online",
+			"members": [
+				{
+					"name": "Henry Langmack",
+					"position": "Online Co-Editor"
+				},
+				{
+					"name": "Ayush Shrivastava",
+					"position": "Online Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "News & Features",
+			"members": [
+				{
+					"name": "Matias da Costa",
+					"position": "News & Features Co-Editor"
+				},
+				{
+					"name": "Claire Tang",
+					"position": "News & Features Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Multimedia",
+			"members": [
+				{
+					"name": "Aritra Ray",
+					"position": "Multimedia Editor"
+				}
+			]
+		},
+		{
+			"name": "Opinions",
+			"members": [
+				{
+					"name": "Tessa Silver",
+					"position": "Opinions Co-Editor"
+				},
+				{
+					"name": "Chloe Zhao",
+					"position": "Opinions Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Vanguard",
+			"members": [
+				{
+					"name": "Syra Bhatt",
+					"position": "Vanguard Co-Editor"
+				},
+				{
+					"name": "Zoe Nuland",
+					"position": "Vanguard Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Arts & Entertainment",
+			"members": [
+				{
+					"name": "Marina Yazbek Dias Peres",
+					"position": "Arts & Entertainment Co-Editor"
+				},
+				{
+					"name": "Sophie Zhang",
+					"position": "Arts & Entertainment Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Sports",
+			"members": [
+				{
+					"name": "Asya Morozov",
+					"position": "Sports Co-Editor"
+				},
+				{
+					"name": "Dester Selby-Salazar",
+					"position": "Sports Co-Editor"
+				},
+				{
+					"name": "Katie Qin",
+					"position": "Sports Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Visuals",
+			"members": [
+				{
+					"name": "Katherine Chen",
+					"position": "Visuals Co-Editor"
+				},
+				{
+					"name": "Charley Hu",
+					"position": "Visuals Co-Editor"
+				},
+				{
+					"name": "Emily Kim",
+					"position": "Visuals Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Copy",
+			"members": [
+				{
+					"name": "James Bertrand",
+					"position": "Co-Head Copy Editor"
+				},
+				{
+					"name": "Kylie Sek",
+					"position": "Co-Head Copy Editor"
+				}
+			]
+		},
+		{
+			"name": "Business",
+			"members": [
+				{
+					"name": "Angela Chen",
+					"position": "Business Co-Editor"
+				},
+				{
+					"name": "Joseph Hu",
+					"position": "Business Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Social Media",
+			"members": [
+				{
+					"name": "Jingwen Yuan",
+					"position": "Social Media Editor"
+				}
+			]
+		}
+	]
+}

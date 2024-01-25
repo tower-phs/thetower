@@ -1,7 +1,6 @@
 /** @format */
 
 import Head from "next/head";
-import Link from "next/link";
 import CreditLink from "~/components/credit.client";
 
 type Member = {
@@ -36,6 +35,11 @@ export async function getStaticPaths() {
 			{
 				params: {
 					year: "2023",
+				},
+			},
+			{
+				params: {
+					year: "2024",
 				},
 			},
 		],

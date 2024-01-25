@@ -2,15 +2,18 @@
 
 const nextConfig = {
   reactStrictMode: true,
-	swcMinify: true,
-	images: {
-    domains: [
-			'lh5.googleusercontent.com',
-			'yusjougmsdnhcsksadaw.supabase.co'
-		],
+  swcMinify: true,
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'lh5.googleusercontent.com',
+        protocol: 'https'
+      },
+      { hostname: 'yusjougmsdnhcsksadaw.supabase.co', protocol: 'https' }
+    ],
   },
-	pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
-	async redirects() {
+  pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
+  async redirects() {
     return [
       {
         source: '/',

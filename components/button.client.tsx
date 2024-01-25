@@ -78,7 +78,7 @@ export default function Button({ name, href, children, className, onClick }: Pro
 					}
 				}
 			`}</style>
-			<Link href={href}>
+			<Link href={href} legacyBehavior>
 				<a className="btn">{name}</a>
 			</Link>
 			{children && <div className="content">{children}</div>}

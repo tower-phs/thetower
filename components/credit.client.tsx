@@ -18,7 +18,7 @@ export default function CreditLink({ author, small }: Props) {
 					text-decoration: underline;
 				}
 			`}</style>
-			<Link className="credit-link" href={"/credit/" + encodeURI(author)}>
+			<Link legacyBehavior className="credit-link" href={"/credit/" + encodeURI(author)}>
 				<a>{author}</a>
 			</Link>
 		</>
