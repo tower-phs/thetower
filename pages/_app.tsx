@@ -43,7 +43,7 @@ function Banner() {
 			<style jsx>{`
 				.banner {
 					margin: 0px;
-					padding-top: 20px;
+					padding-top: 0px;
 					position: relative;
 					background-color: ${styles.color.navbar};
 				}
@@ -338,10 +338,6 @@ function NavBar() {
 					<Link href="/category/sports/student-athletes">Student Athletes</Link>
 				</Button>
 
-				<Button name="Special Issues" href="/category/special/nsi">
-					<Link href="/category/special/nsi">New Student Issues</Link>
-				</Button>
-
 				<Button name="About" href="/about">
 					<Link href="/about/2024">2024 Staff</Link>
 					<hr />
@@ -350,7 +346,9 @@ function NavBar() {
 					<Link href="/about/2022">2022 Staff</Link>
 				</Button>
 
-				<Button name="Archives" href="/archives" />
+				<Button name="Archives" href="/archives">
+					<Link href="/category/special/nsi">New Student Issues</Link>
+				</Button>
 			</div>
 		</div>
 	);
