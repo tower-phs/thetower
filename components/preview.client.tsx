@@ -6,6 +6,7 @@ import Link from "next/link";
 import { displayDate, expandCategorySlug, shortenText } from "~/lib/utils";
 import CreditLink from "./credit.client";
 import styles from "~/lib/styles";
+import React, { Fragment } from "react";
 
 interface Props {
 	article: article;
@@ -168,10 +169,12 @@ export default function ArticlePreview({ article, category, style = "row", size 
 
 					<section className="authors">
 						{article.authors?.map((author, index) => (
-							<>
-								<CreditLink key={index} author={author} />
-								{index < article.authors.length - 1 ? <span style={{ marginLeft: "5px", marginRight: "5px" }}> • </span> : ""}
-							</>
+							<Fragment key={index}>
+								{" "}
+								{/* Use a unique identifier if available, otherwise fallback to index */}
+								<CreditLink author={author} />
+								{index < article.authors.length - 1 && <span style={{ marginLeft: "5px", marginRight: "5px" }}> • </span>}
+							</Fragment>
 						))}
 					</section>
 
