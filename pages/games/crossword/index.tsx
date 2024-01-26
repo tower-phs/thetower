@@ -1,7 +1,7 @@
 /** @format */
 
 import { useMutativeReducer } from "use-mutative";
-import { CrosswordDispatchContext, crosswordStateReducer, initialStateFromInput, useDispatchContext } from "./state";
+import { CrosswordDispatchContext, crosswordStateReducer, initialStateFromInput, useDispatchContext } from "../../../lib/crossword/state";
 import { useEffect, useRef } from "react";
 import { GetServerSidePropsResult } from "next";
 
