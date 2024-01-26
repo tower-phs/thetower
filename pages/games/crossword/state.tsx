@@ -1,16 +1,15 @@
 /** @format */
 
 import { createContext, useContext } from "react";
-import { MutativeReducer, useMutativeReducer } from "use-mutative";
+import { useMutativeReducer } from "use-mutative";
 
 type Dispatcher = ReturnType<typeof useMutativeReducer<GameState, Action>>[1];
 
-type Action = {};
+type Action = { type: "selectCell"; col: number; row: number } | { type: "enterGuess"; letter: string };
 
 export function initialStateFromInput(input: PuzzleInput): GameState {
 	// Initialize rows and columns
-	let rows = 0;
-	let cols = 0;
+	let max = 0;
 
 	// Calculate grid size based on clues
 	for (const directionKey in input) {
@@ -18,19 +17,19 @@ export function initialStateFromInput(input: PuzzleInput): GameState {
 		for (const num in input[direction]) {
 			const clue = input[direction][num];
 			if (direction === "across") {
-				rows = Math.max(rows, clue.row);
-				cols = Math.max(cols, clue.col + clue.answer.length);
+				max = Math.max(max, clue.row);
+				max = Math.max(max, clue.col + clue.answer.length);
 			} else if (direction === "down") {
-				rows = Math.max(rows, clue.row + clue.answer.length);
-				cols = Math.max(cols, clue.col);
+				max = Math.max(max, clue.row + clue.answer.length);
+				max = Math.max(max, clue.col);
 			}
 		}
 	}
 
 	// Initialize grid with unused cells
-	const grid: GridData = Array(rows)
+	const grid: GridData = Array(max)
 		.fill(null)
-		.map(() => Array(cols).fill({ used: false }));
+		.map(() => Array(max).fill({ used: false }));
 
 	// Populate grid with used cells and set numbers for starting positions
 	let clueNumber = 1;
@@ -60,8 +59,8 @@ export function initialStateFromInput(input: PuzzleInput): GameState {
 
 	// Set initial state
 	return {
-		rows,
-		cols,
+		rows: max,
+		cols: max,
 		grid,
 		clues,
 		focused: false,
@@ -70,7 +69,26 @@ export function initialStateFromInput(input: PuzzleInput): GameState {
 	};
 }
 
-export function crosswordStateReducer(state: GameState, action: Action) {}
+export function crosswordStateReducer(state: GameState, action: Action) {
+	switch (action.type) {
+		case "selectCell": {
+			if (state.selectedPosition.col == action.col && state.selectedPosition.row == action.row) {
+				state.selectedDirection = state.selectedDirection == "across" ? "down" : "across";
+			} else {
+				state.selectedPosition = { col: action.col, row: action.row };
+			}
+			// state.focused = true
+			break;
+		}
+		case "enterGuess": {
+			const cell = state.grid[state.selectedPosition.row][state.selectedPosition.col];
+			if (cell.used) {
+				cell.guess = action.letter;
+			}
+			break;
+		}
+	}
+}
 
 export const CrosswordDispatchContext = createContext<Dispatcher>(_ => {});
 
