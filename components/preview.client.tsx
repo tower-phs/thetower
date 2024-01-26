@@ -1,7 +1,6 @@
 /** @format */
 
 import { article } from "@prisma/client";
-import Image from "next/image";
 import Link from "next/link";
 import { displayDate, expandCategorySlug, shortenText } from "~/lib/utils";
 import CreditLink from "./credit.client";
@@ -121,7 +120,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				img {
 					width: 100%;
 					background-color: #f7f7f7;
-					border-radius: 0px;
+					border-radius: 7px;
 				}
 				.article-preview > .large-preview {
 					background-color: #f5f5f5;
