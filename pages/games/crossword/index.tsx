@@ -4,6 +4,7 @@ import { useMutativeReducer } from "use-mutative";
 import { CrosswordDispatchContext, crosswordStateReducer, initialStateFromInput, useDispatchContext } from "../../../lib/crossword/state";
 import { useEffect, useRef } from "react";
 import { GetServerSidePropsResult } from "next";
+import { PuzzleInput } from "~/lib/crossword/types";
 
 type Props = { puzzleInput: PuzzleInput };
 
