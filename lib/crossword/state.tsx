@@ -2,6 +2,7 @@
 
 import { createContext, useContext } from "react";
 import { useMutativeReducer } from "use-mutative";
+import { Clues, Direction, GameState, GridData, PuzzleInput } from "./types";
 
 type Dispatcher = ReturnType<typeof useMutativeReducer<GameState, Action>>[1];
 

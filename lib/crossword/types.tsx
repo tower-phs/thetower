@@ -1,24 +1,24 @@
 /** @format */
 
-type UsedCellData = { used: true; num?: number; guess?: string; answer: string };
-type UnusedCellData = { used: false };
+export type UsedCellData = { used: true; num?: number; guess?: string; answer: string };
+export type UnusedCellData = { used: false };
 
-type CellData = UsedCellData | UnusedCellData;
-type GridData = CellData[][];
+export type CellData = UsedCellData | UnusedCellData;
+export type GridData = CellData[][];
 
-type Direction = "across" | "down";
+export type Direction = "across" | "down";
 
-type Clue = { clue: string; answer: string; row: number; col: number };
-type RuntimeClue = Clue & { num: number };
+export type Clue = { clue: string; answer: string; row: number; col: number };
+export type RuntimeClue = Clue & { num: number };
 
-type PuzzleInput = Record<Direction, Record<number, Clue>>;
+export type PuzzleInput = Record<Direction, Record<number, Clue>>;
 
 // These two arrays will be sorted by num so that we can display the two columns easily
-type Clues = { across: RuntimeClue[]; down: RuntimeClue[] };
+export type Clues = { across: RuntimeClue[]; down: RuntimeClue[] };
 
-type Pos = { row: number; col: number };
+export type Pos = { row: number; col: number };
 
-type GameState = {
+export type GameState = {
 	rows: number;
 	cols: number;
 	grid: GridData;
