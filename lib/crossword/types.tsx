@@ -25,6 +25,6 @@ export type GameState = {
 	clues: Clues;
 
 	focused: boolean;
-	selectedPosition: Pos;
-	selectedDirection: Direction;
+	position: Pos;
+	direction: Direction;
 };

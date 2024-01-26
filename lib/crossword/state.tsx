@@ -6,8 +6,6 @@ import { Clues, Direction, GameState, GridData, PuzzleInput } from "./types";
 
 type Dispatcher = ReturnType<typeof useMutativeReducer<GameState, Action>>[1];
 
-type Action = { type: "selectCell"; col: number; row: number } | { type: "enterGuess"; letter: string };
-
 export function initialStateFromInput(input: PuzzleInput): GameState {
 	// Initialize rows and columns
 	let max = 0;
@@ -33,23 +31,21 @@ export function initialStateFromInput(input: PuzzleInput): GameState {
 		.map(() => Array(max).fill({ used: false }));
 
 	// Populate grid with used cells and set numbers for starting positions
-	let clueNumber = 1;
 	const clues: Clues = { across: [], down: [] };
 
 	for (const directionKey in input) {
 		const direction = directionKey as Direction;
 		for (const num in input[direction]) {
+			const actualNum = num as unknown as number;
 			const clue = input[direction][num];
-			const runtimeClue = { ...clue, num: clueNumber };
+			const runtimeClue = { ...clue, num: actualNum };
 			clues[direction].push(runtimeClue);
 
 			for (let i = 0; i < clue.answer.length; i++) {
 				const row = clue.row + (direction === "down" ? i : 0);
 				const col = clue.col + (direction === "across" ? i : 0);
-				grid[row][col] = { used: true, answer: clue.answer[i] };
+				grid[row][col] = { used: true, answer: clue.answer[i], num: i == 0 ? actualNum : undefined };
 			}
-
-			clueNumber++;
 		}
 	}
 
@@ -65,27 +61,73 @@ export function initialStateFromInput(input: PuzzleInput): GameState {
 		grid,
 		clues,
 		focused: false,
-		selectedPosition: { row: 0, col: 0 },
-		selectedDirection: "across",
+		position: { row: 0, col: 0 },
+		direction: "across",
 	};
 }
 
+type Action = { type: "selectCell"; col: number; row: number } | { type: "keyDown"; key: string };
+
 export function crosswordStateReducer(state: GameState, action: Action) {
+	function moveRelative(rows: number, cols: number) {
+		const newRow = state.position.row + rows;
+		const newCol = state.position.col + cols;
+		if (newRow >= 0 && newRow < state.rows && state.grid[newRow][state.position.col].used) {
+			state.position.row = newRow;
+		}
+		if (newCol >= 0 && newCol < state.cols && state.grid[state.position.row][newCol].used) {
+			state.position.col = newCol;
+		}
+	}
+
+	function moveForward() {
+		if (state.direction == "across") {
+			moveRelative(0, 1);
+		} else {
+			moveRelative(1, 0);
+		}
+	}
+
+	function moveBackward() {
+		if (state.direction == "across") {
+			moveRelative(0, -1);
+		} else {
+			moveRelative(-1, 0);
+		}
+	}
+
 	switch (action.type) {
 		case "selectCell": {
-			if (state.selectedPosition.col == action.col && state.selectedPosition.row == action.row) {
-				state.selectedDirection = state.selectedDirection == "across" ? "down" : "across";
+			if (state.position.col == action.col && state.position.row == action.row) {
+				state.direction = state.direction == "across" ? "down" : "across";
 			} else {
-				state.selectedPosition = { col: action.col, row: action.row };
+				state.position = { col: action.col, row: action.row };
 			}
-			// state.focused = true
 			break;
 		}
-		case "enterGuess": {
-			const cell = state.grid[state.selectedPosition.row][state.selectedPosition.col];
-			if (cell.used) {
-				cell.guess = action.letter;
+		case "keyDown": {
+			const cell = state.grid[state.position.row][state.position.col];
+			const key = action.key;
+			if (!cell.used) return;
+
+			if (key.length === 1 && action.key.match(/[a-z]/i)) {
+				cell.guess = action.key.toUpperCase();
+				moveForward();
+			} else if (key == " ") {
+				cell.guess = undefined;
+				moveForward();
+			} else if (key == "Backspace") {
+				if (cell.guess == undefined) {
+					moveBackward();
+					const newCell = state.grid[state.position.row][state.position.col];
+					if (newCell.used) {
+						newCell.guess = undefined;
+					}
+				} else {
+					cell.guess = undefined;
+				}
 			}
+
 			break;
 		}
 	}
