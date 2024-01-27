@@ -36,6 +36,8 @@ export default function Button({ name, href, children, className, onClick }: Pro
 					transition: 0.1s ease-in;
 					box-sizing: border-box;
 					position: relative;
+					font-family: Manrope;
+					font-weight: 400;
 				}
 				.btn::after {
 					content: "";

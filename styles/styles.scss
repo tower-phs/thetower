@@ -19,6 +19,7 @@ h6 {
 	font-family: globals.$font-header, globals.$font-stack;
 	font-weight: normal;
 }
+
 span {
 	color: #8b8b8b;
 	font-family: globals.$font-text, globals.$font-stack;
@@ -26,6 +27,7 @@ span {
 
 @import url("https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap");
 
 @font-face {
 	font-family: "Canterbury";
@@ -46,10 +48,10 @@ span {
 		url("//db.onlinewebfonts.com/t/1dd1c7d8df011c2266f33ebd5927c0ab.svg#DIN2014-Demi") format("svg");
 }
 @font-face {
-	font-family: "EgyptianText";
-	src: url("/assets/fonts/EgyptianText.woff2") format("woff2");
+	font-family: "Imperial";
+	src: url("/assets/fonts/ImperialRegular.otf") format("opentype");
 }
 @font-face {
-	font-family: "EgyptianHeader";
-	src: url("/assets/fonts/EgyptianHeader.woff2") format("woff2");
+	font-family: "ImperialBold";
+	src: url("/assets/fonts/ImperialBold.otf") format("opentype");
 }

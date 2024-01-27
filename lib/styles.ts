@@ -3,8 +3,8 @@
 const styles = {
 	font: {
 		stack: "system-ui, sans-serif",
-		header: "EgyptianHeader",
-		text: "EgyptianText",
+		header: "Manrope",
+		text: "Imperial",
 	},
 	color: {
 		background: "#fff",

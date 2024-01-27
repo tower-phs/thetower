@@ -95,17 +95,21 @@ export default function ArticlePreview({ article, category, style = "row", size 
 					font-size: smaller;
 				}
 				.title {
-					font-weight: bolder;
+					font-weight: 800;
+					font-family: ${styles.font.header}, "Courier New";
 				}
 				.title .large {
+					font-family: ${styles.font.header}, "Courier New";
 					font-size: xx-large;
 					color: ${styles.color.secondary} !important !important !important;
 				}
 				.title .medium {
+					font-family: ${styles.font.header}, "Courier New";
 					font-size: large;
 					color: ${styles.color.tertiary} !important !important !important;
 				}
 				.title .small {
+					font-family: ${styles.font.header}, "Courier New";
 					font-size: medium;
 				}
 				.category {
@@ -114,7 +118,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 					margin-top: 1vh;
 				}
 				.preview-text {
-					font-family: ${styles.font.text}, ${styles.font.stack};
+					font-family: ${styles.font.text}, "Courier New";
 					margin-top: 1vh;
 					margin-bottom: 2vh;
 				}

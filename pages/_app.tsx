@@ -110,14 +110,16 @@ function Banner() {
 			`}</style>
 			<div className="sub">
 				<Link href="/subscribe">
-					<span style={{ color: "white", cursor: "pointer", fontFamily: "Open Sans" }}>SUBSCRIBE</span>
+					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.header }}>SUBSCRIBE</span>
 				</Link>
 				<br />
 				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/1223-full.pdf">
-					<span style={{ color: "white", cursor: "pointer", fontFamily: "Open Sans" }}>PRINT EDITION</span>
+					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.header }}>PRINT EDITION</span>
 				</Link>
 				<br />
-				<span style={{ fontFamily: "Open Sans", color: styles.color.accent }}>{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}</span>
+				<span style={{ fontFamily: styles.font.header, color: styles.color.accent }}>
+					{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}
+				</span>
 			</div>
 			<div className="search">
 				<input
@@ -196,6 +198,7 @@ function Footer() {
 					font-size: 1.1em;
 					font-weight: bolder;
 				}
+
 				.bottom a {
 					font-size: 0.9em;
 				}
@@ -219,7 +222,9 @@ function Footer() {
 			<div className="bottom">
 				<div>
 					<b>
-						<Link href="/category/news-features">News & Features</Link>
+						<Link style={{ fontFamily: styles.font.header }} href="/category/news-features">
+							NEWS & FEATURES
+						</Link>
 						<br />
 					</b>
 					<Link href="/category/news-features/phs-profiles">PHS Profiles</Link>
@@ -227,7 +232,9 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link href="/category/opinions">Opinions</Link>
+						<Link style={{ fontFamily: styles.font.header }} href="/category/opinions">
+							OPINIONS
+						</Link>
 						<br />
 					</b>
 					<Link href="/category/opinions/editorials">Editorials</Link>
@@ -237,7 +244,9 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link href="/category/vanguard">Vanguard</Link>
+						<Link style={{ fontFamily: styles.font.header }} href="/category/vanguard">
+							VANGUARD
+						</Link>
 						<br />
 					</b>
 					<Link href="/category/vanguard/random-musings">Random Musings</Link>
@@ -247,7 +256,9 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link href="/category/arts-entertainment">Arts & Entertainment</Link>
+						<Link style={{ fontFamily: styles.font.header }} href="/category/arts-entertainment">
+							ARTS & ENTERTAINMENT
+						</Link>
 						<br />
 					</b>
 					<Link href="/category/arts-entertainment/student-artists">Student Artists</Link>
@@ -255,15 +266,17 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link href="/category/sports">Sports</Link>
+						<Link style={{ fontFamily: styles.font.header }} href="/category/sports">
+							SPORTS
+						</Link>
 						<br />
 					</b>
 					<Link href="/category/sports/student-athletes">Student Athletes</Link>
 				</div>
 			</div>
 			<hr />
-			<span>© 2017-2023 The Tower</span>
-			<span>Site by Luke Tong &apos;23 and Jieruei Chang &apos;24</span>
+			<span>© 2017-2024 The Tower</span>
+			<span>Site by Luke Tong &apos;23, Jieruei Chang &apos;24, Henry Langmack &apos;25, and Ayush Shrivastava &apos;25</span>
 		</div>
 	);
 }
@@ -313,33 +326,33 @@ function NavBar() {
 				}}
 			></Button>
 			<div className="menu">
-				<Button name="News & Features" href="/category/news-features">
+				<Button name="NEWS & FEATURES" href="/category/news-features">
 					<Link href="/category/news-features/phs-profiles">PHS Profiles</Link>
 				</Button>
 
-				<Button name="Multimedia" href="/category/multimedia"></Button>
+				<Button name="MULTIMEDIA" href="/category/multimedia"></Button>
 
-				<Button name="Opinions" href="/category/opinions">
+				<Button name="OPINONS" href="/category/opinions">
 					<Link href="/category/opinions/editorials">Editorials</Link>
 					<hr />
 					<Link href="/category/opinions/cheers-jeers">Cheers & Jeers</Link>
 				</Button>
 
-				<Button name="Vanguard" href="/category/vanguard">
+				<Button name="VANGUARD" href="/category/vanguard">
 					<Link href="/category/vanguard">Spreads</Link>
 					<hr />
 					<Link href="/category/vanguard/vanguard">Articles</Link>
 				</Button>
 
-				<Button name="Arts & Entertainment" href="/category/arts-entertainment">
+				<Button name="ARTS & ENTERTAINMENT" href="/category/arts-entertainment">
 					<Link href="/category/arts-entertainment/student-artists">Student Artists</Link>
 				</Button>
 
-				<Button name="Sports" href="/category/sports">
+				<Button name="SPORTS" href="/category/sports">
 					<Link href="/category/sports/student-athletes">Student Athletes</Link>
 				</Button>
 
-				<Button name="About" href="/about">
+				<Button name="ABOUT" href="/about">
 					<Link href="/about/2024">2024 Staff</Link>
 					<hr />
 					<Link href="/about/2023">2023 Staff</Link>
@@ -347,7 +360,7 @@ function NavBar() {
 					<Link href="/about/2022">2022 Staff</Link>
 				</Button>
 
-				<Button name="Archives" href="/archives">
+				<Button name="ARCHIVES" href="/archives">
 					<Link href="/category/special/nsi">New Student Issues</Link>
 				</Button>
 			</div>
