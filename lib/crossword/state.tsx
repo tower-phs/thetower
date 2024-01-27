@@ -126,6 +126,30 @@ export function crosswordStateReducer(state: GameState, action: Action) {
 				} else {
 					cell.guess = undefined;
 				}
+			} else if (key == "ArrowLeft") {
+				if (state.direction == "across") {
+					moveRelative(0, -1);
+				} else {
+					state.direction = "across";
+				}
+			} else if (key == "ArrowRight") {
+				if (state.direction == "across") {
+					moveRelative(0, 1);
+				} else {
+					state.direction = "across";
+				}
+			} else if (key == "ArrowUp") {
+				if (state.direction == "down") {
+					moveRelative(-1, 0);
+				} else {
+					state.direction = "down";
+				}
+			} else if (key == "ArrowDown") {
+				if (state.direction == "down") {
+					moveRelative(1, 0);
+				} else {
+					state.direction = "down";
+				}
 			}
 
 			break;

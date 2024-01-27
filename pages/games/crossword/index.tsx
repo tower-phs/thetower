@@ -4,7 +4,8 @@ import { useMutativeReducer } from "use-mutative";
 import { CrosswordDispatchContext, crosswordStateReducer, initialStateFromInput } from "../../../lib/crossword/state";
 import { useMemo, useRef } from "react";
 import { GetServerSidePropsResult } from "next";
-import { Direction, PuzzleInput, RuntimeClue } from "~/lib/crossword/types";
+import { Clues, Direction, PuzzleInput, RuntimeClue } from "~/lib/crossword/types";
+import React from "react";
 
 type Props = { puzzleInput: PuzzleInput };
 
@@ -123,7 +124,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 						)
 					)}
 				</svg>
-				{/* Clues rendering */}
+				<CluesSectionMemo clues={state.clues} />
 			</div>
 		</CrosswordDispatchContext.Provider>
 	);
@@ -165,3 +166,37 @@ function Cell({ guess, answer, isSelected, isHighlighted, size, x, y, onClick, n
 		</g>
 	);
 }
+
+type CluesSectionProps = {
+	clues: Clues;
+};
+
+function CluesSection({ clues }: CluesSectionProps): JSX.Element {
+	console.log("rerendering clues");
+	return (
+		<div className="clues-section">
+			<div className="across-clues">
+				<h2>Across</h2>
+				<ul>
+					{clues.across.map((clue: RuntimeClue) => (
+						<li key={clue.num}>
+							<span className="clue-number">{clue.num}</span> {clue.clue}
+						</li>
+					))}
+				</ul>
+			</div>
+			<div className="down-clues">
+				<h2>Down</h2>
+				<ul>
+					{clues.down.map((clue: RuntimeClue) => (
+						<li key={clue.num}>
+							<span className="clue-number">{clue.num}</span> {clue.clue}
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	);
+}
+
+const CluesSectionMemo = React.memo(CluesSection);
