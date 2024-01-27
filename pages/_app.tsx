@@ -7,6 +7,10 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import { FaFacebookSquare } from "@react-icons/all-files/fa/FaFacebookSquare";
 import { FaInstagramSquare } from "@react-icons/all-files/fa/FaInstagramSquare";
+import { FaYoutubeSquare } from "@react-icons/all-files/fa/FaYoutubeSquare";
+import { FaSpotify } from "@react-icons/all-files/fa/FaSpotify";
+import { SiApplepodcasts } from "@react-icons/all-files/si/SiApplepodcasts";
+import { FaArrowRight } from "@react-icons/all-files/fa/FaArrowRight";
 import Button from "~/components/button.client";
 
 import "~/styles/styles.scss";
@@ -205,7 +209,48 @@ function Footer() {
 				span {
 					padding-bottom: 2vh;
 				}
+
+				.sub {
+					text-align: center;
+					align-items: center;
+				}
+
+				.sub h2 {
+					font-weight: bold;
+				}
+
+				.sub p {
+					margin-left: 20%;
+					margin-right: 20%;
+				}
+
+				.sub-link {
+					font-size: 1.25rem;
+					border-color: black;
+					border-style: solid;
+					background-color: white;
+					transition: 0.25s;
+					padding: 0.5rem;
+				}
+
+				.sub-link:hover {
+					color: white;
+					background-color: black;
+				}
 			`}</style>
+			<hr />
+			<div className="sub">
+				<h2>Consider subscribing to The Tower.</h2>
+				{/* <p>You'll be supporting an award-winning school newspaper.</p> */}
+				<p>
+					For $30.00 a year or $5.00 a month, subscribers to The Tower will receive all eight issues shipped to their home or business over
+					the course of the year.
+				</p>
+				<br />
+				<Link href="/subscribe">
+					<p className="sub-link">Learn more</p>
+				</Link>
+			</div>
 			<hr />
 			<div className="top">
 				<h1>The Tower</h1>
@@ -214,6 +259,15 @@ function Footer() {
 				</a>
 				<a href="https://www.facebook.com/phstower" target="_blank" rel="noopener noreferrer">
 					<FaFacebookSquare size="2.2em" />
+				</a>
+				<a href="https://www.youtube.com/channel/UCoopcAJbsz-qlTS2xkVWplQ" target="_blank" rel="noopener noreferrer">
+					<FaYoutubeSquare size="2.2rem" />
+				</a>
+				<a href="https://open.spotify.com/show/2c0TlU1f01LKoVPaMMDxB8?si=f1fa622c0339438e" target="_blank" rel="noopener noreferrer">
+					<FaSpotify size="2.2rem" />
+				</a>
+				<a href="https://podcasts.apple.com/us/podcast/phs-talks/id1674696258" target="_blank" rel="noopener noreferrer">
+					<SiApplepodcasts size="2.2rem" />
 				</a>
 				<Link href="/home" legacyBehavior>
 					<a className="home-btn">Go to home page »</a>

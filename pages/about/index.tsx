@@ -20,6 +20,7 @@ export default function About() {
 					text-align: center;
 					border-bottom: 3px solid gainsboro;
 					margin-bottom: 4vh;
+					font-weight: bold;
 				}
 
 				h2 {

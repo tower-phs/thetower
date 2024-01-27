@@ -96,20 +96,20 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				}
 				.title {
 					font-weight: 800;
-					font-family: ${styles.font.header}, "Courier New";
+					font-family: ${styles.font.header}, sans-serif;
 				}
 				.title .large {
-					font-family: ${styles.font.header}, "Courier New";
+					font-family: ${styles.font.header}, sans-serif;
 					font-size: xx-large;
 					color: ${styles.color.secondary} !important !important !important;
 				}
 				.title .medium {
-					font-family: ${styles.font.header}, "Courier New";
+					font-family: ${styles.font.header}, sans-serif;
 					font-size: large;
 					color: ${styles.color.tertiary} !important !important !important;
 				}
 				.title .small {
-					font-family: ${styles.font.header}, "Courier New";
+					font-family: ${styles.font.header}, sans-serif;
 					font-size: medium;
 				}
 				.category {

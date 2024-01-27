@@ -18,6 +18,10 @@ export default function Archives() {
 					font-weight: 600;
 				}
 
+				h1 {
+					font-weight: bold;
+				}
+
 				.container {
 					margin-left: 10%;
 					width: 80%;

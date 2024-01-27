@@ -64,7 +64,7 @@ export default function Subcategory({ subcategory, articles, sidebar }: Props) {
 			<div className="grid">
 				<section>
 					{articles.map(article => (
-						<ArticlePreview key={article.id} article={article} style="row" size="small" />
+						<ArticlePreview key={article.id} article={article} style="row" size="medium" />
 					))}
 				</section>
 				<section className="sidebar">

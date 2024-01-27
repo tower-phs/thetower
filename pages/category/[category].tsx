@@ -45,6 +45,7 @@ export default function Category({ category, articles, sidebar }: Props) {
 					text-align: center;
 					border-bottom: 3px double black;
 					margin-bottom: 1vh;
+					font-weight: bold;
 				}
 				.grid {
 					display: grid;
@@ -64,7 +65,7 @@ export default function Category({ category, articles, sidebar }: Props) {
 			<div className="grid">
 				<section>
 					{articles.map(article => (
-						<ArticlePreview key={article.id} article={article} style="row" size="small" />
+						<ArticlePreview key={article.id} article={article} style="row" size="medium" />
 					))}
 				</section>
 				<section className="sidebar">

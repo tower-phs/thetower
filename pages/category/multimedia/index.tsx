@@ -34,6 +34,7 @@ export default function Category(/*{ spreads }: Props*/) {
 					text-align: center;
 					border-bottom: 3px double black;
 					margin-bottom: 1vh;
+					font-weight: bold;
 				}
 				.grid {
 					display: grid;
