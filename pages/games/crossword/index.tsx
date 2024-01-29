@@ -78,6 +78,12 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 
 	return (
 		<CrosswordDispatchContext.Provider value={dispatch}>
+			<style jsx>{`
+				.crossword-svg {
+					width: min(50vw, 75vh);
+					height: min(50vw, 75vh);
+				}
+			`}</style>
 			<div className="crossword-container">
 				<input
 					ref={inputRef}
@@ -88,9 +94,8 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 				/>
 				<svg
 					className="crossword-svg"
-					width={state.cols * cellSize}
-					height={state.rows * cellSize}
-					style={{ border: "1px solid black", backgroundColor: "black" }}
+					viewBox={`0 0 ${state.cols * cellSize} ${state.rows * cellSize}`}
+					style={{ border: "0.25px solid black", backgroundColor: "black" }}
 				>
 					{state.grid.map((row, rowIndex) =>
 						row.map(
@@ -143,23 +148,22 @@ type CellProps = {
 };
 
 function Cell({ guess, answer, isSelected, isHighlighted, size, x, y, onClick, num }: CellProps): JSX.Element {
-	const fillColor = isSelected ? "blue" : isHighlighted ? "lightblue" : "white";
-	const textColor = isSelected || isHighlighted ? "white" : "black";
+	const fillColor = isSelected ? "#FFD700" : isHighlighted ? "#9dd9fa" : "white";
 
 	return (
 		<g onClick={onClick}>
-			<rect x={x * size} y={y * size} width={size} height={size} fill={fillColor} stroke="black" />
+			<rect x={x * size} y={y * size} width={size} height={size} fill={fillColor} stroke="#555555" strokeWidth={0.6} />
 			num &&{" "}
-			<text x={x * size + 6} y={y * size + 6} fontSize={size * 0.3} dominantBaseline="middle" textAnchor="middle" fill="black">
+			<text x={x * size + 6} y={y * size + 8} fontSize={size * 0.3} dominantBaseline="left" textAnchor="middle" fill="black">
 				{num}
 			</text>
 			<text
 				x={x * size + size / 2}
-				y={y * size + size / 2}
+				y={y * size + (size / 3) * 2}
 				dominantBaseline="middle"
 				textAnchor="middle"
 				fontSize={size * 0.6}
-				fill={textColor}
+				fill="black"
 			>
 				{guess}
 			</text>
