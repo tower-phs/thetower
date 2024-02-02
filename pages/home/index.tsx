@@ -7,7 +7,7 @@ import ArticlePreview from "~/components/preview.client";
 import Video from "~/components/video.client";
 import Podcast from "~/components/podcast.client";
 import { getFrontpageArticles } from "~/lib/queries";
-
+// gotta commit something
 export async function getServerSideProps() {
 	const articles = await getFrontpageArticles();
 
