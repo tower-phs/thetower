@@ -79,9 +79,23 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 	return (
 		<CrosswordDispatchContext.Provider value={dispatch}>
 			<style jsx>{`
+				.crossword-container {
+					display: flex;
+					align-items: flex-start;
+				}
+
 				.crossword-svg {
 					width: min(50vw, 75vh);
 					height: min(50vw, 75vh);
+					user-select: none;
+					cursor: default;
+				}
+
+				.clues-container {
+					display: flex;
+					flex-direction: row;
+					gap: 20px;
+					margin-left: 20px;
 				}
 			`}</style>
 			<div className="crossword-container">
@@ -129,7 +143,10 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 						)
 					)}
 				</svg>
-				<CluesSectionMemo clues={state.clues} />
+				<div className="clues-container">
+					<CluesSection clues={state.clues.across} title="Across" />
+					<CluesSection clues={state.clues.down} title="Down" />
+				</div>
 			</div>
 		</CrosswordDispatchContext.Provider>
 	);
@@ -172,33 +189,43 @@ function Cell({ guess, answer, isSelected, isHighlighted, size, x, y, onClick, n
 }
 
 type CluesSectionProps = {
-	clues: Clues;
+	title: string;
+	clues: RuntimeClue[];
 };
 
-function CluesSection({ clues }: CluesSectionProps): JSX.Element {
+function CluesSection({ clues, title }: CluesSectionProps): JSX.Element {
 	console.log("rerendering clues");
 	return (
 		<div className="clues-section">
-			<div className="across-clues">
-				<h2>Across</h2>
-				<ul>
-					{clues.across.map((clue: RuntimeClue) => (
-						<li key={clue.num}>
-							<span className="clue-number">{clue.num}</span> {clue.clue}
-						</li>
-					))}
-				</ul>
-			</div>
-			<div className="down-clues">
-				<h2>Down</h2>
-				<ul>
-					{clues.down.map((clue: RuntimeClue) => (
-						<li key={clue.num}>
-							<span className="clue-number">{clue.num}</span> {clue.clue}
-						</li>
-					))}
-				</ul>
-			</div>
+			<style jsx>{`
+				.clues-section {
+					margin-left: 20px; /* Adjust the margin as needed */
+					display: flex;
+					flex-direction: column;
+				}
+
+				ul {
+					list-style: none;
+					padding: 0;
+					margin: 0; /* Remove default margin */
+				}
+
+				li {
+					margin-bottom: 10px; /* Adjust the margin as needed */
+				}
+
+				.clue-number {
+					margin-right: 5px; /* Adjust the margin as needed */
+				}
+			`}</style>
+			<h2>{title}</h2>
+			<ul>
+				{clues.map((clue: RuntimeClue) => (
+					<li key={clue.num}>
+						<span className="clue-number">{clue.num}</span> {clue.clue}
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 }
