@@ -177,16 +177,7 @@ function Cell({ guess, answer, isSelected, isHighlighted, size, x, y, onClick, n
 
 	return (
 		<g onClick={onClick}>
-			<rect
-				x={x * size}
-				y={y * size}
-				width={size}
-				height={size}
-				fill={fillColor}
-				stroke="#555555"
-				strokeWidth={0.6}
-				style={{ transitionDuration: "0.05s" }}
-			/>
+			<rect x={x * size} y={y * size} width={size} height={size} fill={fillColor} stroke="#555555" strokeWidth={0.6} />
 			num &&{" "}
 			<text x={x * size + 6} y={y * size + 8} fontSize={size * 0.3} dominantBaseline="left" textAnchor="middle" fill="black">
 				{num}
