@@ -71,6 +71,7 @@ function Banner() {
 					left: 1vw;
 					top: 5px;
 					bottom: 5px;
+					font-family: ${styles.font.folio};
 				}
 				.search {
 					position: absolute;
@@ -83,7 +84,7 @@ function Banner() {
 					border: 1px solid ${styles.color.accent};
 					border-radius: 5px 0px 0px 5px;
 					padding: 5px;
-					font-family: "Open Sans";
+					font-family: ${styles.font.folio};
 					box-sizing: border-box;
 					vertical-align: middle;
 					color: ${styles.color.accent};
@@ -99,7 +100,7 @@ function Banner() {
 					transform: scaleX(-1);
 					background-color: ${styles.color.accent};
 					color: ${styles.color.navbar};
-					font-family: "Open Sans";
+					font-family: ${styles.font.folio};
 					cursor: pointer;
 					box-sizing: border-box;
 					padding: 5px;
@@ -114,16 +115,14 @@ function Banner() {
 			`}</style>
 			<div className="sub">
 				<Link href="/subscribe">
-					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.header }}>SUBSCRIBE</span>
+					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.folio }}>SUBSCRIBE</span>
 				</Link>
 				<br />
 				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/1223-full.pdf">
-					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.header }}>PRINT EDITION</span>
+					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.folio }}>PRINT EDITION</span>
 				</Link>
 				<br />
-				<span style={{ fontFamily: styles.font.header, color: styles.color.accent }}>
-					{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}
-				</span>
+				<span style={{ fontFamily: styles.font.folio, color: "lightgray" }}>{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}</span>
 			</div>
 			<div className="search">
 				<input
@@ -188,7 +187,7 @@ function Footer() {
 					margin-right: 2.5vh;
 				}
 				.bottom {
-					font-family: sans-serif;
+					font-family: "Courier New";
 					margin: 1vh;
 					display: grid;
 					grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -226,7 +225,7 @@ function Footer() {
 
 				.sub-link {
 					font-size: 1.25rem;
-					border-color: black;
+					border-color: ${styles.color.navbar};
 					border-style: solid;
 					background-color: white;
 					transition: 0.25s;
@@ -235,7 +234,7 @@ function Footer() {
 
 				.sub-link:hover {
 					color: white;
-					background-color: black;
+					background-color: ${styles.color.navbar};
 				}
 			`}</style>
 			<hr />
@@ -243,8 +242,8 @@ function Footer() {
 				<h2>Consider subscribing to The Tower.</h2>
 				{/* <p>You'll be supporting an award-winning school newspaper.</p> */}
 				<p>
-					For $30.00 a year or $5.00 a month, subscribers to The Tower will receive all eight issues shipped to their home or business over
-					the course of the year.
+					For $30.00 a year, subscribers to The Tower will receive all eight issues shipped to their home or business over the course of the
+					year.
 				</p>
 				<br />
 				<Link href="/subscribe">
@@ -346,6 +345,7 @@ function NavBar() {
 					text-align: center;
 					width: 100%;
 					border-top: 1px solid ${styles.color.accent};
+					font-family: ${styles.font.folio}, "Courier New";
 				}
 
 				.navbar hr {
@@ -358,6 +358,7 @@ function NavBar() {
 
 				.menu {
 					display: contents;
+					font-family: ${styles.font.folio}, "Courier New";
 				}
 
 				@media screen and (max-width: 1000px) {
