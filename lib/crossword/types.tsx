@@ -11,7 +11,11 @@ export type Direction = "across" | "down";
 export type Clue = { clue: string; answer: string; row: number; col: number };
 export type RuntimeClue = Clue & { num: number };
 
-export type PuzzleInput = Record<Direction, Record<number, Clue>>;
+export type PuzzleInput = {
+	date: string;
+	author: string;
+	clues: Record<Direction, Record<number, Clue>>;
+};
 
 // These two arrays will be sorted by num so that we can display the two columns easily
 export type Clues = { across: RuntimeClue[]; down: RuntimeClue[] };

@@ -11,10 +11,10 @@ export function initialStateFromInput(input: PuzzleInput): GameState {
 	let max = 0;
 
 	// Calculate grid size based on clues
-	for (const directionKey in input) {
+	for (const directionKey in input.clues) {
 		const direction = directionKey as Direction;
-		for (const num in input[direction]) {
-			const clue = input[direction][num];
+		for (const num in input.clues[direction]) {
+			const clue = input.clues[direction][num];
 			if (direction === "across") {
 				max = Math.max(max, clue.row);
 				max = Math.max(max, clue.col + clue.answer.length);
@@ -33,11 +33,11 @@ export function initialStateFromInput(input: PuzzleInput): GameState {
 	// Populate grid with used cells and set numbers for starting positions
 	const clues: Clues = { across: [], down: [] };
 
-	for (const directionKey in input) {
+	for (const directionKey in input.clues) {
 		const direction = directionKey as Direction;
-		for (const num in input[direction]) {
+		for (const num in input.clues[direction]) {
 			const actualNum = num as unknown as number;
-			const clue = input[direction][num];
+			const clue = input.clues[direction][num];
 			const runtimeClue = { ...clue, num: actualNum };
 			clues[direction].push(runtimeClue);
 
