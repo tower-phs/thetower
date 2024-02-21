@@ -61,7 +61,11 @@ export function getServerSideProps(): GetServerSidePropsResult<Props> {
 }
 
 export default function CrosswordGame({ puzzleInput }: Props) {
-	const [state, dispatch] = useMutativeReducer(crosswordStateReducer, initialStateFromInput(puzzleInput));
+	const initialState = useMemo(() => {
+		return initialStateFromInput(puzzleInput);
+	}, []);
+
+	const [state, dispatch] = useMutativeReducer(crosswordStateReducer, initialState);
 	const inputRef = useRef<HTMLInputElement>(null);
 	const focused = typeof window !== "undefined" ? inputRef.current == document.activeElement : false;
 	const cellSize = 30;
