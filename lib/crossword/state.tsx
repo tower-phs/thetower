@@ -154,9 +154,7 @@ export function crosswordStateReducer(state: GameState, action: Action) {
 			break;
 		}
 		case "loadState": {
-			console.log(action.state);
 			return action.state;
-			break;
 		}
 	}
 }

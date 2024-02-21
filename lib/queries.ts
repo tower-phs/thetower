@@ -1,6 +1,7 @@
 /** @format */
 
 import { article, PrismaClient, spreads } from "@prisma/client";
+import { PuzzleInput } from "./crossword/types";
 
 const prisma = new PrismaClient();
 
@@ -265,4 +266,13 @@ export async function getSpread(slug: string) {
 	});
 
 	return spreads;
+}
+
+export async function getCurrentCrossword(): Promise<PuzzleInput> {
+	const crossword = (await prisma.crossword.findFirst({ orderBy: { date: "desc" } }))!;
+	return {
+		author: crossword.author,
+		clues: JSON.parse(crossword.clues),
+		date: crossword.date.toISOString(),
+	};
 }
