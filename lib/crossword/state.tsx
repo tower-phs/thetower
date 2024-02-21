@@ -65,7 +65,7 @@ export function initialStateFromInput(input: PuzzleInput, existingGrid?: GridDat
 	};
 }
 
-export type Action = { type: "selectCell"; col: number; row: number } | { type: "keyDown"; key: string } | { type: "loadState"; grid: GridData };
+export type Action = { type: "selectCell"; col: number; row: number } | { type: "keyDown"; key: string } | { type: "loadState"; state: GameState };
 
 export function crosswordStateReducer(state: GameState, action: Action) {
 	function moveRelative(rows: number, cols: number) {
@@ -154,8 +154,8 @@ export function crosswordStateReducer(state: GameState, action: Action) {
 			break;
 		}
 		case "loadState": {
-			console.log(action.grid);
-			state.grid = action.grid;
+			console.log(action.state);
+			return action.state;
 			break;
 		}
 	}

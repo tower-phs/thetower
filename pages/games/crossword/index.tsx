@@ -4,9 +4,8 @@ import { useMutativeReducer } from "use-mutative";
 import { Action, CrosswordDispatchContext, crosswordStateReducer, initialStateFromInput } from "../../../lib/crossword/state";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { GetServerSidePropsResult } from "next";
-import { Clues, Direction, PuzzleInput, RuntimeClue } from "~/lib/crossword/types";
+import { Direction, PuzzleInput, RuntimeClue } from "~/lib/crossword/types";
 import React from "react";
-import styles from "~/lib/styles";
 
 type Props = { puzzleInput: PuzzleInput };
 
@@ -89,7 +88,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 	useEffect(() => {
 		if (hasMutatedRef.current) {
 			console.log("saving");
-			const serializedState = JSON.stringify(state.grid);
+			const serializedState = JSON.stringify(state);
 			localStorage.setItem("crosswordGameState", serializedState);
 		}
 	}, [state.grid]);
@@ -99,7 +98,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 		const savedState = localStorage.getItem("crosswordGameState");
 		if (savedState) {
 			const parsedState = JSON.parse(savedState);
-			dispatch({ type: "loadState", grid: parsedState });
+			dispatch({ type: "loadState", state: parsedState });
 		}
 	}, []);
 
