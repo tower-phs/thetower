@@ -2,10 +2,11 @@
 
 import { useMutativeReducer } from "use-mutative";
 import { CrosswordDispatchContext, crosswordStateReducer, initialStateFromInput } from "../../../lib/crossword/state";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { GetServerSidePropsResult } from "next";
 import { Clues, Direction, PuzzleInput, RuntimeClue } from "~/lib/crossword/types";
 import React from "react";
+import styles from "~/lib/styles";
 
 type Props = { puzzleInput: PuzzleInput };
 
@@ -64,6 +65,8 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const focused = typeof window !== "undefined" ? inputRef.current == document.activeElement : false;
 	const cellSize = 30;
+	console.log("rendering");
+	console.log(state);
 
 	// Function to find the clue associated with the selected cell
 	const selectedClue = useMemo(() => {
@@ -79,6 +82,21 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 
 		return clue;
 	}, [state.position, state.direction, state.clues]);
+
+	useEffect(() => {
+		console.log("saving");
+		const serializedState = JSON.stringify(state.grid);
+		localStorage.setItem("crosswordGameState", serializedState);
+	}, [state.grid]);
+
+	useEffect(() => {
+		const savedState = localStorage.getItem("crosswordGameState");
+		console.log("saved" + savedState);
+		if (savedState) {
+			const parsedState = JSON.parse(savedState);
+			dispatch({ type: "loadState", grid: parsedState });
+		}
+	}, []);
 
 	return (
 		<CrosswordDispatchContext.Provider value={dispatch}>
@@ -138,9 +156,9 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 													  rowIndex < selectedClue?.row + selectedClue?.answer.length
 											}
 											onClick={() => {
+												console.log("cloick");
 												dispatch({ type: "selectCell", row: rowIndex, col: colIndex });
 												inputRef.current?.focus();
-												console.log("click");
 											}}
 											size={cellSize}
 											x={colIndex}
@@ -178,7 +196,6 @@ function Cell({ guess, answer, isSelected, isHighlighted, size, x, y, onClick, n
 	return (
 		<g onClick={onClick}>
 			<rect x={x * size} y={y * size} width={size} height={size} fill={fillColor} stroke="#555555" strokeWidth={0.6} />
-			num &&{" "}
 			<text x={x * size + 6} y={y * size + 8} fontSize={size * 0.3} dominantBaseline="left" textAnchor="middle" fill="black">
 				{num}
 			</text>

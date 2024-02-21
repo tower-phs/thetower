@@ -28,7 +28,6 @@ export type GameState = {
 	grid: GridData;
 	clues: Clues;
 
-	focused: boolean;
 	position: Pos;
 	direction: Direction;
 };

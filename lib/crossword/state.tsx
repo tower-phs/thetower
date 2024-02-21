@@ -7,10 +7,9 @@ import { Clues, Direction, GameState, GridData, PuzzleInput } from "./types";
 type Dispatcher = ReturnType<typeof useMutativeReducer<GameState, Action>>[1];
 
 export function initialStateFromInput(input: PuzzleInput): GameState {
-	// Initialize rows and columns
+	console.log("create an initial state");
 	let max = 0;
 
-	// Calculate grid size based on clues
 	for (const directionKey in input.clues) {
 		const direction = directionKey as Direction;
 		for (const num in input.clues[direction]) {
@@ -44,7 +43,8 @@ export function initialStateFromInput(input: PuzzleInput): GameState {
 			for (let i = 0; i < clue.answer.length; i++) {
 				const row = clue.row + (direction === "down" ? i : 0);
 				const col = clue.col + (direction === "across" ? i : 0);
-				grid[row][col] = { used: true, answer: clue.answer[i], num: i == 0 ? actualNum : undefined };
+				const existing = grid[row][col];
+				grid[row][col] = { used: true, answer: clue.answer[i], num: i == 0 ? actualNum : existing.used ? existing.num : undefined };
 			}
 		}
 	}
@@ -60,13 +60,12 @@ export function initialStateFromInput(input: PuzzleInput): GameState {
 		cols: max,
 		grid,
 		clues,
-		focused: false,
 		position: { row: 0, col: 0 },
 		direction: "across",
 	};
 }
 
-type Action = { type: "selectCell"; col: number; row: number } | { type: "keyDown"; key: string };
+type Action = { type: "selectCell"; col: number; row: number } | { type: "keyDown"; key: string } | { type: "loadState"; grid: GridData };
 
 export function crosswordStateReducer(state: GameState, action: Action) {
 	function moveRelative(rows: number, cols: number) {
@@ -153,6 +152,10 @@ export function crosswordStateReducer(state: GameState, action: Action) {
 			}
 
 			break;
+		}
+		case "loadState": {
+			state.grid = action.grid;
+			console.log("FUCK " + state.grid);
 		}
 	}
 }
