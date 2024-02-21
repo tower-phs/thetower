@@ -29,13 +29,13 @@ export default function FrontPage({ articles }: Props) {
 				.mosaic {
 					display: grid;
 					grid-gap: 10px;
-					margin-left: 1vw;
-					margin-right: 1vw;
+					margin-left: 0vw;
+					margin-right: 0vw;
 				}
 				.triple {
 					display: grid;
 					grid-gap: 10px;
-					grid-template-columns: 1.5fr 1fr 1fr;
+					grid-template-columns: 0.625fr 1.75fr 0.625fr;
 				}
 				@media (max-width: 1000px) {
 					.triple {
@@ -56,16 +56,20 @@ export default function FrontPage({ articles }: Props) {
 				<meta property="og:description" content="The Tower is Princeton High School's newspaper club." />
 			</Head>
 			<div className="mosaic">
-				<div className="one triple">
+				<div className="triple">
 					<div>
-						<NewsFeatures {...articles["news-features"]} />
-						<Sports {...articles["sports"]} />
+						<ArticlePreview article={articles["opinions"][0]} style="box" size="large" />
+						<ArticlePreview article={articles["opinions"][1]} style="box" size="large" />
+						<ArticlePreview article={articles["opinions"][2]} style="box" size="large" />
 					</div>
 					<div>
-						<Multimedia />
-						<Opinions {...articles["opinions"]} />
+						<ArticlePreview article={articles["news-features"][3]} style="box" size="featured" />
 					</div>
-					<ArtsEntertainment {...articles["arts-entertainment"]} />
+					<div>
+						<ArticlePreview article={articles["sports"][0]} style="box" size="large" />
+						<ArticlePreview article={articles["sports"][1]} style="box" size="large" />
+						<ArticlePreview article={articles["sports"][2]} style="box" size="large" />
+					</div>
 				</div>
 			</div>
 		</div>

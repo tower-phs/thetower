@@ -12,7 +12,7 @@ interface Props {
 	article: article;
 	category?: boolean;
 	style?: "box" | "row";
-	size?: "small" | "medium" | "large";
+	size?: "small" | "medium" | "large" | "featured";
 }
 
 export default function ArticlePreview({ article, category, style = "row", size = "medium" }: Props) {
@@ -22,6 +22,10 @@ export default function ArticlePreview({ article, category, style = "row", size 
 	if (style === "box") {
 		// BOX STYLE
 		switch (size) {
+			case "featured":
+				charlen = 200;
+				break;
+
 			case "large":
 				charlen = 200;
 				break;
@@ -34,6 +38,10 @@ export default function ArticlePreview({ article, category, style = "row", size 
 	} else {
 		// ROW STYLE
 		switch (size) {
+			case "featured":
+				charlen = 250;
+				break;
+
 			case "large":
 				charlen = 250;
 				break;
@@ -96,21 +104,37 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				}
 				.title {
 					font-weight: 800;
-					font-family: ${styles.font.header}, sans-serif;
+					font-family: ${styles.font.previewHeader}, sans-serif;
 				}
-				.title .large {
-					font-family: ${styles.font.header}, sans-serif;
+
+				.title a {
+					line-height: 0.95;
+				}
+
+				.title a:hover {
+					opacity: 0.7;
+					transition-duration: 0.25s;
+				}
+
+				.title .featured {
+					font-family: ${styles.font.previewHeader}, sans-serif;
 					font-size: xx-large;
 					color: ${styles.color.secondary} !important !important !important;
 				}
-				.title .medium {
-					font-family: ${styles.font.header}, sans-serif;
+
+				.title .large {
+					font-family: ${styles.font.previewHeader}, sans-serif;
 					font-size: large;
+					color: ${styles.color.secondary} !important !important !important;
+				}
+				.title .medium {
+					font-family: ${styles.font.previewHeader}, sans-serif;
+					font-size: medium;
 					color: ${styles.color.tertiary} !important !important !important;
 				}
 				.title .small {
-					font-family: ${styles.font.header}, sans-serif;
-					font-size: medium;
+					font-family: ${styles.font.previewHeader}, sans-serif;
+					font-size: small;
 				}
 				.category {
 					font-size: 12pt;
@@ -126,16 +150,17 @@ export default function ArticlePreview({ article, category, style = "row", size 
 					width: 100%;
 					background-color: #f7f7f7;
 					border-radius: 0px;
+					box-shadow: 0px 5px 12px #00000022;
 				}
 				.article-preview > .large-preview {
-					background-color: #f5f5f5;
+					background-color: white;
 					padding: 10px;
 					margin-bottom: 10px;
-					border: 1px solid gainsboro;
-					border-left: 2px solid ${styles.color.secondary};
+					border-bottom: 1px solid gainsboro;
 				}
 				.article-preview > .large-preview:hover {
-					background-color: #f0f0f0;
+					background-color: #f0f0f077;
+					transition-duration: 0.1s;
 				}
 				.article-preview > .medium-preview {
 					display: contents;

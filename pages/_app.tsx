@@ -30,8 +30,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 					main {
 						display: block;
 						margin-top: 4vh;
-						margin-left: 5vw;
-						margin-right: 5vw;
+						margin-left: 2.5vw;
+						margin-right: 2.5vw;
 					}
 				`}</style>
 				<Component {...pageProps} />

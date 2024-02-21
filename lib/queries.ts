@@ -151,6 +151,7 @@ export async function getArticlesByCategory(cat: string) {
 			category: cat,
 			published: true,
 		},
+		take: 10,
 	});
 
 	return articles;

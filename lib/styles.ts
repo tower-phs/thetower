@@ -7,6 +7,7 @@ const styles = {
 		text: "Minion Pro Regular",
 		caption: "Gandhi Sans Regular",
 		folio: "News Cycle",
+		previewHeader: "Neue Montreal",
 	},
 	color: {
 		background: "#fff",
