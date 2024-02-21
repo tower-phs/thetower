@@ -154,8 +154,9 @@ export function crosswordStateReducer(state: GameState, action: Action) {
 			break;
 		}
 		case "loadState": {
+			console.log(action.grid);
 			state.grid = action.grid;
-			console.log("FUCK " + state.grid);
+			break;
 		}
 	}
 }

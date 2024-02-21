@@ -95,6 +95,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 	}, [state.grid]);
 
 	useEffect(() => {
+		console.log("loading");
 		const savedState = localStorage.getItem("crosswordGameState");
 		if (savedState) {
 			const parsedState = JSON.parse(savedState);
