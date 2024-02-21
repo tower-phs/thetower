@@ -53,6 +53,11 @@ span {
 }
 
 @font-face {
+	font-family: "Neue Montreal Regular";
+	src: url("/assets/fonts/Neue Montreal/NeueMontreal-Regular.otf") format("opentype");
+}
+
+@font-face {
 	font-family: "Neue Montreal Medium";
-	src: url("/assets/fonts/Neue Monreal/NeueMontreal-Regular.otf") format("opentype");
+	src: url("/assets/fonts/Neue Montreal/NeueMontreal-Medium.otf") format("opentype");
 }

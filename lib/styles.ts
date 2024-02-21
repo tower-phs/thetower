@@ -2,12 +2,12 @@
 
 const styles = {
 	font: {
-		stack: "system-ui, sans-serif",
+		stack: "Courier New",
 		header: "Minion Pro Medium",
 		text: "Minion Pro Regular",
 		caption: "Gandhi Sans Regular",
-		folio: "News Cycle",
-		previewHeader: "Neue Montreal",
+		folio: "Neue Montreal Regular",
+		previewHeader: "Neue Montreal Medium",
 	},
 	color: {
 		background: "#fff",
