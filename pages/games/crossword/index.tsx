@@ -15,7 +15,7 @@ export function getServerSideProps(): GetServerSidePropsResult<Props> {
 	return {
 		props: {
 			puzzleInput: {
-				date: new Date().toString(),
+				date: new Date().toDateString(),
 				author: "Henry Langmack",
 				clues: {
 					across: {
@@ -127,6 +127,17 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 					margin-top: 8px;
 				}
 
+				@media (max-width: 850px) {
+					.crossword-container {
+						flex-direction: column;
+					}
+
+					.crossword-svg {
+						width: 90vw;
+						height: 90vw;
+					}
+				}
+
 				.clues-container {
 					display: flex;
 					flex-direction: row;
@@ -134,6 +145,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 					margin-left: 20px;
 				}
 			`}</style>
+			<h1>The Crossword {puzzleInput.date}</h1>
 			<div className="crossword-container">
 				<input
 					ref={inputRef}
