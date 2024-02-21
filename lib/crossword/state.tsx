@@ -6,7 +6,7 @@ import { Clues, Direction, GameState, GridData, PuzzleInput } from "./types";
 
 type Dispatcher = ReturnType<typeof useMutativeReducer<GameState, Action>>[1];
 
-export function initialStateFromInput(input: PuzzleInput): GameState {
+export function initialStateFromInput(input: PuzzleInput, existingGrid?: GridData): GameState {
 	console.log("create an initial state");
 	let max = 0;
 
@@ -58,14 +58,14 @@ export function initialStateFromInput(input: PuzzleInput): GameState {
 	return {
 		rows: max,
 		cols: max,
-		grid,
+		grid: existingGrid ?? grid,
 		clues,
 		position: { row: 0, col: 0 },
 		direction: "across",
 	};
 }
 
-type Action = { type: "selectCell"; col: number; row: number } | { type: "keyDown"; key: string } | { type: "loadState"; grid: GridData };
+export type Action = { type: "selectCell"; col: number; row: number } | { type: "keyDown"; key: string } | { type: "loadState"; grid: GridData };
 
 export function crosswordStateReducer(state: GameState, action: Action) {
 	function moveRelative(rows: number, cols: number) {

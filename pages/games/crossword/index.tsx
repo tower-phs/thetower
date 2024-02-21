@@ -1,8 +1,8 @@
 /** @format */
 
 import { useMutativeReducer } from "use-mutative";
-import { CrosswordDispatchContext, crosswordStateReducer, initialStateFromInput } from "../../../lib/crossword/state";
-import { useEffect, useMemo, useRef } from "react";
+import { Action, CrosswordDispatchContext, crosswordStateReducer, initialStateFromInput } from "../../../lib/crossword/state";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { GetServerSidePropsResult } from "next";
 import { Clues, Direction, PuzzleInput, RuntimeClue } from "~/lib/crossword/types";
 import React from "react";
@@ -69,8 +69,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const focused = typeof window !== "undefined" ? inputRef.current == document.activeElement : false;
 	const cellSize = 30;
-	console.log("rendering");
-	console.log(state);
+	const hasMutatedRef = useRef(false);
 
 	// Function to find the clue associated with the selected cell
 	const selectedClue = useMemo(() => {
@@ -88,22 +87,31 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 	}, [state.position, state.direction, state.clues]);
 
 	useEffect(() => {
-		console.log("saving");
-		const serializedState = JSON.stringify(state.grid);
-		localStorage.setItem("crosswordGameState", serializedState);
+		if (hasMutatedRef.current) {
+			console.log("saving");
+			const serializedState = JSON.stringify(state.grid);
+			localStorage.setItem("crosswordGameState", serializedState);
+		}
 	}, [state.grid]);
 
 	useEffect(() => {
 		const savedState = localStorage.getItem("crosswordGameState");
-		console.log("saved" + savedState);
 		if (savedState) {
 			const parsedState = JSON.parse(savedState);
 			dispatch({ type: "loadState", grid: parsedState });
 		}
 	}, []);
 
+	const dispatchWithTracking = useCallback(
+		(action: Action) => {
+			dispatch(action);
+			hasMutatedRef.current = true;
+		},
+		[dispatch]
+	);
+
 	return (
-		<CrosswordDispatchContext.Provider value={dispatch}>
+		<CrosswordDispatchContext.Provider value={dispatchWithTracking}>
 			<style jsx>{`
 				.crossword-container {
 					display: flex;
@@ -130,7 +138,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 					ref={inputRef}
 					type="text"
 					className="hidden-input"
-					onKeyDown={e => dispatch({ type: "keyDown", key: e.key })}
+					onKeyDown={e => dispatchWithTracking({ type: "keyDown", key: e.key })}
 					style={{ position: "absolute", opacity: 0, pointerEvents: "none" }}
 				/>
 				<div>
@@ -161,7 +169,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 											}
 											onClick={() => {
 												console.log("cloick");
-												dispatch({ type: "selectCell", row: rowIndex, col: colIndex });
+												dispatchWithTracking({ type: "selectCell", row: rowIndex, col: colIndex });
 												inputRef.current?.focus();
 											}}
 											size={cellSize}
