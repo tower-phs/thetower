@@ -7,6 +7,7 @@ import { GetServerSidePropsResult } from "next";
 import { Direction, PuzzleInput, RuntimeClue } from "~/lib/crossword/types";
 import React from "react";
 import { getCurrentCrossword } from "~/lib/queries";
+import styles from "~/lib/styles";
 
 type Props = { puzzleInput: PuzzleInput };
 
@@ -28,6 +29,10 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 	const focused = typeof window !== "undefined" ? inputRef.current == document.activeElement : false;
 	const cellSize = 30;
 	const hasMutatedRef = useRef(false);
+
+	const date = useMemo(() => {
+		return new Date(puzzleInput.date);
+	}, []);
 
 	// Function to find the clue associated with the selected cell
 	const selectedClue = useMemo(() => {
@@ -101,9 +106,18 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 					flex-direction: row;
 					gap: 20px;
 					margin-left: 20px;
+					width: 100%;
+				}
+
+				.title-container h3 {
+					font-family: ${styles.font.stack};
+					font-weight: 300;
 				}
 			`}</style>
-			<h1>The Crossword {puzzleInput.date}</h1>
+			<div className="title-container">
+				<h1>The Crossword</h1>
+				<h3>{date.toLocaleDateString()}</h3>
+			</div>
 			<div className="crossword-container">
 				<input
 					ref={inputRef}
@@ -207,11 +221,11 @@ function CluesSection({ clues, title }: CluesSectionProps): JSX.Element {
 		<div className="clues-section">
 			<style jsx>{`
 				.clues-section {
-					margin-left: 20px; /* Adjust the margin as needed */
+					flex: 1;
 					display: flex;
 					flex-direction: column;
+					max-width: 100%;
 				}
-
 				ul {
 					list-style: none;
 					padding: 0;
@@ -224,6 +238,10 @@ function CluesSection({ clues, title }: CluesSectionProps): JSX.Element {
 
 				.clue-number {
 					margin-right: 5px; /* Adjust the margin as needed */
+				}
+
+				h2 {
+					padding-bottom: 10px;
 				}
 			`}</style>
 			<h2>{title}</h2>

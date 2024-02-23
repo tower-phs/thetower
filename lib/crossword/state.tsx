@@ -35,7 +35,7 @@ export function initialStateFromInput(input: PuzzleInput, existingGrid?: GridDat
 	for (const directionKey in input.clues) {
 		const direction = directionKey as Direction;
 		for (const num in input.clues[direction]) {
-			const actualNum = num as unknown as number;
+			const actualNum = num as unknown as string;
 			const clue = input.clues[direction][num];
 			const runtimeClue = { ...clue, num: actualNum };
 			clues[direction].push(runtimeClue);
@@ -51,7 +51,7 @@ export function initialStateFromInput(input: PuzzleInput, existingGrid?: GridDat
 
 	// Sort the clues by their numbers
 	for (const direction in clues) {
-		clues[direction as Direction].sort((a, b) => a.num - b.num);
+		clues[direction as Direction].sort((a, b) => Number(a.num) - Number(b.num));
 	}
 
 	// Set initial state
