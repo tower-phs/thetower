@@ -74,6 +74,14 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 		[dispatch]
 	);
 
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			dispatchWithTracking({ type: "tick" });
+		}, 1000);
+
+		return () => clearInterval(intervalId);
+	}, [dispatchWithTracking]);
+
 	return (
 		<CrosswordDispatchContext.Provider value={dispatchWithTracking}>
 			<style jsx>{`

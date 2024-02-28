@@ -19,7 +19,7 @@ export type PuzzleInput = {
 
 export type SavedPuzzleState = {
 	grid: GridData;
-	startTime: string;
+	seconds: number;
 };
 
 // These two arrays will be sorted by num so that we can display the two columns easily
@@ -35,5 +35,5 @@ export type GameState = {
 
 	position: Pos;
 	direction: Direction;
-	startTime: Date;
+	seconds: number;
 };

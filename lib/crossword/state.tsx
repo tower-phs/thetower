@@ -62,14 +62,15 @@ export function initialStateFromInput(input: PuzzleInput, existingGrid?: GridDat
 		clues,
 		position: { row: 0, col: 0 },
 		direction: "across",
-		startTime: new Date(),
+		seconds: 0,
 	};
 }
 
 export type Action =
 	| { type: "selectCell"; col: number; row: number }
 	| { type: "keyDown"; key: string }
-	| { type: "loadState"; state: SavedPuzzleState };
+	| { type: "loadState"; state: SavedPuzzleState }
+	| { type: "tick" };
 
 export function crosswordStateReducer(state: GameState, action: Action) {
 	function moveRelative(rows: number, cols: number) {
@@ -158,8 +159,12 @@ export function crosswordStateReducer(state: GameState, action: Action) {
 			break;
 		}
 		case "loadState": {
-			state.startTime = new Date(action.state.startTime);
+			state.seconds = action.state.seconds;
 			state.grid = action.state.grid;
+			break;
+		}
+		case "tick": {
+			state.seconds++;
 			break;
 		}
 	}
