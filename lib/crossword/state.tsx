@@ -2,7 +2,7 @@
 
 import { createContext, useContext } from "react";
 import { useMutativeReducer } from "use-mutative";
-import { Clues, Direction, GameState, GridData, PuzzleInput } from "./types";
+import { Clues, Direction, GameState, GridData, PuzzleInput, SavedPuzzleState } from "./types";
 
 type Dispatcher = ReturnType<typeof useMutativeReducer<GameState, Action>>[1];
 
@@ -62,10 +62,14 @@ export function initialStateFromInput(input: PuzzleInput, existingGrid?: GridDat
 		clues,
 		position: { row: 0, col: 0 },
 		direction: "across",
+		startTime: new Date(),
 	};
 }
 
-export type Action = { type: "selectCell"; col: number; row: number } | { type: "keyDown"; key: string } | { type: "loadState"; state: GameState };
+export type Action =
+	| { type: "selectCell"; col: number; row: number }
+	| { type: "keyDown"; key: string }
+	| { type: "loadState"; state: SavedPuzzleState };
 
 export function crosswordStateReducer(state: GameState, action: Action) {
 	function moveRelative(rows: number, cols: number) {
@@ -154,7 +158,9 @@ export function crosswordStateReducer(state: GameState, action: Action) {
 			break;
 		}
 		case "loadState": {
-			return action.state;
+			state.startTime = new Date(action.state.startTime);
+			state.grid = action.state.grid;
+			break;
 		}
 	}
 }

@@ -29,7 +29,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 	const focused = typeof window !== "undefined" ? inputRef.current == document.activeElement : false;
 	const cellSize = 30;
 	const hasMutatedRef = useRef(false);
-
+	console.log(state);
 	const date = useMemo(() => {
 		return new Date(puzzleInput.date);
 	}, []);
@@ -182,7 +182,7 @@ type CellProps = {
 	isSelected: boolean;
 	isHighlighted: boolean;
 	size: number;
-	num?: number;
+	num?: string;
 	x: number;
 	y: number;
 };

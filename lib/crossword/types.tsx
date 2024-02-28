@@ -1,6 +1,6 @@
 /** @format */
 
-export type UsedCellData = { used: true; num?: number; guess?: string; answer: string };
+export type UsedCellData = { used: true; num?: string; guess?: string; answer: string };
 export type UnusedCellData = { used: false };
 
 export type CellData = UsedCellData | UnusedCellData;
@@ -17,6 +17,11 @@ export type PuzzleInput = {
 	clues: Record<Direction, Record<string, Clue>>;
 };
 
+export type SavedPuzzleState = {
+	grid: GridData;
+	startTime: string;
+};
+
 // These two arrays will be sorted by num so that we can display the two columns easily
 export type Clues = { across: RuntimeClue[]; down: RuntimeClue[] };
 
@@ -30,4 +35,5 @@ export type GameState = {
 
 	position: Pos;
 	direction: Direction;
+	startTime: Date;
 };
