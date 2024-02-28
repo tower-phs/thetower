@@ -36,4 +36,7 @@ export type GameState = {
 	position: Pos;
 	direction: Direction;
 	seconds: number;
+
+	autocheck: boolean;
+	paused: boolean;
 };

@@ -63,6 +63,8 @@ export function initialStateFromInput(input: PuzzleInput, existingGrid?: GridDat
 		position: { row: 0, col: 0 },
 		direction: "across",
 		seconds: 0,
+		autocheck: false,
+		paused: false,
 	};
 }
 
@@ -70,7 +72,10 @@ export type Action =
 	| { type: "selectCell"; col: number; row: number }
 	| { type: "keyDown"; key: string }
 	| { type: "loadState"; state: SavedPuzzleState }
-	| { type: "tick" };
+	| { type: "tick" }
+	| { type: "resetGrid"; puzzleInput: PuzzleInput }
+	| { type: "toggleAutocheck" }
+	| { type: "togglePaused" };
 
 export function crosswordStateReducer(state: GameState, action: Action) {
 	function moveRelative(rows: number, cols: number) {
@@ -163,8 +168,25 @@ export function crosswordStateReducer(state: GameState, action: Action) {
 			state.grid = action.state.grid;
 			break;
 		}
+
 		case "tick": {
+			if (state.paused) return;
 			state.seconds++;
+			break;
+		}
+
+		case "resetGrid": {
+			state.grid = initialStateFromInput(action.puzzleInput).grid;
+			break;
+		}
+
+		case "toggleAutocheck": {
+			state.autocheck = !state.autocheck;
+			break;
+		}
+
+		case "togglePaused": {
+			state.paused = !state.paused;
 			break;
 		}
 	}

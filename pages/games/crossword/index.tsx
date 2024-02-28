@@ -29,7 +29,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 	const focused = typeof window !== "undefined" ? inputRef.current == document.activeElement : false;
 	const cellSize = 30;
 	const hasMutatedRef = useRef(false);
-	console.log(state);
+
 	const date = useMemo(() => {
 		return new Date(puzzleInput.date);
 	}, []);
@@ -55,7 +55,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 			const serializedState = JSON.stringify(state);
 			localStorage.setItem("crosswordGameState", serializedState);
 		}
-	}, [state.grid]);
+	}, [state.grid, state.seconds]);
 
 	useEffect(() => {
 		console.log("loading");
@@ -80,7 +80,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 		}, 1000);
 
 		return () => clearInterval(intervalId);
-	}, [dispatchWithTracking]);
+	}, []);
 
 	return (
 		<CrosswordDispatchContext.Provider value={dispatchWithTracking}>
@@ -126,59 +126,75 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 				<h1>The Crossword</h1>
 				<h3>{date.toLocaleDateString()}</h3>
 			</div>
-			<div className="crossword-container">
-				<input
-					ref={inputRef}
-					type="text"
-					className="hidden-input"
-					onKeyDown={e => dispatchWithTracking({ type: "keyDown", key: e.key })}
-					style={{ position: "absolute", opacity: 0, pointerEvents: "none" }}
-				/>
+			<MenuBar
+				seconds={state.seconds}
+				autocheck={state.autocheck}
+				paused={state.paused}
+				onReset={() => dispatchWithTracking({ type: "resetGrid", puzzleInput: puzzleInput })}
+				onToggleAutocheck={() => dispatch({ type: "toggleAutocheck" })}
+				onTogglePaused={() => dispatch({ type: "togglePaused" })}
+			/>
+
+			{state.paused ? (
 				<div>
-					<SelectedCluePanel clue={selectedClue ?? undefined} direction={state.direction} />
-					<svg
-						className="crossword-svg"
-						viewBox={`0 0 ${state.cols * cellSize} ${state.rows * cellSize}`}
-						style={{ border: "0.25px solid black", backgroundColor: "black" }}
-					>
-						{state.grid.map((row, rowIndex) =>
-							row.map(
-								(cell, colIndex) =>
-									cell.used && (
-										<Cell
-											key={`${rowIndex}-${colIndex}`}
-											guess={cell.guess}
-											answer={cell.answer}
-											num={cell.num}
-											isSelected={focused && rowIndex == state.position.row && colIndex == state.position.col}
-											isHighlighted={
-												state.direction == "across"
-													? selectedClue?.row == rowIndex &&
-													  colIndex >= selectedClue?.col &&
-													  colIndex < selectedClue?.col + selectedClue?.answer.length
-													: selectedClue?.col == colIndex &&
-													  rowIndex >= selectedClue?.row &&
-													  rowIndex < selectedClue?.row + selectedClue?.answer.length
-											}
-											onClick={() => {
-												console.log("cloick");
-												dispatchWithTracking({ type: "selectCell", row: rowIndex, col: colIndex });
-												inputRef.current?.focus();
-											}}
-											size={cellSize}
-											x={colIndex}
-											y={rowIndex}
-										/>
-									)
-							)
-						)}
-					</svg>
+					<h1>Game Paused</h1>
+					<p>Click play to resume the game</p>
 				</div>
-				<div className="clues-container">
-					<CluesSectionMemo clues={state.clues.across} title="Across" />
-					<CluesSectionMemo clues={state.clues.down} title="Down" />
+			) : (
+				<div className="crossword-container">
+					<input
+						ref={inputRef}
+						type="text"
+						className="hidden-input"
+						onKeyDown={e => dispatchWithTracking({ type: "keyDown", key: e.key })}
+						style={{ position: "absolute", opacity: 0, pointerEvents: "none" }}
+					/>
+					<div>
+						<SelectedCluePanel clue={selectedClue ?? undefined} direction={state.direction} />
+						<svg
+							className="crossword-svg"
+							viewBox={`0 0 ${state.cols * cellSize} ${state.rows * cellSize}`}
+							style={{ border: "0.25px solid black", backgroundColor: "black" }}
+						>
+							{state.grid.map((row, rowIndex) =>
+								row.map(
+									(cell, colIndex) =>
+										cell.used && (
+											<Cell
+												key={`${rowIndex}-${colIndex}`}
+												guess={cell.guess}
+												answer={cell.answer}
+												num={cell.num}
+												isSelected={focused && rowIndex == state.position.row && colIndex == state.position.col}
+												isHighlighted={
+													state.direction == "across"
+														? selectedClue?.row == rowIndex &&
+														  colIndex >= selectedClue?.col &&
+														  colIndex < selectedClue?.col + selectedClue?.answer.length
+														: selectedClue?.col == colIndex &&
+														  rowIndex >= selectedClue?.row &&
+														  rowIndex < selectedClue?.row + selectedClue?.answer.length
+												}
+												onClick={() => {
+													console.log("cloick");
+													dispatchWithTracking({ type: "selectCell", row: rowIndex, col: colIndex });
+													inputRef.current?.focus();
+												}}
+												size={cellSize}
+												x={colIndex}
+												y={rowIndex}
+											/>
+										)
+								)
+							)}
+						</svg>
+					</div>
+					<div className="clues-container">
+						<CluesSectionMemo clues={state.clues.across} title="Across" />
+						<CluesSectionMemo clues={state.clues.down} title="Down" />
+					</div>
 				</div>
-			</div>
+			)}
 		</CrosswordDispatchContext.Provider>
 	);
 }
@@ -215,6 +231,91 @@ function Cell({ guess, answer, isSelected, isHighlighted, size, x, y, onClick, n
 				{guess}
 			</text>
 		</g>
+	);
+}
+
+function formatSeconds(seconds: number): string {
+	if (seconds < 0) {
+		return "Invalid input: Please provide a non-negative number of seconds.";
+	}
+
+	const hours: number = Math.floor(seconds / 3600);
+	const minutes: number = Math.floor((seconds % 3600) / 60);
+	const remainingSeconds: number = Math.floor(seconds % 60);
+
+	if (hours === 0) {
+		return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+	} else {
+		return `${hours}:${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
+	}
+}
+
+type MenuBarProps = {
+	seconds: number;
+	paused: boolean;
+	autocheck: boolean;
+
+	onTogglePaused?: () => void;
+	onReset?: () => void;
+	onToggleAutocheck?: () => void;
+};
+
+// MenuBar component with toggle button for autocheck and reset button
+function MenuBar({ seconds, paused, autocheck, onTogglePaused, onReset, onToggleAutocheck }: MenuBarProps) {
+	return (
+		<div className="menu-bar">
+			<style jsx>{`
+				.menu-bar {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					padding: 10px;
+					border-top: #dddddd 1px solid;
+					border-bottom: #dddddd 1px solid;
+					margin-top: 10px;
+					margin-bottom: 10px;
+				}
+				.timer {
+					font-size: 18px;
+					font-weight: bold;
+				}
+				.buttons {
+					display: flex;
+					gap: 10px;
+				}
+				.button {
+					padding: 8px 16px;
+					background-color: #007bff;
+					color: white;
+					border: none;
+					border-radius: 4px;
+					cursor: pointer;
+				}
+				.button:hover {
+					background-color: #0056b3;
+				}
+				.left-side {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					gap: 10px;
+				}
+			`}</style>
+			<div className={"left-side"}>
+				<button className="button" onClick={onTogglePaused}>
+					{paused ? "Play" : "Pause"}
+				</button>
+				<div className="timer">{formatSeconds(seconds)}</div>
+			</div>
+			<div className="buttons">
+				<button className="button" onClick={() => onToggleAutocheck && onToggleAutocheck()}>
+					{autocheck ? "Autocheck: On" : "Autocheck: Off"}
+				</button>
+				<button className="button" onClick={onReset}>
+					Reset
+				</button>
+			</div>
+		</div>
 	);
 }
 
