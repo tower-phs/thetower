@@ -12,7 +12,7 @@ interface Props {
 	article: article;
 	category?: boolean;
 	style?: "box" | "row";
-	size?: "small" | "medium" | "large" | "featured";
+	size?: "small" | "medium" | "large" | "featured" | "category-list";
 }
 
 export default function ArticlePreview({ article, category, style = "row", size = "medium" }: Props) {
@@ -34,6 +34,9 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				break;
 			case "small":
 				break;
+
+			case "category-list":
+				charlen = 200;
 		}
 	} else {
 		// ROW STYLE
@@ -77,13 +80,19 @@ export default function ArticlePreview({ article, category, style = "row", size 
 					margin-bottom: 2vh;
 					border: none;
 					border-bottom: 1px solid gainsboro;
-					grid-template-columns: 1fr 1.5fr;
+					// grid-template-columns: 1fr 1.5fr;
 					grid-gap: 1vw;
 				}
 				.article-preview.row.small {
 					display: grid;
-					grid-template-columns: 1fr 1.5fr;
+					// grid-template-columns: 1fr 1.5fr;
 				}
+
+				.article-preview .row .category-list {
+					display: grid;
+					grid-template-columns: 0.5fr;
+				}
+
 				.img-container {
 					position: relative;
 					max-width: 100%;
@@ -98,6 +107,11 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				.img-container.row.small {
 					width: 10vw;
 				}
+
+				.img-wrapper .category-list {
+					width: 20vw;
+				}
+
 				span {
 					margin-left: 1vw;
 					font-size: smaller;
@@ -122,6 +136,12 @@ export default function ArticlePreview({ article, category, style = "row", size 
 					color: ${styles.color.secondary} !important !important !important;
 				}
 
+				@media (max-width: 1000px) {
+					.title .featured {
+						font-size: x-large;
+					}
+				}
+
 				.title .large {
 					font-family: ${styles.font.previewHeader}, sans-serif;
 					font-size: large;
@@ -136,6 +156,12 @@ export default function ArticlePreview({ article, category, style = "row", size 
 					font-family: ${styles.font.previewHeader}, sans-serif;
 					font-size: small;
 				}
+
+				.title .category-list {
+					font-family: ${styles.font.previewHeader}, "Courier New";
+					font-size: calc(0.75rem + 1vw);
+				}
+
 				.category {
 					font-size: 12pt;
 					margin-bottom: 1vh;
@@ -168,6 +194,12 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				.article-preview > .small-preview {
 					display: contents;
 				}
+
+				.article-preview > .category-list-preview {
+					display: grid;
+					grid-template-columns: 0.45fr 1fr;
+				}
+
 				.noimg {
 					display: grid;
 					grid-template-columns: 1fr !important;

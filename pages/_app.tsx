@@ -215,12 +215,15 @@ function Footer() {
 				}
 
 				.sub h2 {
+					font-family: ${styles.font.previewHeader};
 					font-weight: bold;
+					font-size: calc(1.25rem + 1vw);
 				}
 
 				.sub p {
 					margin-left: 20%;
 					margin-right: 20%;
+					font-size: 1.25rem;
 				}
 
 				.sub-link {

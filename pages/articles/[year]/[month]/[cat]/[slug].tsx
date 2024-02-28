@@ -107,6 +107,7 @@ export default function Article({ article }: Props) {
 				.article .titleblock h1 {
 					font-size: 2.5rem;
 					font-weight: 800;
+					font-family: ${styles.font.previewHeader};
 				}
 			`}</style>
 
