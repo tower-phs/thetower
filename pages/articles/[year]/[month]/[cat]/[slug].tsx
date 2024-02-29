@@ -93,7 +93,7 @@ export default function Article({ article }: Props) {
 					}
 				}
 				.article .content p {
-					font-family: ${styles.font.text}, ${styles.font.stack};
+					font-family: ${styles.font.text};
 					font-size: 1.2rem;
 				}
 				.article p {
@@ -105,7 +105,9 @@ export default function Article({ article }: Props) {
 					text-align: center;
 				}
 				.article .titleblock h1 {
-					font-size: 2rem;
+					font-size: 2.5rem;
+					font-weight: 800;
+					font-family: ${styles.font.previewHeader};
 				}
 			`}</style>
 

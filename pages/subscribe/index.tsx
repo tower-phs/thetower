@@ -13,6 +13,7 @@ export default function Subscribe() {
 			<style jsx>{`
 				h1 {
 					text-align: center;
+					font-weight: 600;
 				}
 				iframe {
 					border: none;

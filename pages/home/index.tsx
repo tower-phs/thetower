@@ -7,7 +7,8 @@ import ArticlePreview from "~/components/preview.client";
 import Video from "~/components/video.client";
 import Podcast from "~/components/podcast.client";
 import { getFrontpageArticles } from "~/lib/queries";
-// gotta commit something
+import styles from "~/lib/styles";
+
 export async function getServerSideProps() {
 	const articles = await getFrontpageArticles();
 
@@ -29,26 +30,81 @@ export default function FrontPage({ articles }: Props) {
 				.mosaic {
 					display: grid;
 					grid-gap: 10px;
-					margin-left: 1vw;
-					margin-right: 1vw;
+					margin-left: 0vw;
+					margin-right: 0vw;
 				}
 				.triple {
 					display: grid;
 					grid-gap: 10px;
-					grid-template-columns: 1.5fr 1fr 1fr;
+					grid-template-columns: 0.625fr 1.75fr 0.625fr;
 				}
-				@media (max-width: 1000px) {
-					.triple {
-						grid-template-columns: 1fr;
-					}
-				}
+
 				.one {
 					padding-bottom: 10px;
 					border-bottom: 1px solid gainsboro;
+					display: none;
 				}
+
+				@media (max-width: 1000px) {
+					.triple {
+						display: none;
+					}
+
+					.one {
+						display: block;
+					}
+				}
+
 				.three {
 					padding-top: 10px;
 					border-top: 1px solid gainsboro;
+				}
+
+				.dark-banner {
+					position: relative;
+					background-color: ${styles.color.primary};
+					width: 100vw;
+					left: -2.5vw;
+					padding-top: 5rem;
+					padding-bottom: 5rem;
+				}
+
+				.dark-banner * {
+					color: ${styles.color.background};
+					text-align: center;
+					font-size: 2.5rem;
+					font-family: "Neue Montreal Medium";
+					// margin-right: 0.75rem;
+				}
+
+				.dark-banner a {
+					border-color: lightgray;
+					color: lightgray;
+					border-style: solid;
+					border-thickness: 5px;
+					border-radius: 2rem;
+				}
+
+				.dark-banner a:hover {
+					text-decoration: underline;
+				}
+
+				#dark-banner-content {
+					margin-left: 7.5rem;
+					margin-right: 7.5rem;
+				}
+
+				#tag-container {
+					padding-top: 0.5rem;
+					display: grid;
+					gap: 0.75rem;
+					grid-template-columns: auto auto auto auto auto;
+				}
+
+				@media (max-width: 1000px) {
+					#tag-container {
+						grid-template-columns: auto;
+					}
 				}
 			`}</style>
 			<Head>
@@ -56,18 +112,46 @@ export default function FrontPage({ articles }: Props) {
 				<meta property="og:description" content="The Tower is Princeton High School's newspaper club." />
 			</Head>
 			<div className="mosaic">
-				<div className="one triple">
+				<div className="triple">
 					<div>
-						<NewsFeatures {...articles["news-features"]} />
-						<Sports {...articles["sports"]} />
+						<ArticlePreview article={articles["opinions"][0]} style="box" size="large" />
+						<ArticlePreview article={articles["opinions"][1]} style="box" size="large" />
+						<ArticlePreview article={articles["opinions"][2]} style="box" size="large" />
 					</div>
 					<div>
-						<Multimedia />
-						<Opinions {...articles["opinions"]} />
+						<ArticlePreview article={articles["news-features"][3]} style="box" size="featured" />
 					</div>
-					<ArtsEntertainment {...articles["arts-entertainment"]} />
+					<div>
+						<ArticlePreview article={articles["sports"][0]} style="box" size="large" />
+						<ArticlePreview article={articles["sports"][1]} style="box" size="large" />
+						<ArticlePreview article={articles["sports"][2]} style="box" size="large" />
+					</div>
+				</div>
+				<div className="one">
+					<ArticlePreview article={articles["news-features"][3]} style="box" size="featured" />
+
+					<ArticlePreview article={articles["opinions"][0]} style="box" size="large" />
+					<ArticlePreview article={articles["opinions"][1]} style="box" size="large" />
+					<ArticlePreview article={articles["opinions"][2]} style="box" size="large" />
+
+					<ArticlePreview article={articles["sports"][0]} style="box" size="large" />
+					<ArticlePreview article={articles["sports"][1]} style="box" size="large" />
+					<ArticlePreview article={articles["sports"][2]} style="box" size="large" />
 				</div>
 			</div>
+			{/* <div className="dark-banner">
+				<div id="dark-banner-content">
+					<h1>The Tower is Princeton High School&apos;s newspaper club. Explore PHS's culture through </h1>
+					<div id="tag-container">
+						<a className="big-tag" href="/category/news-features">NEWFE</a>
+						<a className="big-tag" href="/category/opinions">OPS</a>
+						<a className="big-tag" href="/category/arts-entertainment">A&E</a>
+						<a className="big-tag" href="/category/sports">SPORTS</a>
+						<a className="big-tag" href="/category/vanguard">VANGUARD</a>
+						<a className="big-tag" href="/category/multimedia">MULTIMEDIA</a>
+					</div> 
+				</div>
+			</div> */}
 		</div>
 	);
 }

@@ -137,7 +137,7 @@ export async function getArticlesByDate(year: string, month: string) {
 	return articles;
 }
 
-export async function getArticlesByCategory(cat: string) {
+export async function getArticlesByCategory(cat: string, take: number | 10) {
 	const articles = await prisma.article.findMany({
 		orderBy: [
 			{
@@ -151,7 +151,23 @@ export async function getArticlesByCategory(cat: string) {
 			category: cat,
 			published: true,
 		},
+		take: take,
 	});
+
+	return articles;
+}
+
+export async function getArticlesExceptCategory(cat: string) {
+	let articles: any[] = [];
+	let cats = ["news-features", "arts-entertainment", "opinions", "sports", "multimedia"];
+
+	for (let i = 0; i < cats.length; i++) {
+		// TODO: use foreach but make it actually work
+		let c = cats[i];
+		if (c == cat) continue;
+		let cArticles = await getArticlesByCategory(c, 2);
+		articles.push(...cArticles);
+	}
 
 	return articles;
 }

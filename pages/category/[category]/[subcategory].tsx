@@ -48,7 +48,7 @@ export default function Subcategory({ subcategory, articles, sidebar }: Props) {
 				}
 				.grid {
 					display: grid;
-					grid-template-columns: 5fr 2fr;
+					grid-template-columns: 2.25fr 0.75fr;
 					grid-column-gap: 2vw;
 				}
 				.grid .sidebar {
@@ -64,7 +64,7 @@ export default function Subcategory({ subcategory, articles, sidebar }: Props) {
 			<div className="grid">
 				<section>
 					{articles.map(article => (
-						<ArticlePreview key={article.id} article={article} style="row" size="small" />
+						<ArticlePreview key={article.id} article={article} style="row" size="category-list" />
 					))}
 				</section>
 				<section className="sidebar">

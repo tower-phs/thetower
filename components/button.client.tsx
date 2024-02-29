@@ -36,6 +36,8 @@ export default function Button({ name, href, children, className, onClick }: Pro
 					transition: 0.1s ease-in;
 					box-sizing: border-box;
 					position: relative;
+					font-family: ${styles.font.folio};
+					font-weight: 400;
 				}
 				.btn::after {
 					content: "";
@@ -45,7 +47,7 @@ export default function Button({ name, href, children, className, onClick }: Pro
 					right: 0;
 					width: 100%;
 					height: 0%;
-					background-color: ${styles.color.accent};
+					background-color: ${styles.color.background};
 					transition: 0.1s ease-in;
 				}
 				.btn:hover::after {

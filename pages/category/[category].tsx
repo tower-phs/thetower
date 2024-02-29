@@ -3,9 +3,10 @@
 import { article } from "@prisma/client";
 import Head from "next/head";
 import ArticlePreview from "~/components/preview.client";
-import { getArticlesByCategory, getCurrArticles, getFrontpageArticles } from "~/lib/queries";
+import { getArticlesByCategory, getArticlesExceptCategory, getFrontpageArticles } from "~/lib/queries";
 import { expandCategorySlug } from "~/lib/utils";
 import shuffle from "lodash/shuffle";
+import styles from "~/lib/styles";
 
 interface Params {
 	params: {
@@ -23,8 +24,8 @@ export async function getServerSideProps({ params }: Params) {
 	return {
 		props: {
 			category: params.category,
-			articles: await getArticlesByCategory(params.category),
-			sidebar: await getCurrArticles(),
+			articles: await getArticlesByCategory(params.category, 10),
+			sidebar: await getArticlesExceptCategory(params.category),
 		},
 	};
 }
@@ -45,10 +46,13 @@ export default function Category({ category, articles, sidebar }: Props) {
 					text-align: center;
 					border-bottom: 3px double black;
 					margin-bottom: 1vh;
+					font-weight: bold;
+					font-family: ${styles.font.previewHeader};
+					font-size: calc(1.5rem + 1vw);
 				}
 				.grid {
 					display: grid;
-					grid-template-columns: 2fr 1fr;
+					grid-template-columns: 2.25fr 0.75fr;
 					grid-column-gap: 2vw;
 				}
 				.grid .sidebar {
@@ -64,7 +68,7 @@ export default function Category({ category, articles, sidebar }: Props) {
 			<div className="grid">
 				<section>
 					{articles.map(article => (
-						<ArticlePreview key={article.id} article={article} style="row" size="small" />
+						<ArticlePreview key={article.id} article={article} style="row" size="category-list" />
 					))}
 				</section>
 				<section className="sidebar">
