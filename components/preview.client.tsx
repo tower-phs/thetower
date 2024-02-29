@@ -200,6 +200,13 @@ export default function ArticlePreview({ article, category, style = "row", size 
 					grid-template-columns: 0.45fr 1fr;
 				}
 
+				@media (max-width: 1000px) {
+					.article-preview > .category-list-preview {
+						display: grid;
+						grid-template-columns: 0.5fr 1fr;
+					}
+				}
+
 				.noimg {
 					display: grid;
 					grid-template-columns: 1fr !important;

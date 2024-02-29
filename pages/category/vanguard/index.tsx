@@ -37,6 +37,7 @@ export default function Category({ spreads, sidebar }: Props) {
 					border-bottom: 3px double black;
 					margin-bottom: 1vh;
 					font-weight: bold;
+					font-size: calc(1.5rem + 1vw);
 				}
 				.grid {
 					display: grid;

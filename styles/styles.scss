@@ -10,7 +10,7 @@
 	text-decoration: none;
 	margin: 0;
 }
-h1,
+
 h2,
 h3,
 h4,
@@ -18,6 +18,10 @@ h5,
 h6 {
 	font-family: globals.$font-header, globals.$font-stack;
 	font-weight: normal;
+}
+
+h1 {
+	font-family: "Neue Montreal Medium";
 }
 
 span {

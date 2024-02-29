@@ -8,6 +8,7 @@ import Video from "~/components/video.client";
 import Podcast from "~/components/podcast.client";
 import { getArticlesByCategory } from "~/lib/queries";
 import NoSSR from "~/components/nossr.client";
+import styles from "~/lib/styles";
 
 interface Props {
 	spreads: spreads[];
@@ -35,7 +36,13 @@ export default function Category(/*{ spreads }: Props*/) {
 					border-bottom: 3px double black;
 					margin-bottom: 1vh;
 					font-weight: bold;
+					font-size: calc(1.5rem + 1vw);
 				}
+
+				h2 {
+					font-family: ${styles.font.previewHeader};
+				}
+
 				.grid {
 					display: grid;
 					grid-template-columns: 2fr 1fr 1fr;
@@ -89,14 +96,14 @@ export default function Category(/*{ spreads }: Props*/) {
 					</section>*/}
 					<section className="papercasts">
 						<h2>PHS Talks</h2>
+						<Podcast link="1272351" />
+						<Podcast link="1233141" />
+						<Podcast link="1187999" />
 						<Podcast link="1187999" />
 						<Podcast link="1143064" />
-						<Podcast link="937713" />
-						<Podcast link="927613" />
-						<Podcast link="844939" />
 					</section>
 					<section className="rightbar">
-						<h2>Inside PHS</h2>
+						<h2>Inside PHS - PHS Talks Specials</h2>
 						<Podcast link="876635" />
 					</section>
 				</NoSSR>
