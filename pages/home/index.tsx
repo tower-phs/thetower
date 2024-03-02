@@ -98,7 +98,7 @@ export default function FrontPage({ articles }: Props) {
 					padding-top: 0.5rem;
 					display: grid;
 					gap: 0.75rem;
-					grid-template-columns: auto auto auto auto auto;
+					grid-template-columns: auto auto auto auto auto auto;
 				}
 
 				@media (max-width: 1000px) {
@@ -139,19 +139,31 @@ export default function FrontPage({ articles }: Props) {
 					<ArticlePreview article={articles["sports"][2]} style="box" size="large" />
 				</div>
 			</div>
-			{/* <div className="dark-banner">
+			<div className="dark-banner">
 				<div id="dark-banner-content">
-					<h1>The Tower is Princeton High School&apos;s newspaper club. Explore PHS's culture through </h1>
+					<h1>The Tower is Princeton High School&pos;s student-run newspaper. Explore PHS&pos;s culture through </h1>
 					<div id="tag-container">
-						<a className="big-tag" href="/category/news-features">NEWFE</a>
-						<a className="big-tag" href="/category/opinions">OPS</a>
-						<a className="big-tag" href="/category/arts-entertainment">A&E</a>
-						<a className="big-tag" href="/category/sports">SPORTS</a>
-						<a className="big-tag" href="/category/vanguard">VANGUARD</a>
-						<a className="big-tag" href="/category/multimedia">MULTIMEDIA</a>
-					</div> 
+						<Link className="big-tag" href="/category/news-features">
+							NEWFE
+						</Link>
+						<Link className="big-tag" href="/category/opinions">
+							OPS
+						</Link>
+						<Link className="big-tag" href="/category/arts-entertainment">
+							A&E
+						</Link>
+						<Link className="big-tag" href="/category/sports">
+							SPORTS
+						</Link>
+						<Link className="big-tag" href="/category/vanguard">
+							VANGUARD
+						</Link>
+						<Link className="big-tag" href="/category/multimedia">
+							MULTIMEDIA
+						</Link>
+					</div>
 				</div>
-			</div> */}
+			</div>
 		</div>
 	);
 }

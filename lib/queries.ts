@@ -137,7 +137,33 @@ export async function getArticlesByDate(year: string, month: string) {
 	return articles;
 }
 
-export async function getArticlesByCategory(cat: string, take: number | 10) {
+export async function getIdOfNewest(cat: string) {
+	const res = await prisma.article.findFirst({
+		orderBy: [
+			{
+				year: "desc",
+			},
+			{
+				month: "desc",
+			},
+			{
+				id: "desc",
+			},
+		],
+		where: {
+			category: cat,
+			published: true,
+		},
+		select: {
+			id: true,
+		},
+	});
+
+	console.log("id", res);
+	return res === null ? 0 : res.id;
+}
+
+export async function getArticlesByCategory(cat: string, take: number, offsetCursor: number, skip: number) {
 	const articles = await prisma.article.findMany({
 		orderBy: [
 			{
@@ -146,12 +172,19 @@ export async function getArticlesByCategory(cat: string, take: number | 10) {
 			{
 				month: "desc",
 			},
+			{
+				id: "desc",
+			},
 		],
 		where: {
 			category: cat,
 			published: true,
 		},
 		take: take,
+		cursor: {
+			id: offsetCursor,
+		},
+		skip: skip,
 	});
 
 	return articles;
@@ -165,7 +198,8 @@ export async function getArticlesExceptCategory(cat: string) {
 		// TODO: use foreach but make it actually work
 		let c = cats[i];
 		if (c == cat) continue;
-		let cArticles = await getArticlesByCategory(c, 2);
+		let id = await getIdOfNewest(c);
+		let cArticles = await getArticlesByCategory(c, 2, id, 0);
 		articles.push(...cArticles);
 	}
 
