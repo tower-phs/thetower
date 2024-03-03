@@ -159,7 +159,6 @@ export async function getIdOfNewest(cat: string) {
 		},
 	});
 
-	console.log("id", res);
 	return res === null ? 0 : res.id;
 }
 

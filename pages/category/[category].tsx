@@ -26,7 +26,7 @@ export async function getServerSideProps({ params }: Params) {
 	return {
 		props: {
 			category: params.category,
-			articles: await getArticlesByCategory(params.category, 10, await getIdOfNewest(params.category), 0),
+			articles: [],
 			sidebar: await getArticlesExceptCategory(params.category),
 		},
 	};
@@ -34,7 +34,7 @@ export async function getServerSideProps({ params }: Params) {
 
 export default function Category(props: Props) {
 	const [articles, setArticles] = useState(props.articles);
-	const [cursor, setCursor] = useState(articles[articles.length - 1].id);
+	const [cursor, setCursor] = useState(null);
 	const category = props.category;
 	const sidebar = props.sidebar;
 	const route = useRouter().asPath;
@@ -55,27 +55,21 @@ export default function Category(props: Props) {
 
 	useEffect(() => {
 		async function setData() {
-			const cursorRes = await fetch("/api/id", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ category }),
-			});
-
-			setCursor(await cursorRes.json());
+			setCursor(null);
 
 			const articleRes = await fetch("/api/load", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({ category, cursor }),
+				body: JSON.stringify({ category, cursor: null }),
 			});
 
-			const articles = await articleRes.json();
-			setArticles(articles);
-			setCursor(articles[articles.length - 1].id);
+			articleRes.json().then(recvd => {
+				console.log(recvd);
+				setArticles(recvd);
+				setCursor(recvd[recvd.length - 1].id);
+			});
 		}
 
 		setData();
