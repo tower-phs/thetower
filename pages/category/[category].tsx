@@ -3,7 +3,7 @@
 import { article } from "@prisma/client";
 import Head from "next/head";
 import ArticlePreview from "~/components/preview.client";
-import { getArticlesByCategory, getArticlesExceptCategory, getIdOfNewest } from "~/lib/queries";
+import { getArticlesExceptCategory } from "~/lib/queries";
 import { expandCategorySlug } from "~/lib/utils";
 import shuffle from "lodash/shuffle";
 import styles from "~/lib/styles";
@@ -40,6 +40,9 @@ export default function Category(props: Props) {
 	const route = useRouter().asPath;
 
 	async function newArticles() {
+		let loading = document.getElementById("loading");
+		if (loading == null) return; // to make the compiler happy
+		loading.style = "display: block";
 		const response = await fetch("/api/load", {
 			method: "POST",
 			headers: {
@@ -49,12 +52,21 @@ export default function Category(props: Props) {
 		});
 
 		const loaded = await response.json();
-		setArticles([...articles, ...loaded]);
-		setCursor(loaded[loaded.length - 1].id);
+		if (loaded.length != 0) {
+			setArticles([...articles, ...loaded]);
+			setCursor(loaded[loaded.length - 1].id);
+			loading.style = "display: none";
+		} else {
+			loading.innerText = "No more articles to load.";
+		}
 	}
 
 	useEffect(() => {
 		async function setData() {
+			let loading = document.getElementById("loading");
+			loading.innerText = "Loading articles, please wait...";
+			loading.style = "display: block";
+
 			setCursor(null);
 
 			const articleRes = await fetch("/api/load", {
@@ -70,6 +82,7 @@ export default function Category(props: Props) {
 				setArticles(recvd);
 				setCursor(recvd[recvd.length - 1].id);
 			});
+			loading.style = "display: none;";
 		}
 
 		setData();
@@ -126,6 +139,10 @@ export default function Category(props: Props) {
 					color: white;
 					background-color: black;
 				}
+
+				#loading {
+					display: none;
+				}
 			`}</style>
 			<h1>{expandCategorySlug(category)}</h1>
 			<div className="grid">
@@ -135,6 +152,7 @@ export default function Category(props: Props) {
 							<ArticlePreview key={article.id} article={article} style="row" size="category-list" />
 						))}
 					</section>
+					<h3 id="loading">Loading articles, please wait...</h3>
 					<button id="loadmore" onClick={newArticles}>
 						Load more
 					</button>

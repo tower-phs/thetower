@@ -79,6 +79,8 @@ export default function Category(/*{ spreads }: Props*/) {
 			<div className="grid">
 				<NoSSR>
 					<section className="videos">
+						<Video link="icIwD1E3_SI" title="PHS Jazz Ensemble's Trip to Hawaii" />
+						<br />
 						<Video link="GDDGmRkkS5A" title="Soccer Practice with Nick Matese" />
 						<br />
 						<Video link="NlVjqI7eSfc" title="To Track or Not To Track? - A Math Talk with NCTM President Kevin Dykema" />
@@ -96,15 +98,15 @@ export default function Category(/*{ spreads }: Props*/) {
 					</section>*/}
 					<section className="papercasts">
 						<h2>PHS Talks</h2>
-						<Podcast link="1272351" />
-						<Podcast link="1233141" />
-						<Podcast link="1187999" />
-						<Podcast link="1187999" />
-						<Podcast link="1143064" />
+						<Podcast link="phstalks/1272351" />
+						<Podcast link="phstalks/1233141" />
+						<Podcast link="phstalks/1187999" />
+						<Podcast link="phstalks/1187999" />
+						<Podcast link="phstalks/1143064" />
 					</section>
 					<section className="rightbar">
-						<h2>Inside PHS - PHS Talks Specials</h2>
-						<Podcast link="876635" />
+						<h2>Tower Shorts</h2>
+						<Podcast link="towershorts/1369461" />
 					</section>
 				</NoSSR>
 			</div>
