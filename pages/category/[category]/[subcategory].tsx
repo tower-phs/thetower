@@ -42,7 +42,7 @@ export default function Subcategory(props: Props) {
 	async function newArticles() {
 		let loading = document.getElementById("loading");
 		if (loading == null) return; // to make the compiler happy
-		loading.style = "display: block";
+		loading.setAttribute("style", "display: block");
 		const response = await fetch("/api/loadsub", {
 			method: "POST",
 			headers: {
@@ -55,7 +55,7 @@ export default function Subcategory(props: Props) {
 		if (loaded.length != 0) {
 			setArticles([...articles, ...loaded]);
 			setCursor(loaded[loaded.length - 1].id);
-			loading.style = "display: none";
+			loading.setAttribute("style", "display: none");
 		} else {
 			loading.innerText = "No more articles to load.";
 		}
@@ -66,7 +66,7 @@ export default function Subcategory(props: Props) {
 			let loading = document.getElementById("loading");
 			if (loading == null) return;
 			loading.innerText = "Loading articles, please wait...";
-			loading.style = "display: block";
+			loading.setAttribute("style", "display: block");
 
 			setCursor(null);
 
@@ -83,7 +83,7 @@ export default function Subcategory(props: Props) {
 				setArticles(recvd);
 				setCursor(recvd[recvd.length - 1].id);
 			});
-			loading.style = "display: none;";
+			loading.setAttribute("style", "display: none;");
 		}
 
 		setData();
