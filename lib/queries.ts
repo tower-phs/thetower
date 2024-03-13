@@ -137,8 +137,9 @@ export async function getArticlesByDate(year: string, month: string) {
 	return articles;
 }
 
-export async function getIdOfNewest(cat: string, subcat: string) {
-	subcat = subcat == null ? cat : subcat;
+export async function getIdOfNewest(cat: string, subcat: string | null) {
+	const where = subcat == null ? { category: cat, published: true } : { category: cat, subcategory: subcat, published: true };
+
 	const res = await prisma.article.findFirst({
 		orderBy: [
 			{
@@ -151,11 +152,7 @@ export async function getIdOfNewest(cat: string, subcat: string) {
 				id: "desc",
 			},
 		],
-		where: {
-			category: cat,
-			subcategory: subcat,
-			published: true,
-		},
+		where,
 		select: {
 			id: true,
 		},

@@ -78,18 +78,6 @@ export default function FrontPage({ articles }: Props) {
 					// margin-right: 0.75rem;
 				}
 
-				// .dark-banner .big-tag {
-				// 	border-color: lightgray;
-				// 	color: lightgray;
-				// 	border-style: solid;
-				// 	border-thickness: 5px;
-				// 	border-radius: 2rem;
-				// }
-
-				// .dark-banner .big-tag:hover {
-				// 	text-decoration: underline;
-				// }
-
 				#dark-banner-content {
 					margin-left: 7.5rem;
 					margin-right: 7.5rem;
@@ -99,18 +87,12 @@ export default function FrontPage({ articles }: Props) {
 					font-size: calc(1rem + 1vw);
 				}
 
-				// #tag-container {
-				// 	padding-top: 0.5rem;
-				// 	display: grid;
-				// 	gap: 0.75rem;
-				// 	grid-template-columns: auto auto auto auto auto auto;
-				// }
-
-				// @media (max-width: 1000px) {
-				// 	#tag-container {
-				// 		grid-template-columns: auto;
-				// 	}
-				// }
+				.section-header {
+					// font-family: ${styles.font.previewHeader};
+					// font-style: italic;
+					text-align: center;
+					font-weight: bold;
+				}
 			`}</style>
 			<Head>
 				<meta property="og:title" content="Home | The Tower" />
@@ -119,17 +101,21 @@ export default function FrontPage({ articles }: Props) {
 			<div className="mosaic">
 				<div className="triple">
 					<div>
+						<h2 className="section-header">OPINIONS</h2>
+						<hr />
 						<ArticlePreview article={articles["opinions"][0]} style="box" size="large" />
 						<ArticlePreview article={articles["opinions"][1]} style="box" size="large" />
-						<ArticlePreview article={articles["opinions"][2]} style="box" size="large" />
+						{/* <ArticlePreview article={articles["opinions"][2]} style="box" size="large" /> */}
 					</div>
 					<div>
 						<ArticlePreview article={articles["news-features"][3]} style="box" size="featured" />
 					</div>
 					<div>
+						<h2 className="section-header">SPORTS</h2>
+						<hr />
 						<ArticlePreview article={articles["sports"][0]} style="box" size="large" />
-						<ArticlePreview article={articles["sports"][1]} style="box" size="large" />
-						<ArticlePreview article={articles["sports"][2]} style="box" size="large" />
+						{/* <ArticlePreview article={articles["sports"][1]} style="box" size="large" /> */}
+						{/* <ArticlePreview article={articles["sports"][2]} style="box" size="large" /> */}
 					</div>
 				</div>
 				<div className="one">
@@ -144,54 +130,19 @@ export default function FrontPage({ articles }: Props) {
 					<ArticlePreview article={articles["sports"][2]} style="box" size="large" />
 				</div>
 			</div>
-			<div className="dark-banner">
+			{/* <div className="dark-banner">
 				<div id="dark-banner-content">
 					<hr />
 					<h1 style={{ marginTop: "2.5rem" }}>The Tower is Princeton High School&apos;s student-run newspaper.</h1>
 					<Image src="/assets/white-tower.png" width={309} height={721} alt="Tower logo" style={{ width: "10rem", height: "auto" }} />
 					<h1 style={{ marginBottom: "2.5rem" }}>
-						Since 1928, the Tower has been reporting on the inner workings of PHS, the district, and cultural and athletic events that
+						Since 1928, the Tower has been reporting on the inner workings of PHS, the district, and the cultural and athletic events that
 						affect the student body.
 					</h1>
 					<hr />
-					{/* <div id="tag-container">
-						<div className="big-tag">
-							<Link href="/category/news-features">
-								<h1>NEWFE</h1>
-							</Link>
-						</div>
-						<div className="big-tag">
-							<Link href="/category/opinions">
-								<h1>OPS</h1>
-							</Link>
-						</div>
-						<div className="big-tag">
-							<Link href="/category/arts-entertainment">
-								<h1>A&E</h1>
-							</Link>
-						</div>
-						<div className="big-tag">
-							<Link href="/category/sports">
-								<h1>SPORTS</h1>
-							</Link>
-						</div>
-						<div className="big-tag">
-							<Link href="/category/vanguard">
-								<h1>VANGUARD</h1>
-							</Link>
-						</div>
-						<div className="big-tag">
-							<Link href="/category/multimedia">
-								<h1>MULTIMEDIA</h1>
-							</Link>
-						</div>
-					</div> */}
 				</div>
-				{/* <div>
-					<ArtsEntertainment {...articles["arts-entertainment"]}/>
-					<Multimedia />
-				</div> */}
-			</div>
+			</div> */}
+			{/* <Opinions {...articles["opinions"]} /> */}
 		</div>
 	);
 }
@@ -227,12 +178,12 @@ export function Opinions(articles: article[]) {
 		<div className="opinions">
 			<style jsx>{``}</style>
 			<div>
-				<ArticlePreview article={articles[0]} style="box" size="medium" category />
+				<ArticlePreview article={articles[0]} style="row" size="category-list" category />
 				<div>
 					{Object.values(articles)
 						.slice(1)
 						.map(article => (
-							<ArticlePreview key={article.id} style="row" size="medium" category article={article} />
+							<ArticlePreview key={article.id} style="row" size="category-list" category article={article} />
 						))}
 				</div>
 			</div>

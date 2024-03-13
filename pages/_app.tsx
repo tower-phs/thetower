@@ -375,7 +375,7 @@ function NavBar() {
 			`}</style>
 			<Button
 				name="☰"
-				href=""
+				href="#"
 				className="showMenu"
 				onClick={() => {
 					let menu = document.querySelector(".menu");

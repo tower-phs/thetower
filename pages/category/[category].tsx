@@ -36,8 +36,8 @@ export default function Category(props: Props) {
 	const [articles, setArticles] = useState(props.articles);
 	const [cursor, setCursor] = useState(null);
 	const category = props.category;
-	const sidebar = props.sidebar;
 	const route = useRouter().asPath;
+	const sidebar = props.sidebar;
 
 	async function newArticles() {
 		let loading = document.getElementById("loading");
@@ -63,6 +63,7 @@ export default function Category(props: Props) {
 
 	useEffect(() => {
 		async function setData() {
+			console.log("route change");
 			let loading = document.getElementById("loading");
 			loading.innerText = "Loading articles, please wait...";
 			loading.style = "display: block";
