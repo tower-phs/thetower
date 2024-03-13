@@ -137,7 +137,31 @@ export async function getArticlesByDate(year: string, month: string) {
 	return articles;
 }
 
-export async function getArticlesByCategory(cat: string, take: number | 10) {
+export async function getIdOfNewest(cat: string, subcat: string | null) {
+	const where = subcat == null ? { category: cat, published: true } : { category: cat, subcategory: subcat, published: true };
+
+	const res = await prisma.article.findFirst({
+		orderBy: [
+			{
+				year: "desc",
+			},
+			{
+				month: "desc",
+			},
+			{
+				id: "desc",
+			},
+		],
+		where,
+		select: {
+			id: true,
+		},
+	});
+
+	return res === null ? 0 : res.id;
+}
+
+export async function getArticlesByCategory(cat: string, take: number, offsetCursor: number, skip: number) {
 	const articles = await prisma.article.findMany({
 		orderBy: [
 			{
@@ -146,12 +170,19 @@ export async function getArticlesByCategory(cat: string, take: number | 10) {
 			{
 				month: "desc",
 			},
+			{
+				id: "desc",
+			},
 		],
 		where: {
 			category: cat,
 			published: true,
 		},
 		take: take,
+		cursor: {
+			id: offsetCursor,
+		},
+		skip: skip,
 	});
 
 	return articles;
@@ -165,7 +196,8 @@ export async function getArticlesExceptCategory(cat: string) {
 		// TODO: use foreach but make it actually work
 		let c = cats[i];
 		if (c == cat) continue;
-		let cArticles = await getArticlesByCategory(c, 2);
+		let id = await getIdOfNewest(c, c);
+		let cArticles = await getArticlesByCategory(c, 2, id, 0);
 		articles.push(...cArticles);
 	}
 
@@ -213,7 +245,7 @@ export async function getArticlesBySearch(cat: string) {
 	return articles;
 }
 
-export async function getArticlesBySubcategory(subcat: string) {
+export async function getArticlesBySubcategory(subcat: string, take: number, offsetCursor: number, skip: number) {
 	const articles = await prisma.article.findMany({
 		orderBy: [
 			{
@@ -227,6 +259,11 @@ export async function getArticlesBySubcategory(subcat: string) {
 			subcategory: subcat,
 			published: true,
 		},
+		take: take,
+		cursor: {
+			id: offsetCursor,
+		},
+		skip: skip,
 	});
 
 	return articles;

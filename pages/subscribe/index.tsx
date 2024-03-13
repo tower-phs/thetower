@@ -9,8 +9,12 @@ export default function Subscribe() {
 				<title>Subscribe | The Tower</title>
 				<meta property="og:title" content="Subscribe | The Tower" />
 				<meta property="og:description" content="Subscribe to the Tower" />
+				<meta
+					http-equiv="refresh"
+					content="0; URL=https://docs.google.com/forms/d/e/1FAIpQLSepzFs9XYC-Dfenzf5Y4xnwfPs5MBzpPhgoRzNYmsBtFAfa5g/viewform"
+				/>
 			</Head>
-			<style jsx>{`
+			{/* <style jsx>{`
 				h1 {
 					text-align: center;
 					font-weight: 600;
@@ -32,7 +36,7 @@ export default function Subscribe() {
 				>
 					Loading…
 				</iframe>
-			</div>
+			</div> */}
 		</div>
 	);
 }

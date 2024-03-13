@@ -3,10 +3,12 @@
 import { article } from "@prisma/client";
 import Head from "next/head";
 import ArticlePreview from "~/components/preview.client";
-import { getArticlesByCategory, getArticlesExceptCategory, getFrontpageArticles } from "~/lib/queries";
+import { getArticlesExceptCategory } from "~/lib/queries";
 import { expandCategorySlug } from "~/lib/utils";
 import shuffle from "lodash/shuffle";
 import styles from "~/lib/styles";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 interface Params {
 	params: {
@@ -24,13 +26,70 @@ export async function getServerSideProps({ params }: Params) {
 	return {
 		props: {
 			category: params.category,
-			articles: await getArticlesByCategory(params.category, 10),
+			articles: [],
 			sidebar: await getArticlesExceptCategory(params.category),
 		},
 	};
 }
 
-export default function Category({ category, articles, sidebar }: Props) {
+export default function Category(props: Props) {
+	const [articles, setArticles] = useState(props.articles);
+	const [cursor, setCursor] = useState(null);
+	const category = props.category;
+	const route = useRouter().asPath;
+	const sidebar = props.sidebar;
+
+	async function newArticles() {
+		let loading = document.getElementById("loading");
+		if (loading == null) return; // to make the compiler happy
+		loading.setAttribute("style", "display: block");
+		const response = await fetch("/api/load", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ category, cursor }),
+		});
+
+		const loaded = await response.json();
+		if (loaded.length != 0) {
+			setArticles([...articles, ...loaded]);
+			setCursor(loaded[loaded.length - 1].id);
+			loading.setAttribute("style", "display: none");
+		} else {
+			loading.innerText = "No more articles to load.";
+		}
+	}
+
+	useEffect(() => {
+		async function setData() {
+			console.log("route change");
+			let loading = document.getElementById("loading");
+			if (loading == null) return; // make typescript happy
+			loading.innerText = "Loading articles, please wait...";
+			loading.setAttribute("style", "display: block");
+
+			setCursor(null);
+
+			const articleRes = await fetch("/api/load", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ category, cursor: null }),
+			});
+
+			articleRes.json().then(recvd => {
+				console.log(recvd);
+				setArticles(recvd);
+				setCursor(recvd[recvd.length - 1].id);
+			});
+			loading.setAttribute("style", "display: none;");
+		}
+
+		setData();
+	}, [route]);
+
 	return (
 		<div className="category">
 			<Head>
@@ -63,14 +122,43 @@ export default function Category({ category, articles, sidebar }: Props) {
 					border-left: 1px solid gainsboro;
 					border-right: 1px solid gainsboro;
 				}
+
+				#loadmore {
+					border-radius: 2rem;
+					font-family: ${styles.font.previewHeader};
+					font-size: calc(0.25rem + 1vw);
+					color: black;
+					background-color: white;
+					border-style: solid;
+					border-color: black;
+					padding: 0.5rem;
+					padding-left: 0.75rem;
+					padding-right: 0.75rem;
+					transition: 0.25s;
+				}
+
+				#loadmore:hover {
+					color: white;
+					background-color: black;
+				}
+
+				#loading {
+					display: none;
+				}
 			`}</style>
 			<h1>{expandCategorySlug(category)}</h1>
 			<div className="grid">
-				<section>
-					{articles.map(article => (
-						<ArticlePreview key={article.id} article={article} style="row" size="category-list" />
-					))}
-				</section>
+				<div>
+					<section>
+						{articles.map(article => (
+							<ArticlePreview key={article.id} article={article} style="row" size="category-list" />
+						))}
+					</section>
+					<h3 id="loading">Loading articles, please wait...</h3>
+					<button id="loadmore" onClick={newArticles}>
+						Load more
+					</button>
+				</div>
 				<section className="sidebar">
 					<SidebarArticles sidebar={sidebar} />
 				</section>
