@@ -34,6 +34,12 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 		return new Date(puzzleInput.date);
 	}, []);
 
+	const won = useMemo(() => {
+		return state.grid.every(c => c.every(cell => (cell.used ? cell.answer == cell.guess : true)));
+	}, [state.grid]);
+
+	console.log(won);
+
 	// Function to find the clue associated with the selected cell
 	const selectedClue = useMemo(() => {
 		if (!focused) {
@@ -76,7 +82,9 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 
 	useEffect(() => {
 		const intervalId = setInterval(() => {
-			dispatchWithTracking({ type: "tick" });
+			if (!won) {
+				dispatchWithTracking({ type: "tick" });
+			}
 		}, 1000);
 
 		return () => clearInterval(intervalId);
@@ -130,6 +138,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 				seconds={state.seconds}
 				autocheck={state.autocheck}
 				paused={state.paused}
+				won={won}
 				onReset={() => dispatchWithTracking({ type: "resetGrid", puzzleInput: puzzleInput })}
 				onToggleAutocheck={() => dispatch({ type: "toggleAutocheck" })}
 				onTogglePaused={() => dispatch({ type: "togglePaused" })}
@@ -175,6 +184,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 														  rowIndex >= selectedClue?.row &&
 														  rowIndex < selectedClue?.row + selectedClue?.answer.length
 												}
+												isWrong={state.autocheck && cell.guess != null && cell.guess != cell.answer}
 												onClick={() => {
 													console.log("cloick");
 													dispatchWithTracking({ type: "selectCell", row: rowIndex, col: colIndex });
@@ -205,13 +215,14 @@ type CellProps = {
 	onClick: () => void;
 	isSelected: boolean;
 	isHighlighted: boolean;
+	isWrong: boolean;
 	size: number;
 	num?: string;
 	x: number;
 	y: number;
 };
 
-function Cell({ guess, answer, isSelected, isHighlighted, size, x, y, onClick, num }: CellProps): JSX.Element {
+function Cell({ guess, answer, isSelected, isHighlighted, isWrong, size, x, y, onClick, num }: CellProps): JSX.Element {
 	const fillColor = isSelected ? "#FFD700" : isHighlighted ? "#9dd9fa" : "white";
 
 	return (
@@ -230,6 +241,7 @@ function Cell({ guess, answer, isSelected, isHighlighted, size, x, y, onClick, n
 			>
 				{guess}
 			</text>
+			{isWrong && <line x1={x * size} y1={(y + 1) * size} x2={(x + 1) * size} y2={y * size} stroke="red" strokeWidth="0.5" />}
 		</g>
 	);
 }
@@ -254,6 +266,7 @@ type MenuBarProps = {
 	seconds: number;
 	paused: boolean;
 	autocheck: boolean;
+	won: boolean;
 
 	onTogglePaused?: () => void;
 	onReset?: () => void;
@@ -261,7 +274,7 @@ type MenuBarProps = {
 };
 
 // MenuBar component with toggle button for autocheck and reset button
-function MenuBar({ seconds, paused, autocheck, onTogglePaused, onReset, onToggleAutocheck }: MenuBarProps) {
+function MenuBar({ seconds, paused, autocheck, onTogglePaused, onReset, onToggleAutocheck, won }: MenuBarProps) {
 	return (
 		<div className="menu-bar">
 			<style jsx>{`
@@ -306,6 +319,7 @@ function MenuBar({ seconds, paused, autocheck, onTogglePaused, onReset, onToggle
 					{paused ? "Play" : "Pause"}
 				</button>
 				<div className="timer">{formatSeconds(seconds)}</div>
+				{won && <p>YOU WON!!!!!!!!</p>}
 			</div>
 			<div className="buttons">
 				<button className="button" onClick={() => onToggleAutocheck && onToggleAutocheck()}>
