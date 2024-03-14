@@ -10,7 +10,7 @@
 	text-decoration: none;
 	margin: 0;
 }
-h1,
+
 h2,
 h3,
 h4,
@@ -19,13 +19,17 @@ h6 {
 	font-family: globals.$font-header, globals.$font-stack;
 	font-weight: normal;
 }
+
+h1 {
+	font-family: "Neue Montreal Medium";
+}
+
 span {
 	color: #8b8b8b;
 	font-family: globals.$font-text, globals.$font-stack;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap");
 
 @font-face {
 	font-family: "Canterbury";
@@ -36,20 +40,28 @@ span {
 		url("//db.onlinewebfonts.com/t/45f5fadb3dbf0140e10b498c7cb030a6.ttf") format("truetype"),
 		url("//db.onlinewebfonts.com/t/45f5fadb3dbf0140e10b498c7cb030a6.svg#Canterbury") format("svg");
 }
+
 @font-face {
-	font-family: "DIN2014-Demi";
-	src: url("//db.onlinewebfonts.com/t/1dd1c7d8df011c2266f33ebd5927c0ab.eot");
-	src: url("//db.onlinewebfonts.com/t/1dd1c7d8df011c2266f33ebd5927c0ab.eot?#iefix") format("embedded-opentype"),
-		url("//db.onlinewebfonts.com/t/1dd1c7d8df011c2266f33ebd5927c0ab.woff2") format("woff2"),
-		url("//db.onlinewebfonts.com/t/1dd1c7d8df011c2266f33ebd5927c0ab.woff") format("woff"),
-		url("//db.onlinewebfonts.com/t/1dd1c7d8df011c2266f33ebd5927c0ab.ttf") format("truetype"),
-		url("//db.onlinewebfonts.com/t/1dd1c7d8df011c2266f33ebd5927c0ab.svg#DIN2014-Demi") format("svg");
+	font-family: "Minion Pro Medium";
+	src: url("/assets/fonts/Minion Pro/Minion Pro Medium.ttf") format("truetype");
 }
+
 @font-face {
-	font-family: "EgyptianText";
-	src: url("/assets/fonts/EgyptianText.woff2") format("woff2");
+	font-family: "Minion Pro Regular";
+	src: url("/assets/fonts/Minion Pro/Minion Pro Regular.ttf") format("truetype");
 }
+
 @font-face {
-	font-family: "EgyptianHeader";
-	src: url("/assets/fonts/EgyptianHeader.woff2") format("woff2");
+	font-family: "Gandhi Sans Regular";
+	src: url("/assets/fonts/gandhi-sans/GandhiSans-Regular.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Neue Montreal Regular";
+	src: url("/assets/fonts/Neue Montreal/NeueMontreal-Regular.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Neue Montreal Medium";
+	src: url("/assets/fonts/Neue Montreal/NeueMontreal-Medium.otf") format("opentype");
 }

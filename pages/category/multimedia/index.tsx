@@ -8,6 +8,7 @@ import Video from "~/components/video.client";
 import Podcast from "~/components/podcast.client";
 import { getArticlesByCategory } from "~/lib/queries";
 import NoSSR from "~/components/nossr.client";
+import styles from "~/lib/styles";
 
 interface Props {
 	spreads: spreads[];
@@ -34,7 +35,14 @@ export default function Category(/*{ spreads }: Props*/) {
 					text-align: center;
 					border-bottom: 3px double black;
 					margin-bottom: 1vh;
+					font-weight: bold;
+					font-size: calc(1.5rem + 1vw);
 				}
+
+				h2 {
+					font-family: ${styles.font.previewHeader};
+				}
+
 				.grid {
 					display: grid;
 					grid-template-columns: 2fr 1fr 1fr;
@@ -71,6 +79,8 @@ export default function Category(/*{ spreads }: Props*/) {
 			<div className="grid">
 				<NoSSR>
 					<section className="videos">
+						<Video link="icIwD1E3_SI" title="PHS Jazz Ensemble's Trip to Hawaii" />
+						<br />
 						<Video link="GDDGmRkkS5A" title="Soccer Practice with Nick Matese" />
 						<br />
 						<Video link="NlVjqI7eSfc" title="To Track or Not To Track? - A Math Talk with NCTM President Kevin Dykema" />
@@ -88,15 +98,15 @@ export default function Category(/*{ spreads }: Props*/) {
 					</section>*/}
 					<section className="papercasts">
 						<h2>PHS Talks</h2>
-						<Podcast link="1187999" />
-						<Podcast link="1143064" />
-						<Podcast link="937713" />
-						<Podcast link="927613" />
-						<Podcast link="844939" />
+						<Podcast link="phstalks/1272351" />
+						<Podcast link="phstalks/1233141" />
+						<Podcast link="phstalks/1187999" />
+						<Podcast link="phstalks/1187999" />
+						<Podcast link="phstalks/1143064" />
 					</section>
 					<section className="rightbar">
-						<h2>Inside PHS</h2>
-						<Podcast link="876635" />
+						<h2>Tower Shorts</h2>
+						<Podcast link="towershorts/1369461" />
 					</section>
 				</NoSSR>
 			</div>

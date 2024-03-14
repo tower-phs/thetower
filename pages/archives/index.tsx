@@ -12,9 +12,16 @@ export default function Archives() {
 				<meta property="og:description" content="Read scanned PDF newspapers here" />
 			</Head>
 			<style jsx>{`
-				h1 {
+				h1,
+				h2 {
 					text-align: center;
+					font-weight: 600;
 				}
+
+				h1 {
+					font-weight: bold;
+				}
+
 				.container {
 					margin-left: 10%;
 					width: 80%;
@@ -23,6 +30,8 @@ export default function Archives() {
 				}
 			`}</style>
 			<h1>Archives</h1>
+			<br></br>
+			<h2>2023</h2>
 			<div className="container">
 				<VirtualArchive month={2} year={2023} />
 				<VirtualArchive month={3} year={2023} />
@@ -32,7 +41,10 @@ export default function Archives() {
 				<VirtualArchive month={10} year={2023} />
 				<VirtualArchive month={11} year={2023} />
 				<VirtualArchive month={12} year={2023} />
-
+			</div>
+			<br></br>
+			<h2>2022</h2>
+			<div className="container">
 				<VirtualArchive month={2} year={2022} />
 				<VirtualArchive month={3} year={2022} />
 				<VirtualArchive month={4} year={2022} />
@@ -41,7 +53,10 @@ export default function Archives() {
 				<VirtualArchive month={10} year={2022} />
 				<VirtualArchive month={11} year={2022} />
 				<VirtualArchive month={12} year={2022} />
-
+			</div>
+			<br></br>
+			<h2>2021</h2>
+			<div className="container">
 				<VirtualArchive month={2} year={2021} />
 				<VirtualArchive month={3} year={2021} />
 				<VirtualArchive month={4} year={2021} />
@@ -50,7 +65,10 @@ export default function Archives() {
 				<VirtualArchive month={10} year={2021} />
 				<VirtualArchive month={11} year={2021} />
 				<VirtualArchive month={12} year={2021} />
-
+			</div>
+			<br></br>
+			<h2>2020</h2>
+			<div className="container">
 				<VirtualArchive month={2} year={2020} />
 				<VirtualArchive month={3} year={2020} />
 				<VirtualArchive month={4} year={2020} />

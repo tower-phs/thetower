@@ -7,6 +7,10 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import { FaFacebookSquare } from "@react-icons/all-files/fa/FaFacebookSquare";
 import { FaInstagramSquare } from "@react-icons/all-files/fa/FaInstagramSquare";
+import { FaYoutubeSquare } from "@react-icons/all-files/fa/FaYoutubeSquare";
+import { FaSpotify } from "@react-icons/all-files/fa/FaSpotify";
+import { SiApplepodcasts } from "@react-icons/all-files/si/SiApplepodcasts";
+import { FaArrowRight } from "@react-icons/all-files/fa/FaArrowRight";
 import Button from "~/components/button.client";
 
 import "~/styles/styles.scss";
@@ -26,8 +30,8 @@ export default function App({ Component, pageProps }: AppProps) {
 					main {
 						display: block;
 						margin-top: 4vh;
-						margin-left: 5vw;
-						margin-right: 5vw;
+						margin-left: 2.5vw;
+						margin-right: 2.5vw;
 					}
 				`}</style>
 				<Component {...pageProps} />
@@ -67,6 +71,7 @@ function Banner() {
 					left: 1vw;
 					top: 5px;
 					bottom: 5px;
+					font-family: ${styles.font.folio};
 				}
 				.search {
 					position: absolute;
@@ -79,7 +84,7 @@ function Banner() {
 					border: 1px solid ${styles.color.accent};
 					border-radius: 5px 0px 0px 5px;
 					padding: 5px;
-					font-family: "Open Sans";
+					font-family: ${styles.font.folio};
 					box-sizing: border-box;
 					vertical-align: middle;
 					color: ${styles.color.accent};
@@ -95,7 +100,7 @@ function Banner() {
 					transform: scaleX(-1);
 					background-color: ${styles.color.accent};
 					color: ${styles.color.navbar};
-					font-family: "Open Sans";
+					font-family: ${styles.font.folio};
 					cursor: pointer;
 					box-sizing: border-box;
 					padding: 5px;
@@ -110,14 +115,14 @@ function Banner() {
 			`}</style>
 			<div className="sub">
 				<Link href="/subscribe">
-					<span style={{ color: "white", cursor: "pointer", fontFamily: "Open Sans" }}>SUBSCRIBE</span>
+					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.folio }}>SUBSCRIBE</span>
 				</Link>
 				<br />
-				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/1223-full.pdf">
-					<span style={{ color: "white", cursor: "pointer", fontFamily: "Open Sans" }}>PRINT EDITION</span>
+				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/0224-full.pdf">
+					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.folio }}>PRINT EDITION</span>
 				</Link>
 				<br />
-				<span style={{ fontFamily: "Open Sans", color: styles.color.accent }}>{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}</span>
+				<span style={{ fontFamily: styles.font.folio, color: "lightgray" }}>{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}</span>
 			</div>
 			<div className="search">
 				<input
@@ -182,7 +187,7 @@ function Footer() {
 					margin-right: 2.5vh;
 				}
 				.bottom {
-					font-family: sans-serif;
+					font-family: "Courier New";
 					margin: 1vh;
 					display: grid;
 					grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -196,13 +201,58 @@ function Footer() {
 					font-size: 1.1em;
 					font-weight: bolder;
 				}
+
 				.bottom a {
 					font-size: 0.9em;
 				}
 				span {
 					padding-bottom: 2vh;
 				}
+
+				.sub {
+					text-align: center;
+					align-items: center;
+				}
+
+				.sub h2 {
+					font-family: ${styles.font.previewHeader};
+					font-weight: bold;
+					font-size: calc(1.25rem + 1vw);
+				}
+
+				.sub p {
+					margin-left: 20%;
+					margin-right: 20%;
+					font-size: 1.25rem;
+				}
+
+				.sub-link {
+					font-size: 1.25rem;
+					border-color: ${styles.color.navbar};
+					border-style: solid;
+					background-color: white;
+					transition: 0.25s;
+					padding: 0.5rem;
+				}
+
+				.sub-link:hover {
+					color: white;
+					background-color: ${styles.color.navbar};
+				}
 			`}</style>
+			<hr />
+			<div className="sub">
+				<h2>Consider subscribing to The Tower.</h2>
+				{/* <p>You'll be supporting an award-winning school newspaper.</p> */}
+				<p>
+					For $30.00 a year, subscribers to The Tower will receive all eight issues shipped to their home or business over the course of the
+					year.
+				</p>
+				<br />
+				<Link href="/subscribe">
+					<p className="sub-link">Learn more</p>
+				</Link>
+			</div>
 			<hr />
 			<div className="top">
 				<h1>The Tower</h1>
@@ -212,6 +262,15 @@ function Footer() {
 				<a href="https://www.facebook.com/phstower" target="_blank" rel="noopener noreferrer">
 					<FaFacebookSquare size="2.2em" />
 				</a>
+				<a href="https://www.youtube.com/channel/UCoopcAJbsz-qlTS2xkVWplQ" target="_blank" rel="noopener noreferrer">
+					<FaYoutubeSquare size="2.2rem" />
+				</a>
+				<a href="https://open.spotify.com/show/2c0TlU1f01LKoVPaMMDxB8?si=f1fa622c0339438e" target="_blank" rel="noopener noreferrer">
+					<FaSpotify size="2.2rem" />
+				</a>
+				<a href="https://podcasts.apple.com/us/podcast/phs-talks/id1674696258" target="_blank" rel="noopener noreferrer">
+					<SiApplepodcasts size="2.2rem" />
+				</a>
 				<Link href="/home" legacyBehavior>
 					<a className="home-btn">Go to home page »</a>
 				</Link>
@@ -219,7 +278,9 @@ function Footer() {
 			<div className="bottom">
 				<div>
 					<b>
-						<Link href="/category/news-features">News & Features</Link>
+						<Link style={{ fontFamily: styles.font.header }} href="/category/news-features">
+							NEWS & FEATURES
+						</Link>
 						<br />
 					</b>
 					<Link href="/category/news-features/phs-profiles">PHS Profiles</Link>
@@ -227,7 +288,9 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link href="/category/opinions">Opinions</Link>
+						<Link style={{ fontFamily: styles.font.header }} href="/category/opinions">
+							OPINIONS
+						</Link>
 						<br />
 					</b>
 					<Link href="/category/opinions/editorials">Editorials</Link>
@@ -237,7 +300,9 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link href="/category/vanguard">Vanguard</Link>
+						<Link style={{ fontFamily: styles.font.header }} href="/category/vanguard">
+							VANGUARD
+						</Link>
 						<br />
 					</b>
 					<Link href="/category/vanguard/random-musings">Random Musings</Link>
@@ -247,7 +312,9 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link href="/category/arts-entertainment">Arts & Entertainment</Link>
+						<Link style={{ fontFamily: styles.font.header }} href="/category/arts-entertainment">
+							ARTS & ENTERTAINMENT
+						</Link>
 						<br />
 					</b>
 					<Link href="/category/arts-entertainment/student-artists">Student Artists</Link>
@@ -255,15 +322,17 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link href="/category/sports">Sports</Link>
+						<Link style={{ fontFamily: styles.font.header }} href="/category/sports">
+							SPORTS
+						</Link>
 						<br />
 					</b>
 					<Link href="/category/sports/student-athletes">Student Athletes</Link>
 				</div>
 			</div>
 			<hr />
-			<span>© 2017-2023 The Tower</span>
-			<span>Site by Luke Tong &apos;23 and Jieruei Chang &apos;24</span>
+			<span>© 2017-2024 The Tower</span>
+			<span>Site by Luke Tong &apos;23, Jieruei Chang &apos;24, Henry Langmack &apos;25, and Ayush Shrivastava &apos;25</span>
 		</div>
 	);
 }
@@ -279,6 +348,7 @@ function NavBar() {
 					text-align: center;
 					width: 100%;
 					border-top: 1px solid ${styles.color.accent};
+					font-family: ${styles.font.folio}, "Courier New";
 				}
 
 				.navbar hr {
@@ -291,6 +361,7 @@ function NavBar() {
 
 				.menu {
 					display: contents;
+					font-family: ${styles.font.folio}, "Courier New";
 				}
 
 				@media screen and (max-width: 1000px) {
@@ -304,7 +375,7 @@ function NavBar() {
 			`}</style>
 			<Button
 				name="☰"
-				href=""
+				href="#"
 				className="showMenu"
 				onClick={() => {
 					let menu = document.querySelector(".menu");
@@ -313,33 +384,33 @@ function NavBar() {
 				}}
 			></Button>
 			<div className="menu">
-				<Button name="News & Features" href="/category/news-features">
+				<Button name="NEWS & FEATURES" href="/category/news-features">
 					<Link href="/category/news-features/phs-profiles">PHS Profiles</Link>
 				</Button>
 
-				<Button name="Multimedia" href="/category/multimedia"></Button>
+				<Button name="MULTIMEDIA" href="/category/multimedia"></Button>
 
-				<Button name="Opinions" href="/category/opinions">
+				<Button name="OPINONS" href="/category/opinions">
 					<Link href="/category/opinions/editorials">Editorials</Link>
 					<hr />
 					<Link href="/category/opinions/cheers-jeers">Cheers & Jeers</Link>
 				</Button>
 
-				<Button name="Vanguard" href="/category/vanguard">
+				<Button name="VANGUARD" href="/category/vanguard">
 					<Link href="/category/vanguard">Spreads</Link>
 					<hr />
 					<Link href="/category/vanguard/vanguard">Articles</Link>
 				</Button>
 
-				<Button name="Arts & Entertainment" href="/category/arts-entertainment">
+				<Button name="ARTS & ENTERTAINMENT" href="/category/arts-entertainment">
 					<Link href="/category/arts-entertainment/student-artists">Student Artists</Link>
 				</Button>
 
-				<Button name="Sports" href="/category/sports">
+				<Button name="SPORTS" href="/category/sports">
 					<Link href="/category/sports/student-athletes">Student Athletes</Link>
 				</Button>
 
-				<Button name="About" href="/about">
+				<Button name="ABOUT" href="/about">
 					<Link href="/about/2024">2024 Staff</Link>
 					<hr />
 					<Link href="/about/2023">2023 Staff</Link>
@@ -347,7 +418,7 @@ function NavBar() {
 					<Link href="/about/2022">2022 Staff</Link>
 				</Button>
 
-				<Button name="Archives" href="/archives">
+				<Button name="ARCHIVES" href="/archives">
 					<Link href="/category/special/nsi">New Student Issues</Link>
 				</Button>
 			</div>

@@ -41,6 +41,7 @@ export default function Video({ link, title }: Props) {
 				}
 				h3 {
 					padding: 5px;
+					font-family: "Neue Montreal Regular";
 				}
 			`}</style>
 			<div className="video_container">

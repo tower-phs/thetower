@@ -11,7 +11,7 @@ interface Props {
 	article: article;
 	category?: boolean;
 	style?: "box" | "row";
-	size?: "small" | "medium" | "large";
+	size?: "small" | "medium" | "large" | "featured" | "category-list";
 }
 
 export default function ArticlePreview({ article, category, style = "row", size = "medium" }: Props) {
@@ -21,6 +21,10 @@ export default function ArticlePreview({ article, category, style = "row", size 
 	if (style === "box") {
 		// BOX STYLE
 		switch (size) {
+			case "featured":
+				charlen = 200;
+				break;
+
 			case "large":
 				charlen = 200;
 				break;
@@ -29,10 +33,17 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				break;
 			case "small":
 				break;
+
+			case "category-list":
+				charlen = 200;
 		}
 	} else {
 		// ROW STYLE
 		switch (size) {
+			case "featured":
+				charlen = 250;
+				break;
+
 			case "large":
 				charlen = 250;
 				break;
@@ -68,13 +79,19 @@ export default function ArticlePreview({ article, category, style = "row", size 
 					margin-bottom: 2vh;
 					border: none;
 					border-bottom: 1px solid gainsboro;
-					grid-template-columns: 1fr 1.5fr;
+					// grid-template-columns: 1fr 1.5fr;
 					grid-gap: 1vw;
 				}
 				.article-preview.row.small {
 					display: grid;
-					grid-template-columns: 1fr 1.5fr;
+					// grid-template-columns: 1fr 1.5fr;
 				}
+
+				.article-preview .row .category-list {
+					display: grid;
+					grid-template-columns: 0.5fr;
+				}
+
 				.img-container {
 					position: relative;
 					max-width: 100%;
@@ -89,48 +106,86 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				.img-container.row.small {
 					width: 10vw;
 				}
+
+				.img-wrapper .category-list {
+					width: 20vw;
+				}
+
 				span {
 					margin-left: 1vw;
 					font-size: smaller;
 				}
 				.title {
-					font-weight: bolder;
+					font-weight: 800;
+					font-family: ${styles.font.previewHeader}, sans-serif;
 				}
-				.title .large {
+
+				.title a {
+					line-height: 0.95;
+				}
+
+				.title a:hover {
+					opacity: 0.7;
+					transition-duration: 0.25s;
+				}
+
+				.title .featured {
+					font-family: ${styles.font.previewHeader}, sans-serif;
 					font-size: xx-large;
 					color: ${styles.color.secondary} !important !important !important;
 				}
-				.title .medium {
+
+				@media (max-width: 1000px) {
+					.title .featured {
+						font-size: x-large;
+					}
+				}
+
+				.title .large {
+					font-family: ${styles.font.previewHeader}, sans-serif;
 					font-size: large;
+					color: ${styles.color.secondary} !important !important !important;
+				}
+				.title .medium {
+					font-family: ${styles.font.previewHeader}, sans-serif;
+					font-size: medium;
 					color: ${styles.color.tertiary} !important !important !important;
 				}
 				.title .small {
-					font-size: medium;
+					font-family: ${styles.font.previewHeader}, sans-serif;
+					font-size: small;
 				}
+
+				.title .category-list {
+					font-family: ${styles.font.previewHeader}, "Courier New";
+					font-size: calc(0.75rem + 1vw);
+				}
+
 				.category {
 					font-size: 12pt;
 					margin-bottom: 1vh;
 					margin-top: 1vh;
 				}
 				.preview-text {
-					font-family: ${styles.font.text}, ${styles.font.stack};
+					font-family: ${styles.font.text}, "Courier New";
 					margin-top: 1vh;
 					margin-bottom: 2vh;
 				}
 				img {
 					width: 100%;
 					background-color: #f7f7f7;
-					border-radius: 7px;
+					border-radius: 0px;
+					box-shadow: 0px 5px 12px #00000022;
 				}
 				.article-preview > .large-preview {
-					background-color: #f5f5f5;
+					background-color: white;
 					padding: 10px;
 					margin-bottom: 10px;
-					border: 1px solid gainsboro;
-					border-left: 2px solid ${styles.color.secondary};
+					border-bottom: 1px solid gainsboro;
 				}
 				.article-preview > .large-preview:hover {
-					background-color: #f0f0f0;
+					background-color: #f0f0f077;
+					transition-duration: 0.1s;
 				}
 				.article-preview > .medium-preview {
 					display: contents;
@@ -138,6 +193,19 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				.article-preview > .small-preview {
 					display: contents;
 				}
+
+				.article-preview > .category-list-preview {
+					display: grid;
+					grid-template-columns: 0.45fr 1fr;
+				}
+
+				@media (max-width: 1000px) {
+					.article-preview > .category-list-preview {
+						display: grid;
+						grid-template-columns: 0.5fr 1fr;
+					}
+				}
+
 				.noimg {
 					display: grid;
 					grid-template-columns: 1fr !important;
