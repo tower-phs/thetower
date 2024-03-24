@@ -1,7 +1,6 @@
 /** @format */
 
 import { article } from "@prisma/client";
-import Image from "next/image";
 import Link from "next/link";
 import { displayDate, expandCategorySlug, shortenText } from "~/lib/utils";
 import CreditLink from "./credit.client";

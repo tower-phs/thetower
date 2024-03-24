@@ -15,7 +15,7 @@ import Button from "~/components/button.client";
 import "~/styles/styles.scss";
 import styles from "~/lib/styles";
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<div>
 			<Head>
