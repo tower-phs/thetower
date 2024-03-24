@@ -10,7 +10,6 @@ import { FaInstagramSquare } from "@react-icons/all-files/fa/FaInstagramSquare";
 import { FaYoutubeSquare } from "@react-icons/all-files/fa/FaYoutubeSquare";
 import { FaSpotify } from "@react-icons/all-files/fa/FaSpotify";
 import { SiApplepodcasts } from "@react-icons/all-files/si/SiApplepodcasts";
-import { FaArrowRight } from "@react-icons/all-files/fa/FaArrowRight";
 import Button from "~/components/button.client";
 
 import "~/styles/styles.scss";
@@ -118,7 +117,7 @@ function Banner() {
 					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.folio }}>SUBSCRIBE</span>
 				</Link>
 				<br />
-				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/1223-full.pdf">
+				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/0324-full.pdf">
 					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.folio }}>PRINT EDITION</span>
 				</Link>
 				<br />
