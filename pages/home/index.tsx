@@ -25,6 +25,7 @@ interface Props {
 }
 
 export default function FrontPage({ articles }: Props) {
+	console.log(articles["news-features"]);
 	return (
 		<div>
 			<style jsx>{`
@@ -108,7 +109,7 @@ export default function FrontPage({ articles }: Props) {
 						{/* <ArticlePreview article={articles["opinions"][2]} style="box" size="large" /> */}
 					</div>
 					<div>
-						<ArticlePreview article={articles["news-features"][3]} style="box" size="featured" />
+						<ArticlePreview article={articles["news-features"][1]} style="box" size="featured" />
 					</div>
 					<div>
 						<h2 className="section-header">SPORTS</h2>
@@ -130,7 +131,7 @@ export default function FrontPage({ articles }: Props) {
 					<ArticlePreview article={articles["sports"][2]} style="box" size="large" />
 				</div>
 			</div>
-			{/* <div className="dark-banner">
+			<div className="dark-banner">
 				<div id="dark-banner-content">
 					<hr />
 					<h1 style={{ marginTop: "2.5rem" }}>The Tower is Princeton High School&apos;s student-run newspaper.</h1>
@@ -141,7 +142,7 @@ export default function FrontPage({ articles }: Props) {
 					</h1>
 					<hr />
 				</div>
-			</div> */}
+			</div>
 			{/* <Opinions {...articles["opinions"]} /> */}
 		</div>
 	);
