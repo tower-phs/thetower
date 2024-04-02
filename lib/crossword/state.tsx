@@ -179,6 +179,7 @@ export function crosswordStateReducer(state: GameState, action: Action) {
 
 		case "resetGrid": {
 			state.grid = initialStateFromInput(action.puzzleInput).grid;
+			state.seconds = 0;
 			break;
 		}
 
