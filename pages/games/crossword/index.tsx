@@ -38,7 +38,11 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 		return state.grid.every(c => c.every(cell => (cell.used ? cell.answer == cell.guess : true)));
 	}, [state.grid]);
 
-	console.log(won);
+	useEffect(() => {
+		if (won == true) {
+			dispatch({ type: "setWon", to: true });
+		}
+	}, [won]);
 
 	// Function to find the clue associated with the selected cell
 	const selectedClue = useMemo(() => {
@@ -88,7 +92,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 		}, 1000);
 
 		return () => clearInterval(intervalId);
-	}, []);
+	}, [won]);
 
 	return (
 		<CrosswordDispatchContext.Provider value={dispatchWithTracking}>
@@ -148,6 +152,11 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 				<div>
 					<h1>Game Paused</h1>
 					<p>Click play to resume the game</p>
+				</div>
+			) : state.won ? (
+				<div>
+					<h1>You won!</h1>
+					<p>Brag about yout time to your friends...</p>
 				</div>
 			) : (
 				<div className="crossword-container">
@@ -319,7 +328,6 @@ function MenuBar({ seconds, paused, autocheck, onTogglePaused, onReset, onToggle
 					{paused ? "Play" : "Pause"}
 				</button>
 				<div className="timer">{formatSeconds(seconds)}</div>
-				{won && <p>YOU WON!!!!!!!!</p>}
 			</div>
 			<div className="buttons">
 				<button className="button" onClick={() => onToggleAutocheck && onToggleAutocheck()}>
