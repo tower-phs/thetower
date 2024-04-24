@@ -39,4 +39,5 @@ export type GameState = {
 
 	autocheck: boolean;
 	paused: boolean;
+	won: boolean;
 };

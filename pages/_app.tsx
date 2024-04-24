@@ -409,6 +409,8 @@ function NavBar() {
 					<Link href="/category/sports/student-athletes">Student Athletes</Link>
 				</Button>
 
+				<Button name="CROSSWORD" href="/games/crossword"></Button>
+
 				<Button name="ABOUT" href="/about">
 					<Link href="/about/2024">2024 Staff</Link>
 					<hr />

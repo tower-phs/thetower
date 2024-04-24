@@ -65,6 +65,7 @@ export function initialStateFromInput(input: PuzzleInput, existingGrid?: GridDat
 		seconds: 0,
 		autocheck: false,
 		paused: false,
+		won: false,
 	};
 }
 
@@ -75,7 +76,8 @@ export type Action =
 	| { type: "tick" }
 	| { type: "resetGrid"; puzzleInput: PuzzleInput }
 	| { type: "toggleAutocheck" }
-	| { type: "togglePaused" };
+	| { type: "togglePaused" }
+	| { type: "setWon"; to: boolean };
 
 export function crosswordStateReducer(state: GameState, action: Action) {
 	function moveRelative(rows: number, cols: number) {
@@ -177,6 +179,8 @@ export function crosswordStateReducer(state: GameState, action: Action) {
 
 		case "resetGrid": {
 			state.grid = initialStateFromInput(action.puzzleInput).grid;
+			state.seconds = 0;
+			state.won = false;
 			break;
 		}
 
@@ -187,6 +191,11 @@ export function crosswordStateReducer(state: GameState, action: Action) {
 
 		case "togglePaused": {
 			state.paused = !state.paused;
+			break;
+		}
+
+		case "setWon": {
+			state.won = action.to;
 			break;
 		}
 	}
