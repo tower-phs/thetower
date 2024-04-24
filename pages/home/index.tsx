@@ -134,12 +134,15 @@ export default function FrontPage({ articles }: Props) {
 			<div className="dark-banner">
 				<div id="dark-banner-content">
 					<hr />
-					<h1 style={{ marginTop: "2.5rem" }}>The Tower is Princeton High School&apos;s student-run newspaper.</h1>
-					<Image src="/assets/white-tower.png" width={309} height={721} alt="Tower logo" style={{ width: "10rem", height: "auto" }} />
-					<h1 style={{ marginBottom: "2.5rem" }}>
+					{/* <h1 style={{ marginTop: "2.5rem", fontSize: "1.5rem"}}>The Tower is Princeton High School&apos;s student-run newspaper.</h1>
+					<Image src="/assets/white-tower.png" width={309} height={721} alt="Tower logo" style={{ width: "7.5rem", height: "auto" }} />
+					<h1 style={{ marginBottom: "2.5rem", fontSize: "1.5rem" }}>
 						Since 1928, the Tower has been reporting on the inner workings of PHS, the district, and the cultural and athletic events that
 						affect the student body.
 					</h1>
+					<hr /> */}
+					<h1 style={{marginTop: "2.5rem"}}> Thank you to our sponsors for supporting the Tower!</h1>
+					<Image src="/assets/milk-cookies.png" width={2500} height={2500} alt="Milk & Cookies" style={{width: "15rem", height: "auto", marginBottom: "1rem"}} />
 					<hr />
 				</div>
 			</div>
