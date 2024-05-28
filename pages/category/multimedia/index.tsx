@@ -79,6 +79,10 @@ export default function Category(/*{ spreads }: Props*/) {
 			<div className="grid">
 				<NoSSR>
 					<section className="videos">
+						<Video link="X6yiU_yupyw" title="Diving into Testing Season at PHS" />
+						<br />
+						<Video link="OL0By_NUTP4" title="Asian Fest Hosted by PHS" />
+						<br />
 						<Video link="icIwD1E3_SI" title="PHS Jazz Ensemble's Trip to Hawaii" />
 						<br />
 						<Video link="GDDGmRkkS5A" title="Soccer Practice with Nick Matese" />
@@ -106,6 +110,9 @@ export default function Category(/*{ spreads }: Props*/) {
 					</section>
 					<section className="rightbar">
 						<h2>Tower Shorts</h2>
+						<Podcast link="towershorts/1484378/" />
+						<Podcast link="towershorts/1412519" />
+						<Podcast link="towershorts/1342192" />
 						<Podcast link="towershorts/1369461" />
 					</section>
 				</NoSSR>
