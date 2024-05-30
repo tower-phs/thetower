@@ -6,10 +6,10 @@ import { PuzzleInput } from "./crossword/types";
 const prisma = new PrismaClient();
 
 export async function getFrontpageArticles() {
-	let articles: Record<string, article[]> = { "news-features": [], opinions: [], "arts-entertainment": [], sports: [] };
+	let articles: Record<string, article[]> = { "news-features": [], opinions: [], "arts-entertainment": [], sports: [], "featured": [] };
 	const categories = Object.keys(articles);
 
-	for (let i = 0; i < categories.length; i++) {
+	for (let i = 0; i < categories.length - 1; i++) {
 		const curr = new Date();
 		let month = curr.getMonth() + 3;
 		let year = curr.getFullYear();
@@ -37,6 +37,9 @@ export async function getFrontpageArticles() {
 			}
 		}
 	}
+
+	let a = await prisma.article.findFirst({where: {featured : true}});
+	if (a != null) articles["featured"].push(a);
 
 	return articles;
 }

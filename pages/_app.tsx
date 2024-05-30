@@ -389,7 +389,7 @@ function NavBar() {
 
 				<Button name="MULTIMEDIA" href="/category/multimedia"></Button>
 
-				<Button name="OPINONS" href="/category/opinions">
+				<Button name="OPINIONS" href="/category/opinions">
 					<Link href="/category/opinions/editorials">Editorials</Link>
 					<hr />
 					<Link href="/category/opinions/cheers-jeers">Cheers & Jeers</Link>

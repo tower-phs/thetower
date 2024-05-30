@@ -4,6 +4,7 @@ import { article } from "@prisma/client";
 import Head from "next/head";
 import ArticlePreview from "~/components/preview.client";
 import { getArticlesByDate } from "~/lib/queries";
+import Link from "next/link";
 
 interface Params {
 	params: {
@@ -18,15 +19,19 @@ export async function getServerSideProps({ params }: Params) {
 	return {
 		props: {
 			articles,
+			year: params.year,
+			month: params.month
 		},
 	};
 }
 
 interface Props {
 	articles: { [name: string]: article[] };
+	year: string,
+	month: string;
 }
 
-export default function Index({ articles }: Props) {
+export default function Index({ articles, year, month }: Props) {
 	return (
 		<div>
 			<style jsx>{`
@@ -59,6 +64,10 @@ export default function Index({ articles }: Props) {
 				<meta property="og:title" content="Home | The Tower" />
 				<meta property="og:description" content="The Tower is Princeton High School's newspaper club." />
 			</Head>
+			<h1 style={{textAlign: "center"}}>{`${month}/${year} Archives`}</h1>
+			<Link href={`https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/${month}-${year}-full.pdf`}>
+				<h3 style={{textAlign: "center", textDecoration: "underline"}}>View print edition</h3>
+			</Link>
 			<div className="mosaic">
 				<div className="one triple">
 					<div>

@@ -25,7 +25,6 @@ interface Props {
 }
 
 export default function FrontPage({ articles }: Props) {
-	console.log(articles["news-features"]);
 	return (
 		<div>
 			<style jsx>{`
@@ -109,7 +108,7 @@ export default function FrontPage({ articles }: Props) {
 						{/* <ArticlePreview article={articles["opinions"][2]} style="box" size="large" /> */}
 					</div>
 					<div>
-						<ArticlePreview article={articles["news-features"][1]} style="box" size="featured" />
+						<ArticlePreview article={articles["featured"][0]} style="box" size="featured" />
 					</div>
 					<div>
 						<h2 className="section-header">SPORTS</h2>
@@ -182,12 +181,12 @@ export function Opinions(articles: article[]) {
 		<div className="opinions">
 			<style jsx>{``}</style>
 			<div>
-				<ArticlePreview article={articles[0]} style="row" size="category-list" category />
+				<ArticlePreview article={articles[0]} style="box" size="category-list" category />
 				<div>
 					{Object.values(articles)
 						.slice(1)
 						.map(article => (
-							<ArticlePreview key={article.id} style="row" size="category-list" category article={article} />
+							<ArticlePreview key={article.id} style="box" size="category-list" category article={article} />
 						))}
 				</div>
 			</div>
