@@ -218,7 +218,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				</div> */}
 				<div className="img-wrapper"> {(article.img?.includes("."))
 					? <Image src={article.img} width={1000} height={1000} alt="Image" style={{width: "100%", height: "100%", maxWidth: `${(size == "featured") ? "100%" : "19rem"}`, maxHeight: `${(size == "featured") ? "100%" : "19rem"}`, objectFit: "cover"}}/>
-					: <Image src="/assets/white-tower.png" width={309} height={721} style={{width: "19rem", height: "19rem", objectFit: "cover", backgroundColor: "black"}} />
+					: <Image src="/assets/white-tower.png" width={309} height={721} alt="Image" style={{width: "19rem", height: "19rem", objectFit: "cover", backgroundColor: "black"}} />
 				}</div>
 				<div>
 					<section className="category">
