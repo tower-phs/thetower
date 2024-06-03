@@ -18,6 +18,7 @@ model article {
   month       Int      @db.SmallInt
   year        Int      @db.SmallInt
   img         String   @db.VarChar
+  featured    Boolean  @default(false)
 }
 
 model spreads {

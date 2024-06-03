@@ -6,6 +6,7 @@ import { displayDate, expandCategorySlug, shortenText } from "~/lib/utils";
 import CreditLink from "./credit.client";
 import styles from "~/lib/styles";
 import React, { Fragment } from "react";
+import Image from "next/image";
 
 interface Props {
 	article: article;
@@ -212,7 +213,13 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				}
 			`}</style>
 			<div className={size + "-preview"}>
-				<div className="img-wrapper">{!article.img?.includes(".") ? <></> : <img src={article.img} className={size}></img>}</div>
+				{/* <div className="img-wrapper">
+					{!article.img?.includes(".") ? <></> : <img src={article.img} className={size}></img>}
+				</div> */}
+				<div className="img-wrapper"> {(article.img?.includes("."))
+					? <Image src={article.img} width={1000} height={1000} alt="Image" style={{width: "100%", height: "100%", maxWidth: `${(size == "featured") ? "100%" : "19rem"}`, maxHeight: `${(size == "featured") ? "100%" : "19rem"}`, objectFit: "cover"}}/>
+					: <Image src="/assets/white-tower.png" width={309} height={721} alt="Image" style={{width: "19rem", height: "19rem", objectFit: "cover", backgroundColor: "black"}} />
+				}</div>
 				<div>
 					<section className="category">
 						<em>
