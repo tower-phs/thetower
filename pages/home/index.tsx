@@ -114,7 +114,7 @@ export default function FrontPage({ articles }: Props) {
 						<h2 className="section-header">SPORTS</h2>
 						<hr />
 						<ArticlePreview article={articles["sports"][0]} style="box" size="large" />
-						{/* <ArticlePreview article={articles["sports"][1]} style="box" size="large" /> */}
+						<ArticlePreview article={articles["sports"][1]} style="box" size="large" />
 						{/* <ArticlePreview article={articles["sports"][2]} style="box" size="large" /> */}
 					</div>
 				</div>
