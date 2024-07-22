@@ -117,7 +117,7 @@ function Banner() {
 					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.folio }}>SUBSCRIBE</span>
 				</Link>
 				<br />
-				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/0624-full.pdf">
+				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/6-2024.pdf">
 					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.folio }}>PRINT EDITION</span>
 				</Link>
 				<br />
