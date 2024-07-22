@@ -65,7 +65,7 @@ export default function Upload() {
 
                             <h3>Author</h3>
                             <p>Separate each author with a comma, and do not include titles. Leave this blank for the editorial.</p>
-                            <p>Example: "John Doe, NEWS AND FEATURES CO-EDITOR and Jane Doe, OPINIONS CO-EDITOR" is entered as "John Doe, Jane Doe".</p>
+                            <p>Example: &quot;John Doe, NEWS AND FEATURES CO-EDITOR and Jane Doe, OPINIONS CO-EDITOR&quot; is entered as &quot;John Doe, Jane Doe&quot;.</p>
                             <input type="text" />
                             
                             <br /> <br />
