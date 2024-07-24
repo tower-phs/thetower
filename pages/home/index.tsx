@@ -88,7 +88,7 @@ export default function FrontPage({ articles }: Props) {
 				}
 
 				.section-header {
-					// font-family: ${styles.font.previewHeader};
+					// font-family: ${styles.font.header};
 					// font-style: italic;
 					text-align: center;
 					font-weight: bold;

@@ -1,12 +1,9 @@
 /** @format */
 
 import { article, spreads } from "@prisma/client";
-import shuffle from "lodash/shuffle";
 import Head from "next/head";
-import ArticlePreview from "~/components/preview.client";
 import Video from "~/components/video.client";
 import Podcast from "~/components/podcast.client";
-import { getArticlesByCategory } from "~/lib/queries";
 import NoSSR from "~/components/nossr.client";
 import styles from "~/lib/styles";
 

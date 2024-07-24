@@ -118,7 +118,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				}
 				.title {
 					font-weight: 800;
-					font-family: ${styles.font.previewHeader}, sans-serif;
+					font-family: ${styles.font.serifHeader}, sans-serif;
 				}
 
 				.title a {
@@ -131,7 +131,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				}
 
 				.title .featured {
-					font-family: ${styles.font.previewHeader}, sans-serif;
+					font-family: ${styles.font.serifHeader}, sans-serif;
 					font-size: xx-large;
 					color: ${styles.color.secondary} !important !important !important;
 				}
@@ -143,22 +143,22 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				}
 
 				.title .large {
-					font-family: ${styles.font.previewHeader}, sans-serif;
+					font-family: ${styles.font.serifHeader}, sans-serif;
 					font-size: large;
 					color: ${styles.color.secondary} !important !important !important;
 				}
 				.title .medium {
-					font-family: ${styles.font.previewHeader}, sans-serif;
+					font-family: ${styles.font.serifHeader}, sans-serif;
 					font-size: medium;
 					color: ${styles.color.tertiary} !important !important !important;
 				}
 				.title .small {
-					font-family: ${styles.font.previewHeader}, sans-serif;
+					font-family: ${styles.font.serifHeader}, sans-serif;
 					font-size: small;
 				}
 
 				.title .category-list {
-					font-family: ${styles.font.previewHeader}, "Courier New";
+					font-family: ${styles.font.serifHeader}, ${styles.font.stack};
 					font-size: calc(0.75rem + 1vw);
 				}
 
@@ -168,7 +168,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 					margin-top: 1vh;
 				}
 				.preview-text {
-					font-family: ${styles.font.text}, "Courier New";
+					font-family: ${styles.font.serifText}, ${styles.font.stack};
 					margin-top: 1vh;
 					margin-bottom: 2vh;
 				}

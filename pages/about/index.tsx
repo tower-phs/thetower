@@ -33,7 +33,7 @@ export default function About() {
 				p,
 				b {
 					max-width: 45vw;
-					font-family: ${styles.font.text}, ${styles.font.stack};
+					font-family: ${styles.font.serifText}, ${styles.font.stack};
 				}
 				b {
 					font-size: large;

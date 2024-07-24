@@ -3,11 +3,9 @@
 const styles = {
 	font: {
 		stack: "Courier New",
-		header: "Minion Pro Medium",
-		text: "Minion Pro Regular",
-		caption: "Gandhi Sans Regular",
-		folio: "Neue Montreal Regular",
-		previewHeader: "Neue Montreal Medium",
+		serifHeader: "Minion Pro Medium",
+		serifText: "Minion Pro Regular",
+		sans: "Neue Montreal Regular",
 	},
 	color: {
 		background: "#fff",

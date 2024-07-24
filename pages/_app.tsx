@@ -70,7 +70,6 @@ function Banner() {
 					left: 1vw;
 					top: 5px;
 					bottom: 5px;
-					font-family: ${styles.font.folio};
 				}
 				.search {
 					position: absolute;
@@ -83,7 +82,7 @@ function Banner() {
 					border: 1px solid ${styles.color.accent};
 					border-radius: 5px 0px 0px 5px;
 					padding: 5px;
-					font-family: ${styles.font.folio};
+					font-family: ${styles.font.sans};
 					box-sizing: border-box;
 					vertical-align: middle;
 					color: ${styles.color.accent};
@@ -99,7 +98,7 @@ function Banner() {
 					transform: scaleX(-1);
 					background-color: ${styles.color.accent};
 					color: ${styles.color.navbar};
-					font-family: ${styles.font.folio};
+					font-family: ${styles.font.sans};
 					cursor: pointer;
 					box-sizing: border-box;
 					padding: 5px;
@@ -114,14 +113,14 @@ function Banner() {
 			`}</style>
 			<div className="sub">
 				<Link href="/subscribe">
-					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.folio }}>SUBSCRIBE</span>
+					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.sans }}>SUBSCRIBE</span>
 				</Link>
 				<br />
 				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/0424-full.pdf">
-					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.folio }}>PRINT EDITION</span>
+					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.sans }}>PRINT EDITION</span>
 				</Link>
 				<br />
-				<span style={{ fontFamily: styles.font.folio, color: "lightgray" }}>{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}</span>
+				<span style={{ fontFamily: styles.font.sans, color: "lightgray" }}>{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}</span>
 			</div>
 			<div className="search">
 				<input
@@ -214,7 +213,7 @@ function Footer() {
 				}
 
 				.sub h2 {
-					font-family: ${styles.font.previewHeader};
+					font-family: ${styles.font.serifHeader};
 					font-weight: bold;
 					font-size: calc(1.25rem + 1vw);
 				}
@@ -277,7 +276,7 @@ function Footer() {
 			<div className="bottom">
 				<div>
 					<b>
-						<Link style={{ fontFamily: styles.font.header }} href="/category/news-features">
+						<Link style={{ fontFamily: styles.font.serifHeader }} href="/category/news-features">
 							NEWS & FEATURES
 						</Link>
 						<br />
@@ -287,7 +286,7 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link style={{ fontFamily: styles.font.header }} href="/category/opinions">
+						<Link style={{ fontFamily: styles.font.serifHeader }} href="/category/opinions">
 							OPINIONS
 						</Link>
 						<br />
@@ -299,7 +298,7 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link style={{ fontFamily: styles.font.header }} href="/category/vanguard">
+						<Link style={{ fontFamily: styles.font.serifHeader }} href="/category/vanguard">
 							VANGUARD
 						</Link>
 						<br />
@@ -311,7 +310,7 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link style={{ fontFamily: styles.font.header }} href="/category/arts-entertainment">
+						<Link style={{ fontFamily: styles.font.serifHeader }} href="/category/arts-entertainment">
 							ARTS & ENTERTAINMENT
 						</Link>
 						<br />
@@ -321,7 +320,7 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link style={{ fontFamily: styles.font.header }} href="/category/sports">
+						<Link style={{ fontFamily: styles.font.serifHeader }} href="/category/sports">
 							SPORTS
 						</Link>
 						<br />
@@ -347,7 +346,7 @@ function NavBar() {
 					text-align: center;
 					width: 100%;
 					border-top: 1px solid ${styles.color.accent};
-					font-family: ${styles.font.folio}, "Courier New";
+					font-family: ${styles.font.sans}, "Courier New";
 				}
 
 				.navbar hr {
@@ -360,7 +359,6 @@ function NavBar() {
 
 				.menu {
 					display: contents;
-					font-family: ${styles.font.folio}, "Courier New";
 				}
 
 				@media screen and (max-width: 1000px) {

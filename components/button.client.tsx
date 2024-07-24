@@ -36,7 +36,7 @@ export default function Button({ name, href, children, className, onClick }: Pro
 					transition: 0.1s ease-in;
 					box-sizing: border-box;
 					position: relative;
-					font-family: ${styles.font.folio};
+					font-family: ${styles.font.sans};
 					font-weight: 400;
 				}
 				.btn::after {

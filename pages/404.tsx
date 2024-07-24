@@ -13,7 +13,7 @@ export default function PageNotFound() {
 			</Head>
 			<style jsx>{`
 				h1 {
-					font-family: ${styles.font.previewHeader};
+					font-family: ${styles.font.serifHeader};
 					text-align: center;
 					font-size: 3rem;
 				}

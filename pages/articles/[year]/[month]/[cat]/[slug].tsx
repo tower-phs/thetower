@@ -93,7 +93,7 @@ export default function Article({ article }: Props) {
 					}
 				}
 				.article .content p {
-					font-family: ${styles.font.text};
+					font-family: ${styles.font.serifText};
 					font-size: 1.2rem;
 				}
 				.article p {
@@ -107,7 +107,7 @@ export default function Article({ article }: Props) {
 				.article .titleblock h1 {
 					font-size: 2.5rem;
 					font-weight: 800;
-					font-family: ${styles.font.previewHeader};
+					font-family: ${styles.font.serifHeader};
 				}
 			`}</style>
 
@@ -115,7 +115,7 @@ export default function Article({ article }: Props) {
 				<div className="titleblock">
 					<h1>{article.title}</h1>
 
-					<span>{displayDate(article.year, article.month)}</span>
+					<span style={{fontFamily: styles.font.sans}}>{displayDate(article.year, article.month)}</span>
 
 					{article.authors.length > 0 && (
 						<section className="authors">

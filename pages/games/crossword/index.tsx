@@ -136,7 +136,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 			`}</style>
 			<div className="title-container">
 				<h1>The Crossword</h1>
-				<h3 style={{fontFamily: styles.font.text}}>`By ${puzzleInput.author} on {date.toLocaleDateString()}`</h3>
+				<h3 style={{fontFamily: styles.font.sans}}>`By ${puzzleInput.author} on {date.toLocaleDateString()}`</h3>
 			</div>
 			<MenuBar
 				seconds={state.seconds}
