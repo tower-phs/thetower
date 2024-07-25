@@ -83,6 +83,7 @@ function Banner() {
 					border-radius: 5px 0px 0px 5px;
 					padding: 5px;
 					font-family: ${styles.font.sans};
+					font-size: 1.6rem;
 					box-sizing: border-box;
 					vertical-align: middle;
 					color: ${styles.color.accent};
@@ -98,7 +99,7 @@ function Banner() {
 					transform: scaleX(-1);
 					background-color: ${styles.color.accent};
 					color: ${styles.color.navbar};
-					font-family: ${styles.font.sans};
+					/* font-family: ${styles.font.sans}; */
 					cursor: pointer;
 					box-sizing: border-box;
 					padding: 5px;
@@ -113,14 +114,14 @@ function Banner() {
 			`}</style>
 			<div className="sub">
 				<Link href="/subscribe">
-					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.sans }}>SUBSCRIBE</span>
+					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem"}}>SUBSCRIBE</span>
 				</Link>
 				<br />
 				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/0424-full.pdf">
-					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.sans }}>PRINT EDITION</span>
+					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem" }}>PRINT EDITION</span>
 				</Link>
 				<br />
-				<span style={{ fontFamily: styles.font.sans, color: "lightgray" }}>{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}</span>
+				<span style={{ fontFamily: styles.font.sans, color: "lightgray", fontSize: "1.6rem" }}>{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}</span>
 			</div>
 			<div className="search">
 				<input
@@ -168,8 +169,8 @@ function Footer() {
 					height: 3px;
 				}
 				.top h1 {
-					font-family: Canterbury;
-					font-size: xxx-large;
+					/* font-family: Canterbury;
+					font-size: xxx-large; */
 					float: left;
 					padding-right: 10px;
 				}
@@ -179,13 +180,13 @@ function Footer() {
 					padding-top: 2.5vh;
 				}
 				.top .home-btn {
-					font-size: small;
+					/* font-size: small; */
 					color: #274370;
 					float: right;
 					margin-right: 2.5vh;
 				}
 				.bottom {
-					font-family: "Courier New";
+					/* font-family: "Courier New"; */
 					margin: 1vh;
 					display: grid;
 					grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -196,12 +197,12 @@ function Footer() {
 					}
 				}
 				.bottom b {
-					font-size: 1.1em;
-					font-weight: bolder;
+					/* font-size: 1.1em;
+					font-weight: bolder; */
 				}
 
 				.bottom a {
-					font-size: 0.9em;
+					/* font-size: 0.9em; */
 				}
 				span {
 					padding-bottom: 2vh;
@@ -213,19 +214,19 @@ function Footer() {
 				}
 
 				.sub h2 {
-					font-family: ${styles.font.serifHeader};
+					/* font-family: ${styles.font.serifHeader};
 					font-weight: bold;
-					font-size: calc(1.25rem + 1vw);
+					font-size: calc(1.25rem + 1vw); */
 				}
 
 				.sub p {
 					margin-left: 20%;
 					margin-right: 20%;
-					font-size: 1.25rem;
+					/* font-size: 1.25rem; */
 				}
 
 				.sub-link {
-					font-size: 1.25rem;
+					/* font-size: 1.25rem; */
 					border-color: ${styles.color.navbar};
 					border-style: solid;
 					background-color: white;
@@ -346,7 +347,7 @@ function NavBar() {
 					text-align: center;
 					width: 100%;
 					border-top: 1px solid ${styles.color.accent};
-					font-family: ${styles.font.sans}, "Courier New";
+					/* font-family: ${styles.font.sans}, "Courier New"; */
 				}
 
 				.navbar hr {

@@ -2,6 +2,10 @@
 
 @use "globals.scss";
 
+:root {
+	font-size: 10px;
+}
+
 * {
 	font-family: globals.$font-text, globals.$font-stack;
 	color: globals.$primary-color;
@@ -23,6 +27,26 @@ h6 {
 span {
 	color: #8b8b8b;
 	font-family: globals.$font-text, globals.$font-stack;
+}
+
+h1 {
+	font-size: 4rem;
+}
+
+h2 {
+	font-size: 3.5rem;
+}
+
+h3 {
+	font-size: 3rem;
+}
+
+p, section, span, input { 
+	font-size: 2rem;
+}
+
+a {
+	font-size: 1.6rem;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap");

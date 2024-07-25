@@ -32,12 +32,10 @@ export default function Button({ name, href, children, className, onClick }: Pro
 					background-color: ${styles.color.navbar};
 					display: inline-block;
 					padding: 15px;
-					font-size: medium;
 					transition: 0.1s ease-in;
 					box-sizing: border-box;
 					position: relative;
 					font-family: ${styles.font.sans};
-					font-weight: 400;
 				}
 				.btn::after {
 					content: "";
@@ -56,7 +54,7 @@ export default function Button({ name, href, children, className, onClick }: Pro
 				.content {
 					display: block;
 					position: absolute;
-					font-size: medium;
+					/* font-size: medium; */
 					padding: 12px;
 
 					min-width: 14vw;

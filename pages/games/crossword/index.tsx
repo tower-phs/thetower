@@ -130,8 +130,8 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 				}
 
 				.title-container h3 {
-					font-family: ${styles.font.stack};
-					font-weight: 300;
+					/* font-family: ${styles.font.stack};
+					font-weight: 300; */
 				}
 			`}</style>
 			<div className="title-container">
@@ -298,8 +298,8 @@ function MenuBar({ seconds, paused, autocheck, onTogglePaused, onReset, onToggle
 					margin-bottom: 10px;
 				}
 				.timer {
-					font-size: 18px;
-					font-weight: bold;
+					/* font-size: 18px;
+					font-weight: bold; */
 				}
 				.buttons {
 					display: flex;
@@ -412,7 +412,7 @@ function SelectedCluePanel({ clue, direction }: SelectedCluePanelProps) {
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					font-size: 16px;
+					/* font-size: 16px; */
 				}
 			`}</style>
 			<div className="clue-ref">

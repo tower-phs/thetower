@@ -37,7 +37,7 @@ export default function Category(/*{ spreads }: Props*/) {
 				}
 
 				h2 {
-					font-family: ${styles.font.previewHeader};
+					/* font-family: ${styles.font.serifHeader}; */
 				}
 
 				.grid {

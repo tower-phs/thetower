@@ -93,8 +93,8 @@ export default function Article({ article }: Props) {
 					}
 				}
 				.article .content p {
-					font-family: ${styles.font.serifText};
-					font-size: 1.2rem;
+					/* font-family: ${styles.font.serifText};
+					font-size: 1.2rem; */
 				}
 				.article p {
 					margin-top: 3vh;
@@ -105,9 +105,9 @@ export default function Article({ article }: Props) {
 					text-align: center;
 				}
 				.article .titleblock h1 {
-					font-size: 2.5rem;
+					/* font-size: 2.5rem;
 					font-weight: 800;
-					font-family: ${styles.font.serifHeader};
+					font-family: ${styles.font.serifHeader}; */
 				}
 			`}</style>
 

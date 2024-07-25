@@ -20,7 +20,7 @@ export default function About() {
 					text-align: center;
 					border-bottom: 3px solid gainsboro;
 					margin-bottom: 4vh;
-					font-weight: bold;
+					/* font-weight: bold; */
 				}
 
 				h2 {
@@ -33,10 +33,10 @@ export default function About() {
 				p,
 				b {
 					max-width: 45vw;
-					font-family: ${styles.font.serifText}, ${styles.font.stack};
+					/* font-family: ${styles.font.serifText}, ${styles.font.stack}; */
 				}
 				b {
-					font-size: large;
+					/* font-size: large; */
 				}
 			`}</style>
 			<h1>About</h1>

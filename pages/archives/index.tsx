@@ -15,11 +15,11 @@ export default function Archives() {
 				h1,
 				h2 {
 					text-align: center;
-					font-weight: 600;
+					/* font-weight: 600; */
 				}
 
 				h1 {
-					font-weight: bold;
+					/* font-weight: bold; */
 				}
 
 				.container {

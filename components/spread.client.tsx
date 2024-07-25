@@ -27,11 +27,11 @@ export default function Spread({ spread }: Props) {
 					text-decoration: underline;
 				}
 				.title {
-					font-weight: bolder;
-					font-size: larger;
+					/* font-weight: bolder;
+					font-size: larger; */
 				}
 				span {
-					font-size: smaller;
+					/* font-size: smaller; */
 				}
 			`}</style>
 			<section className="title">

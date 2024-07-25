@@ -41,7 +41,7 @@ export default function Video({ link, title }: Props) {
 				}
 				h3 {
 					padding: 5px;
-					font-family: ${styles.font.sans};
+					/* font-family: ${styles.font.sans}; */
 				}
 			`}</style>
 			<div className="video_container">
