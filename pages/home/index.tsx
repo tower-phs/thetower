@@ -9,6 +9,7 @@ import Video from "~/components/video.client";
 import Podcast from "~/components/podcast.client";
 import { getFrontpageArticles } from "~/lib/queries";
 import styles from "~/lib/styles";
+import SubBanner from "~/components/subbanner.client";
 
 export async function getServerSideProps() {
 	const articles = await getFrontpageArticles();
@@ -145,6 +146,7 @@ export default function FrontPage({ articles }: Props) {
 					<hr />
 				</div>
 			</div>
+			<SubBanner title="Consider subscribing to The Tower."/>
 			{/* <Opinions {...articles["opinions"]} /> */}
 		</div>
 	);

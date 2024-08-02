@@ -28,8 +28,8 @@ export default function Button({ name, href, children, className, onClick }: Pro
 					opacity: 1;
 				}
 				.btn {
-					color: /*${styles.color.primary}*/ white;
-					background-color: ${styles.color.navbar};
+					color: ${styles.color.tertiary};
+					// background-color: ${styles.color.background};
 					display: inline-block;
 					padding: 15px;
 					transition: 0.1s ease-in;

@@ -8,6 +8,7 @@ import { Direction, PuzzleInput, RuntimeClue } from "~/lib/crossword/types";
 import React from "react";
 import { getCurrentCrossword } from "~/lib/queries";
 import styles from "~/lib/styles";
+import SubBanner from "~/components/subbanner.client";
 
 type Props = { puzzleInput: PuzzleInput };
 
@@ -214,6 +215,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 					</div>
 				</div>
 			)}
+		<SubBanner title="Enjoyed the crossword? Consider subscribing."/>
 		</CrosswordDispatchContext.Provider>
 	);
 }

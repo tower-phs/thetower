@@ -13,6 +13,7 @@ import { getArticle } from "~/lib/queries";
 import { displayDate } from "~/lib/utils";
 import styles from "~/lib/styles";
 import CreditLink from "~/components/credit.client";
+import SubBanner from "~/components/subbanner.client";
 
 interface Props {
 	article: article;
@@ -142,6 +143,7 @@ export default function Article({ article }: Props) {
 					)}
 				</div>
 			</section>
+			<SubBanner title="Subscribing helps us make more articles like this."/>
 		</div>
 	);
 }
