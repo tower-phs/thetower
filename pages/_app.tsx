@@ -86,10 +86,10 @@ function Banner() {
 					font-size: 1.6rem;
 					box-sizing: border-box;
 					vertical-align: middle;
-					color: ${styles.color.tertiary};
+					color: ${styles.color.accent};
 				}
 				.search input::placeholder {
-					color: ${styles.color.accent};
+					color: ${styles.color.lightAccent};
 				}
 				.search button {
 					width: 30px;
@@ -114,14 +114,14 @@ function Banner() {
 			`}</style>
 			<div className="sub">
 				<Link href="/subscribe">
-					<span style={{ color: styles.color.tertiary, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem"}}>SUBSCRIBE</span>
+					<span style={{ color: styles.color.accent, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem"}}>SUBSCRIBE</span>
 				</Link>
 				<br />
 				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/0424-full.pdf">
-					<span style={{ color: styles.color.tertiary, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem" }}>PRINT EDITION</span>
+					<span style={{ color: styles.color.accent, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem" }}>PRINT EDITION</span>
 				</Link>
 				<br />
-				<span style={{ fontFamily: styles.font.sans, color: styles.color.tertiary, fontSize: "1.6rem" }}>{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}</span>
+				<span style={{ fontFamily: styles.font.sans, color: styles.color.accent, fontSize: "1.6rem" }}>{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}</span>
 			</div>
 			<div className="search">
 				<input
@@ -144,7 +144,7 @@ function Banner() {
 			<div className="image">
 				<Link href="/home" passHref>
 					{/* <Image src="/assets/logo.png" alt="Tower banner" width={250} height={75} priority /> */}
-					<h1 style={{fontFamily: "Canterbury", fontWeight: "normal", textAlign: "center", color: styles.color.tertiary, fontSize: "6rem"}}>The Tower</h1>
+					<h1 style={{fontFamily: "Canterbury", fontWeight: "normal", textAlign: "center", color: styles.color.accent, fontSize: "6rem"}}>The Tower</h1>
 				</Link>
 			</div>
 		</div>
@@ -174,6 +174,7 @@ function Footer() {
 					font-size: xxx-large;
 					float: left;
 					padding-right: 10px;
+					font-weight: normal;
 				}
 				.top a {
 					display: inline-block;
@@ -303,7 +304,7 @@ function NavBar() {
 					margin-bottom: 2vh;
 					text-align: center;
 					width: 100%;
-					border-bottom: 1px solid ${styles.color.accent};
+					border-bottom: 1px solid ${styles.color.lightAccent};
 					/* font-family: ${styles.font.sans}, "Courier New"; */
 				}
 

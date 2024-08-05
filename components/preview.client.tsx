@@ -134,7 +134,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				.title .featured {
 					/* font-family: ${styles.font.serifHeader}, sans-serif; */
 					font-size: 4rem;
-					color: ${styles.color.secondary} !important !important !important;
+					color: ${styles.color.primary} !important !important !important;
 				}
 
 				@media (max-width: 1000px) {
@@ -146,12 +146,12 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				.title .large {
 					/* font-family: ${styles.font.serifHeader}, sans-serif; */
 					font-size: 2.5rem;
-					color: ${styles.color.secondary} !important !important !important;
+					color: ${styles.color.primary} !important !important !important;
 				}
 				.title .medium {
 					/* font-family: ${styles.font.serifHeader}, sans-serif;
 					font-size: medium; */
-					color: ${styles.color.tertiary} !important !important !important;
+					color: ${styles.color.accent} !important !important !important;
 				}
 				.title .small {
 					/* font-family: ${styles.font.serifHeader}, sans-serif;

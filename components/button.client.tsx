@@ -28,7 +28,7 @@ export default function Button({ name, href, children, className, onClick }: Pro
 					opacity: 1;
 				}
 				.btn {
-					color: ${styles.color.tertiary};
+					color: ${styles.color.accent};
 					// background-color: ${styles.color.background};
 					display: inline-block;
 					padding: 15px;

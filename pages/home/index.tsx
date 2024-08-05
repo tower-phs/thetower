@@ -64,7 +64,7 @@ export default function FrontPage({ articles }: Props) {
 
 				.dark-banner {
 					position: relative;
-					background-color: ${styles.color.primary};
+					background-color: ${styles.color.darkAccent};
 					width: 100vw;
 					left: -2.5vw;
 					padding-top: 2.5rem;

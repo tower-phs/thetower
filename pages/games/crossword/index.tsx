@@ -137,7 +137,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 			`}</style>
 			<div className="title-container">
 				<h1>The Crossword</h1>
-				<h3 style={{fontFamily: styles.font.sans}}>`By ${puzzleInput.author} on {date.toLocaleDateString()}`</h3>
+				<p style={{fontFamily: styles.font.sans}}>By {puzzleInput.author} on {date.toLocaleDateString()}</p>
 			</div>
 			<MenuBar
 				seconds={state.seconds}
@@ -329,7 +329,7 @@ function MenuBar({ seconds, paused, autocheck, onTogglePaused, onReset, onToggle
 				<button className="button" onClick={onTogglePaused}>
 					{paused ? "Play" : "Pause"}
 				</button>
-				<div className="timer">{formatSeconds(seconds)}</div>
+				<div className="timer" style={{fontSize: "1.6rem"}}>{formatSeconds(seconds)}</div>
 			</div>
 			<div className="buttons">
 				<button className="button" onClick={() => onToggleAutocheck && onToggleAutocheck()}>
@@ -367,6 +367,7 @@ function CluesSection({ clues, title }: CluesSectionProps): JSX.Element {
 
 				li {
 					margin-bottom: 10px; /* Adjust the margin as needed */
+					font-size: 1.6rem;
 				}
 
 				.clue-number {

@@ -28,7 +28,7 @@ export default function SubBanner({title}: Props) {
 
 				.sub-link {
 					/* font-size: 1.25rem; */
-					border-color: ${styles.color.navbar};
+					border-color: ${styles.color.darkAccent};
 					border-style: solid;
 					background-color: white;
 					transition: 0.25s;
@@ -37,7 +37,7 @@ export default function SubBanner({title}: Props) {
 
 				.sub-link:hover {
 					color: white;
-					background-color: ${styles.color.navbar};
+					background-color: ${styles.color.darkAccent};
 				}
 
                 hr {
