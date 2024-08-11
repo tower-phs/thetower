@@ -1,12 +1,27 @@
 import Head from "next/head";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import Link from "next/link"
+// import MDEditor from "@uiw/react-md-editor";
 
 export default function Upload() {
     const [category, setCategory] = useState("");
+    // const [text, setText] = useState("Type your article here.")
 
     function changeCategory(event: ChangeEvent<HTMLSelectElement>) {
         setCategory(event.target.value)
+    }
+
+    async function submitArticle(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        let f = new FormData(event.currentTarget)
+
+        const response = await fetch('/api/upload', {
+            method: 'POST',
+            body: f,
+          })
+       
+          // Handle response if necessary
+          response.json().then((data) => {console.log(data)})
     }
 
     return (
@@ -19,10 +34,10 @@ export default function Upload() {
             <div style={{textAlign: "center"}}>
                 <h1>PHS Tower Submission Platform</h1>
                 <p>Upload articles for the next issue here. For editor use only.</p>
-                <form>
+                <form onSubmit={submitArticle}>
                     <h2>Section</h2>
                     <select id="cat" onChange={changeCategory}>
-                        <option value="">Select</option>
+                        <option value="">Select category</option>
                         <option value="news-features">News & Features</option>
                         <option value="opinions">Opinions</option>
                         <option value="vanguard">Vanguard</option>
@@ -31,6 +46,9 @@ export default function Upload() {
                         <option value="multimedia">Multimedia</option>
                     </select>
                     <div id="subcats">
+                        <select style={{display: (category == "") ? "inline" : "none"}} disabled={true}>
+                            <option>Select subcategory</option>
+                        </select>
                         <select id="newfe-subcat" style={{display: (category == "news-features") ? "inline" : "none"}}>
                             <option>None</option>
                             <option>PHS Profiles</option>
@@ -72,10 +90,12 @@ export default function Upload() {
 
                             <p>You can write the article in <Link href="https://www.markdownguide.org/cheat-sheet/" style={{textDecoration: "underline", color: "blue"}}>Markdown format</Link> to add details like italics, pullquotes, and more. Format special notes as they appear on the print edition (usually italics).</p>
                             <textarea></textarea>
+                            {/* <MDEditor value={text} onChange={setText}/>
+                            <MDEditor.Markdown source={text} style={{ whiteSpace: 'pre-wrap' }} /> */}
                     </div>
                     <div id="vanguard" style={{display: (category != "vanguard") ? "none" : "block"}}>
                         <h2>Spread</h2>
-                        <p>Upload your pages as one PDF (as they appear on the print edition).</p>
+                        <p>Upload your pages as one PDF (as they appear on the physical issue).</p>
                         <input type="file" accept=".pdf" />
                     </div>
                     <div id="multimedia" style={{display: (category != "multimedia") ? "none" : "block"}}>
@@ -91,7 +111,7 @@ export default function Upload() {
                     </div>
                     <br />
 
-                    <input type="submit" />
+                    <input type="submit"/>
                 </form>
             </div>
         </div>
