@@ -6,7 +6,7 @@ import { PuzzleInput } from "./crossword/types";
 const prisma = new PrismaClient();
 
 export async function getFrontpageArticles() {
-	let articles: Record<string, article[]> = { "news-features": [], opinions: [], "arts-entertainment": [], sports: [], "featured": [] };
+	let articles: Record<string, article[]> = { "news-features": [], opinions: [], "arts-entertainment": [], sports: [], featured: [] };
 	const categories = Object.keys(articles);
 
 	for (let i = 0; i < categories.length - 1; i++) {
@@ -38,7 +38,7 @@ export async function getFrontpageArticles() {
 		}
 	}
 
-	let a = await prisma.article.findFirst({where: {featured : true}});
+	let a = await prisma.article.findFirst({ where: { featured: true } });
 	if (a != null) articles["featured"].push(a);
 
 	return articles;
@@ -54,7 +54,7 @@ export async function getPublishedArticles() {
 	return articles;
 }
 
-export async function getArticle(year: string, month: string, cat: string, id: string, slug: string) {
+export async function getArticle(year: string, month: string, cat: string, id: string, slug: string): article {
 	// new scheme
 	if (id !== "null") {
 		const article = await prisma.article.findFirst({
@@ -331,4 +331,16 @@ export async function getCurrentCrossword(): Promise<PuzzleInput> {
 		clues: JSON.parse(crossword.clues),
 		date: crossword.date.toISOString(),
 	};
+}
+
+export async function uploadArticle(info: {
+	title: string;
+	authors: string;
+	category: string;
+	subcategory: string;
+	month: number;
+	year: number;
+	img: string;
+}) {
+	await prisma.article.create({ data: info });
 }

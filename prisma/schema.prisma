@@ -19,6 +19,7 @@ model article {
   year        Int      @db.SmallInt
   img         String   @db.VarChar
   featured    Boolean  @default(false)
+  markdown    Boolean  @default(false)
 }
 
 model spreads {

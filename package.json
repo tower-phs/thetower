@@ -16,12 +16,16 @@
 	"dependencies": {
 		"@prisma/client": "^5.10.1",
 		"@react-icons/all-files": "^4.1.0",
+		"@supabase/supabase-js": "^2.45.1",
 		"@uiw/react-md-editor": "^4.0.4",
 		"dayjs": "^1.11.3",
+		"formidable": "^3.5.1",
 		"lodash": "^4.17.21",
 		"next": "^14.1.0",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
+		"remark": "^15.0.1",
+		"remark-html": "^16.0.1",
 		"sharp": "^0.33.2",
 		"use-mutative": "^0.0.4"
 	},
