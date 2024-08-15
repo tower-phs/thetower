@@ -14,8 +14,7 @@ export default function Upload() {
 		content?: string | null | undefined;
 		img?: File | null | undefined;
 		spread?: File | null | undefined;
-		yt?: string | null | undefined;
-		rss?: string | null | undefined;
+		multi?: string | null | undefined;
 	};
 	const [category, setCategory] = useState("");
 	const [formData, setFormData] = useState<FormDataType>();
@@ -52,36 +51,62 @@ export default function Upload() {
 		setFormData({ ...formData, img: file });
 	}
 
+	function updateSpread(event: ChangeEvent<HTMLInputElement>) {
+		const file = event.target.files ? event.target.files[0] : null;
+		setFormData({...formData, spread: file})
+	}
+
+	function updateMulti(event: ChangeEvent<HTMLInputElement>) {
+		setFormData({...formData, multi: event.target.value})
+	}
+
 	async function submitArticle(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
+		setUploadResponse("Checking...")
 
 		if (!formData) return;
-		if (formData.category == "") return setUploadResponse("You need to select a category.");
+		if (!formData.category) return setUploadResponse("You need to select a category.");
+		
+		let fd = new FormData();
+		fd.append("category", formData.category);
+		const authors = formData.authors ? formData.authors.split(", ") : [""];
+		
 		if (formData.category == "vanguard") {
-			console.log("vang");
+			console.log("vang", formData.spread);
+			if (!formData.spread) return setUploadResponse("You need to upload a spread for Vanguard.")
+			fd.append("spread", formData.spread)
+			
+			if (!formData.title) return setUploadResponse("You need a title.")
+			fd.append("title", formData.title);
 		} else if (formData.category == "multimedia") {
 			console.log("multi");
+			if (!formData.multi) return setUploadResponse("You need to submit a link.")
+			fd.append("multi", formData.multi)
+
+			if (!formData.title) return setUploadResponse("You need a title.")
+			fd.append("title", formData.title);
+
+			if (!formData.subcategory || formData.subcategory == "") return setUploadResponse("You need to select a subcategory.")
+			fd.append("subcategory", formData.subcategory)
+
 		} else {
-			if (!formData.title) return setUploadResponse("You need a title to upload a standard article.");
-			// if (formData.category == "opinions" && formData.subcategory != "editorial" && !formData.authors) return setUploadResponse("You need to include an author (except for editorials).")
+			if (!formData.title) return setUploadResponse("You need a title.");
+			if (formData.subcategory) {
+				fd.append("subcategory", formData.subcategory);
+			} else {
+				fd.append("subcategory", formData.category);
+			}
+			
+			fd.append("title", formData.title);
+			fd.append("authors", JSON.stringify(authors));
+			if (formData.content) fd.append("content", formData.content);
+			if (formData.img) fd.append("img", formData.img);
 		}
 
-		const authors = formData.authors ? formData.authors.split(", ") : [""];
 		console.log("authors:", authors);
 
-		let fd = new FormData();
-		if (formData.category) fd.append("category", formData.category);
 		// if (!formData.subcategory) setFormData({...formData, subcategory: formData.category})
 		// fd.append("subcategory", formData.subcategory)
-		if (formData.subcategory) {
-			fd.append("subcategory", formData.subcategory);
-		} else {
-			fd.append("subcategory", formData.category);
-		}
-		if (formData.title) fd.append("title", formData.title);
-		fd.append("authors", JSON.stringify(authors));
-		if (formData.content) fd.append("content", formData.content);
-		if (formData.img) fd.append("img", formData.img);
 		console.log("Sending: ", formData);
 		const response = await fetch("/api/upload", {
 			method: "POST",
@@ -134,6 +159,11 @@ export default function Upload() {
 							<option value="">None</option>
 							<option value="student-atheletes">Student Athletes</option>
 						</select>
+						<select id="multi-subcat" style={{ display: category == "multimedia" ? "inline" : "none" }} onChange={changeSubcategory}>
+							<option value="">Select subcategory</option>
+							<option value="youtube">YouTube Video</option>
+							<option value="podcast">Podcast</option>
+						</select>
 					</div>
 					<br />
 					<br />
@@ -144,7 +174,7 @@ export default function Upload() {
 						<input type="file" accept="image/*" id="img" onChange={updateImage} />
 						<br /> <br />
 						<h3>Title</h3>
-						<input type="text" id="title" onChange={updateTitle} />
+						<input type="text" id="title" onChange={updateTitle} value={formData && formData.title ? formData.title : ""} />
 						<br /> <br />
 						<h3>Author</h3>
 						<p>Separate each author with a comma, and do not include titles. Leave this blank for the editorial.</p>
@@ -168,18 +198,31 @@ export default function Upload() {
 						<textarea id="text" onChange={updateContent}></textarea>
 					</div>
 					<div id="vanguard" style={{ display: category != "vanguard" ? "none" : "block" }}>
-						<h2>Spread</h2>
+						<h2>Vanguard</h2>
+						<h3>Title</h3>
+						<input type="text" id="title" onChange={updateTitle} value={formData && formData.title ? formData.title : ""} />
+						<br /> <br />
+						<h3>Spread</h3>
 						<p>Upload your pages as one PDF (as they appear on the physical issue).</p>
-						<input type="file" accept=".pdf" />
+						<input type="file" accept=".pdf" onChange={updateSpread} />
 					</div>
 					<div id="multimedia" style={{ display: category != "multimedia" ? "none" : "block" }}>
-						<h2>Video</h2>
-						<p>Submit the link to the video on YouTube.</p>
-						<input type="text" />
-						<br /> <br />
-						<h2>Podcast</h2>
-						<p>Submit the link to the podcast on RSS.</p>
-						<input type="text" />
+						{formData && formData.subcategory == "youtube" ? (
+							<div id="yt">
+								<h2>YouTube Video</h2>
+								<h3>Title</h3>
+								<input type="text" id="title" onChange={updateTitle} value={formData && formData.title ? formData.title : ""} />
+								
+								<br /> <br />
+								<p>Submit just the ID of the video (e.g. https://www.youtube.com/watch?v=<strong style={{textDecoration: "underline"}}>TKfS5zVfGBc</strong>)</p>
+							</div>
+						) : (
+							<div id="podcast">
+								<h2>Podcast</h2>
+								<p>Submit only podcast name and ID from the RSS link (e.g. https://rss.com/podcasts/<strong style={{textDecoration: "underline"}}>towershorts/1484378/</strong>)</p>
+							</div>
+						)}
+						<input type="text" onChange={updateMulti}/>
 					</div>
 					<br />
 

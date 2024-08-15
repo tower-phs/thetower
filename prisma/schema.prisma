@@ -36,3 +36,12 @@ model crossword {
   author String @db.VarChar
   clues  String @db.Text
 }
+
+model multimedia {
+  id      Int @id @default(autoincrement())
+  format  String @db.VarChar
+  src_id  String @db.VarChar
+  title   String @db.VarChar
+  month   Int @db.SmallInt
+  year   Int @db.SmallInt
+}
