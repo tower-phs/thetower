@@ -3,7 +3,7 @@
 import Head from "next/head";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Link from "next/link";
-// import MDEditor from "@uiw/react-md-editor";
+import styles from "./index.module.css"
 
 export default function Upload() {
 	type FormDataType = {
@@ -127,7 +127,7 @@ export default function Upload() {
 				<meta property="og:title" content="Upload Articles | The Tower" />
 				<meta property="og:description" content="Section editors upload content here." />
 			</Head>
-			<div style={{ textAlign: "center" }}>
+			<div id={styles.formWrapper}>
 				<h1>PHS Tower Submission Platform</h1>
 				<p>Upload articles for the next issue here. For editor use only.</p>
 				<form onSubmit={submitArticle}>
@@ -198,7 +198,7 @@ export default function Upload() {
 							for more info). Format special notes as they appear on the physical paper (usually italics).
 							<strong> Separate paragraphs with empty lines (hit enter twice).</strong>
 						</p>
-						<textarea id="text" onChange={updateContent}></textarea>
+						<textarea id={styles.contentInput} onChange={updateContent}></textarea>
 					</div>
 					<div id="vanguard" style={{ display: category != "vanguard" ? "none" : "block" }}>
 						<h2>Vanguard</h2>
