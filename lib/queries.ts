@@ -355,7 +355,8 @@ export async function getMultiItems(format: string, take: number, offsetCursor: 
 	const items = await prisma.multimedia.findMany({
 		orderBy: [
 			{year: "desc"},
-			{month: "desc"}
+			{month: "desc"},
+			{id: "desc"}
 		],
 		where: {
 			format: format

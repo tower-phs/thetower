@@ -58,7 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				return res.status(500).json({ message: `Unexpected problem in the server! Message: ${e}` })
 			}
 		} else if (fields.category[0] == "multimedia") {
-			console.log(fields)
+			console.log("fields", fields)
 			try {
 				await uploadMulti({
 					format: fields.subcategory[0],

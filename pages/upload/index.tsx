@@ -83,11 +83,11 @@ export default function Upload() {
 			if (!formData.multi) return setUploadResponse("You need to submit a link.")
 			fd.append("multi", formData.multi)
 
-			if (!formData.title) return setUploadResponse("You need a title.")
-			fd.append("title", formData.title);
-
 			if (!formData.subcategory || formData.subcategory == "") return setUploadResponse("You need to select a subcategory.")
 			fd.append("subcategory", formData.subcategory)
+
+			if (!formData.title && formData.subcategory == "youtube") return setUploadResponse("You need a title.")
+			else fd.append("title", formData.title);
 
 		} else {
 			if (!formData.title) return setUploadResponse("You need a title.");
@@ -114,7 +114,10 @@ export default function Upload() {
 		});
 
 		// Handle response if necessary
-		response.json().then(data => setUploadResponse(data.message));
+		response.json().then(data => {
+			setUploadResponse(data.message)
+			if (response.status == 200) setFormData({}) // Clear for next submission
+		});
 	}
 
 	return (
@@ -129,7 +132,7 @@ export default function Upload() {
 				<p>Upload articles for the next issue here. For editor use only.</p>
 				<form onSubmit={submitArticle}>
 					<h2>Section</h2>
-					<select id="cat" onChange={changeCategory}>
+					<select id="cat" value={formData && formData.category ? formData.category : ""} onChange={changeCategory}>
 						<option value="">Select category</option>
 						<option value="news-features">News & Features</option>
 						<option value="opinions">Opinions</option>
@@ -142,24 +145,24 @@ export default function Upload() {
 						<select style={{ display: category == "" ? "inline" : "none" }} disabled={true} onChange={changeSubcategory}>
 							<option>Select subcategory</option>
 						</select>
-						<select id="newfe-subcat" style={{ display: category == "news-features" ? "inline" : "none" }} onChange={changeSubcategory}>
+						<select id="newfe-subcat" style={{ display: category == "news-features" ? "inline" : "none" }} value={formData && formData.subcategory ? formData.subcategory : ""} onChange={changeSubcategory}>
 							<option value="">None</option>
 							<option value="phs-profiles">PHS Profiles</option>
 						</select>
-						<select id="ops-subcat" style={{ display: category == "opinions" ? "inline" : "none" }} onChange={changeSubcategory}>
+						<select id="ops-subcat" style={{ display: category == "opinions" ? "inline" : "none" }} value={formData && formData.subcategory ? formData.subcategory : ""} onChange={changeSubcategory}>
 							<option value="">None</option>
 							<option value="editorial">Editorials</option>
 							<option value="cheers-jeers">Cheers & Jeers</option>
 						</select>
-						<select id="ae-subcat" style={{ display: category == "arts-entertainment" ? "inline" : "none" }} onChange={changeSubcategory}>
+						<select id="ae-subcat" style={{ display: category == "arts-entertainment" ? "inline" : "none" }} value={formData && formData.subcategory ? formData.subcategory : ""} onChange={changeSubcategory}>
 							<option value="">None</option>
 							<option value="student-artists">Student Artists</option>
 						</select>
-						<select id="sports-subcat" style={{ display: category == "sports" ? "inline" : "none" }} onChange={changeSubcategory}>
+						<select id="sports-subcat" style={{ display: category == "sports" ? "inline" : "none" }} value={formData && formData.subcategory ? formData.subcategory : ""} onChange={changeSubcategory}>
 							<option value="">None</option>
 							<option value="student-atheletes">Student Athletes</option>
 						</select>
-						<select id="multi-subcat" style={{ display: category == "multimedia" ? "inline" : "none" }} onChange={changeSubcategory}>
+						<select id="multi-subcat" style={{ display: category == "multimedia" ? "inline" : "none" }} value={formData && formData.subcategory ? formData.subcategory : ""} onChange={changeSubcategory}>
 							<option value="">Select subcategory</option>
 							<option value="youtube">YouTube Video</option>
 							<option value="podcast">Podcast</option>

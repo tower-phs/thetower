@@ -9,7 +9,6 @@ import NoSSR from "~/components/nossr.client";
 import styles from "~/lib/styles";
 import { useEffect, useState } from "react";
 import { multimedia } from "@prisma/client";
-import { useRouter } from "next/router";
 
 interface Props {
 	videos: multimedia[];
@@ -27,12 +26,10 @@ export async function getServerSideProps() {
 
 export default function Category(props : Props) {
 	const [videos, setVideos] = useState(props.videos)
-	const [vCursor, setVCursor] = useState(videos[0].id)
+	const [vCursor, setVCursor] = useState(videos[videos.length - 1].id)
 
 	const [pods, setPods] = useState(props.pods)
-	const [pCursor, setPCursor] = useState(videos[0].id)
-
-	const route = useRouter().asPath
+	const [pCursor, setPCursor] = useState(pods[pods.length - 1].id)
 
 	async function newVideos() {
 		let loading = document.getElementById("loading-videos");
@@ -70,7 +67,7 @@ export default function Category(props : Props) {
 
 		const loaded = await response.json();
 		if (loaded.length != 0) {
-			setPods([...videos, ...loaded]);
+			setPods([...pods, ...loaded]);
 			setPCursor(loaded[loaded.length - 1].id);
 			loading.setAttribute("style", "display: none");
 		} else {
@@ -161,7 +158,7 @@ export default function Category(props : Props) {
 						{
 							videos.map(v => (
 								<div className="video-wrapper">
-									<Video link={v.src_id} title={v.title} />
+									<Video key={v.id} link={v.src_id} title={v.title} />
 									<br />
 								</div>
 							))
@@ -205,7 +202,7 @@ export default function Category(props : Props) {
 						<h2>Tower Shorts</h2>
 						{
 							pods.map(p => (
-								<Podcast link={p.src_id} />
+								<Podcast key={p.id} link={p.src_id} />
 							))
 						}
 						<h3 id="loading-pods" style={{display: "none"}}>Loading podcasts, please wait...</h3>
