@@ -157,7 +157,7 @@ export default function Category(props : Props) {
 					<section className="videos">
 						{
 							videos.map(v => (
-								<div className="video-wrapper">
+								<div key={v.id} className="video-wrapper">
 									<Video key={v.id} link={v.src_id} title={v.title} />
 									<br />
 								</div>

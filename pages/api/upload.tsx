@@ -38,12 +38,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			return res.status(500).json({ error: "Error parsing form data" });
 		}
 		
-		console.log("we made it");
-		console.log(fields);
 		const today = new Date();
 
 		if (fields.category[0] == "vanguard") {
-			console.log("VANGUARD")
 			let upload = await uploadFile(files.spread[0], "spreads")
 			if (upload.code != 200) return res.status(upload.code).json({ message: upload.message })
 			try {
@@ -58,7 +55,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				return res.status(500).json({ message: `Unexpected problem in the server! Message: ${e}` })
 			}
 		} else if (fields.category[0] == "multimedia") {
-			console.log("fields", fields)
 			try {
 				await uploadMulti({
 					format: fields.subcategory[0],
@@ -92,7 +88,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				year: today.getFullYear(),
 				markdown: true,
 			};
-			console.log("Attempting to upload:", articleInfo);
+
 			try {
 				uploadArticle(articleInfo);
 			} catch (e) {
