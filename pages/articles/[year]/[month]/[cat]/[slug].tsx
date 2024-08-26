@@ -13,6 +13,8 @@ import { getArticle } from "~/lib/queries";
 import { displayDate } from "~/lib/utils";
 import styles from "~/lib/styles";
 import CreditLink from "~/components/credit.client";
+import { remark } from "remark";
+import html from "remark-html";
 import SubBanner from "~/components/subbanner.client";
 
 interface Props {
@@ -32,24 +34,51 @@ export async function getServerSideProps({ params }: Params) {
 	// get id from slug
 	const article_id = params.slug.split("-").slice(-1)[0];
 	// test if id is a number
+	// if (isNaN(Number(article_id))) {
+	// 	// old scheme
+	// 	return {
+	// 		props: {
+	// 			article: await getArticle(params.year, params.month, params.cat, "null", params.slug),
+	// 		},
+	// 	};
+	// }
+	// // new scheme
+	// return {
+	// 	props: {
+	// 		article: await getArticle(params.year, params.month, params.cat, article_id, params.slug),
+	// 	},
+	// };
+
+	let processedArticle: article | null = null;
 	if (isNaN(Number(article_id))) {
-		// old scheme
-		return {
-			props: {
-				article: await getArticle(params.year, params.month, params.cat, "null", params.slug),
-			},
-		};
+		processedArticle = await getArticle(params.year, params.month, params.cat, "null", params.slug);
+	} else {
+		processedArticle = await getArticle(params.year, params.month, params.cat, article_id, params.slug);
 	}
-	// new scheme
-	return {
-		props: {
-			article: await getArticle(params.year, params.month, params.cat, article_id, params.slug),
-		},
-	};
+
+	if (processedArticle?.markdown) {
+		let markedContent = await remark().use(html).process(processedArticle.content);
+		processedArticle.content = markedContent.toString();
+
+		return { props: { article: processedArticle } };
+	}
+
+	return { props: { article: processedArticle } };
 }
 
 export default function Article({ article }: Props) {
-	const paragraphs = article.content.split("\n");
+	// remark().use(html).process(article.content).then((markedContent) => {
+
+	// })
+	// const markedHTML = markedContent.toString()
+	// const paragraphs = article.content.split("\n");
+
+	if (article == null) return (
+		<meta
+			http-equiv="refresh"
+			content="0; URL=https://towerphs.com/404"
+		/>
+	)
 
 	return (
 		<div className="article">
@@ -57,6 +86,7 @@ export default function Article({ article }: Props) {
 				<title>{article.title} | The Tower</title>
 				<meta property="og:title" content={article.title + " | The Tower"} />
 				<meta property="og:description" content="Read more about this article!" />
+				
 			</Head>
 			<style jsx>{`
 				.article {
@@ -93,11 +123,13 @@ export default function Article({ article }: Props) {
 						margin-right: 0px;
 					}
 				}
-				.article .content p {
-					/* font-family: ${styles.font.serifText};
-					font-size: 1.2rem; */
+				
+				:global(.article .content p) {
+					font-family: ${styles.font.serifText};
+					font-size: 1.2rem;
 				}
-				.article p {
+				
+				:global(.article p) {
 					margin-top: 3vh;
 					margin-bottom: 3vh;
 				}
@@ -109,6 +141,30 @@ export default function Article({ article }: Props) {
 					/* font-size: 2.5rem;
 					font-weight: 800;
 					font-family: ${styles.font.serifHeader}; */
+				}
+
+				:global(.main-article blockquote) {
+					border-left: 3px solid lightgray;
+					padding-left: 5px;
+				}
+
+				:global(.main-article blockquote p) {
+					font-size: 1.5rem !important;
+					font-family: "Neue Montreal Regular" !important;
+					font-weight: normal; !important;
+				}
+
+				:global(.main-article pre) {
+					background-color: lightgray;
+				}
+
+				:global(.main-article code) {
+					font-family: monospace;
+					padding-left: 5px;
+				}
+
+				:global(.main-article a) {
+					text-decoration: underline;
 				}
 			`}</style>
 
@@ -133,15 +189,21 @@ export default function Article({ article }: Props) {
 				<br></br>
 				{article.img && <img src={article.img} width="100%" height="auto"></img>}
 
-				<div className="main-article">
-					{paragraphs.map((paragraph, index) =>
-						paragraph.startsWith("@img=") ? (
-							<img src={paragraph.substring(5)} width="100%" height="auto" key={index}></img>
-						) : (
-							<p key={index}>{paragraph.replace("&lt;", "<").replace("&gt;", ">")}</p>
-						)
-					)}
-				</div>
+				{article.markdown ? (
+					<div className="main-article" dangerouslySetInnerHTML={{ __html: article.content }} />
+				) : (
+					<div className="main-article">
+						{article.content
+							.split("\n")
+							.map((paragraph, index) =>
+								paragraph.startsWith("@img=") ? (
+									<img src={paragraph.substring(5)} width="100%" height="auto" key={index}></img>
+								) : (
+									<p key={index}>{paragraph.replace("&lt;", "<").replace("&gt;", ">")}</p>
+								)
+							)}
+					</div>
+				)}
 			</section>
 			<SubBanner title="Subscribing helps us make more articles like this."/>
 		</div>

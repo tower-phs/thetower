@@ -1,12 +1,12 @@
 /** @format */
 
-import { article, PrismaClient, spreads } from "@prisma/client";
+import { article, PrismaClient, spreads, multimedia } from "@prisma/client";
 import { PuzzleInput } from "./crossword/types";
 
 const prisma = new PrismaClient();
 
 export async function getFrontpageArticles() {
-	let articles: Record<string, article[]> = { "news-features": [], opinions: [], "arts-entertainment": [], sports: [], "featured": [] };
+	let articles: Record<string, article[]> = { "news-features": [], opinions: [], "arts-entertainment": [], sports: [], featured: [] };
 	const categories = Object.keys(articles);
 
 	for (let i = 0; i < categories.length - 1; i++) {
@@ -38,7 +38,7 @@ export async function getFrontpageArticles() {
 		}
 	}
 
-	let a = await prisma.article.findFirst({where: {featured : true}});
+	let a = await prisma.article.findFirst({ where: { featured: true } });
 	if (a != null) articles["featured"].push(a);
 
 	return articles;
@@ -54,31 +54,32 @@ export async function getPublishedArticles() {
 	return articles;
 }
 
-export async function getArticle(year: string, month: string, cat: string, id: string, slug: string) {
+export async function getArticle(year: string, month: string, cat: string, id: string, slug: string): Promise<article> {
 	// new scheme
+	let art = null;
 	if (id !== "null") {
-		const article = await prisma.article.findFirst({
+		art = await prisma.article.findFirst({
 			where: {
 				id: parseInt(id),
 				published: true,
 			},
 		});
 
-		return article;
 	}
 
 	// old scheme
-	const article = await prisma.article.findFirst({
+	art = await prisma.article.findFirst({
 		where: {
 			year: parseInt(year),
 			month: parseInt(month),
 			category: cat,
-			title: decodeURI(slug),
+			title: decodeURI(slug.replace(/-/g, " ")),
 			published: true,
 		},
 	});
 
-	return article;
+	if (art) return Promise.resolve(art);
+	else return Promise.reject("No article found")
 }
 
 export async function getCurrArticles() {
@@ -142,25 +143,43 @@ export async function getArticlesByDate(year: string, month: string) {
 }
 
 export async function getIdOfNewest(cat: string, subcat: string | null) {
-	const where = subcat == null ? { category: cat, published: true } : { category: cat, subcategory: subcat, published: true };
+	let res;
+	if (cat == "multimedia") {
+		subcat = subcat == null ? "youtube" : subcat
+		res = await prisma.multimedia.findFirst({
+			orderBy: [
+				{year: "desc"},
+				{month: "desc"},
+				{id: "desc"},
+			],
+			where: {
+				format: subcat
+			},
+			select: {
+				id: true
+			}
+		})
+	} else {
+		const where = subcat == null ? { category: cat, published: true } : { category: cat, subcategory: subcat, published: true };
 
-	const res = await prisma.article.findFirst({
-		orderBy: [
-			{
-				year: "desc",
+		res = await prisma.article.findFirst({
+			orderBy: [
+				{
+					year: "desc",
+				},
+				{
+					month: "desc",
+				},
+				{
+					id: "desc",
+				},
+			],
+			where,
+			select: {
+				id: true,
 			},
-			{
-				month: "desc",
-			},
-			{
-				id: "desc",
-			},
-		],
-		where,
-		select: {
-			id: true,
-		},
-	});
+		});
+	}
 
 	return res === null ? 0 : res.id;
 }
@@ -331,4 +350,56 @@ export async function getCurrentCrossword(): Promise<PuzzleInput> {
 		clues: JSON.parse(crossword.clues),
 		date: crossword.date.toISOString(),
 	};
+}
+
+export async function getMultiItems(format: string, take: number, offsetCursor: number, skip: number) {
+	const items = await prisma.multimedia.findMany({
+		orderBy: [
+			{year: "desc"},
+			{month: "desc"},
+			{id: "desc"}
+		],
+		where: {
+			format: format
+		},
+		take: take,
+		cursor: {
+			id: offsetCursor
+		},
+		skip: skip
+	})
+
+	return items
+}
+
+export async function uploadArticle(info: {
+	title: string;
+	authors: string[];
+	category: string;
+	subcategory: string;
+	month: number;
+	year: number;
+	img: string;
+	content: string;
+}) {
+	await prisma.article.create({ data: info });
+}
+
+export async function uploadSpread(info: {
+	title: string;
+	src: string;
+	month: number;
+	year: number;
+}) {
+	await prisma.spreads.create({data: info})
+}
+
+export async function uploadMulti(info: {
+	format: string;
+	src_id: string;
+	month: number;
+	year: number;
+	title: string;
+}) {
+	await prisma.multimedia.create({data: info})
 }

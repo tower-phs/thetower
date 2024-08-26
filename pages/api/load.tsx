@@ -8,9 +8,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const category = req.body.category;
 	const cursor = req.body.cursor;
+
 	const articles =
 		cursor != null
 			? await getArticlesByCategory(category, 10, cursor, 1)
 			: await getArticlesByCategory(category, 10, await getIdOfNewest(category, null), 0);
 	return res.status(200).json(articles);
+
 }
