@@ -3,7 +3,7 @@
 import Head from "next/head";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Link from "next/link";
-import styles from "./index.module.css"
+import styles from "./index.module.scss"
 
 export default function Upload() {
 	type FormDataType = {
