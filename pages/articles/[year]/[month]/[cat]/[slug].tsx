@@ -15,6 +15,7 @@ import styles from "~/lib/styles";
 import CreditLink from "~/components/credit.client";
 import { remark } from "remark";
 import html from "remark-html";
+import SubBanner from "~/components/subbanner.client";
 
 interface Props {
 	article: article;
@@ -124,7 +125,7 @@ export default function Article({ article }: Props) {
 				}
 				
 				:global(.article .content p) {
-					font-family: ${styles.font.text};
+					font-family: ${styles.font.serifText};
 					font-size: 1.2rem;
 				}
 				
@@ -137,9 +138,9 @@ export default function Article({ article }: Props) {
 					text-align: center;
 				}
 				.article .titleblock h1 {
-					font-size: 2.5rem;
+					/* font-size: 2.5rem;
 					font-weight: 800;
-					font-family: ${styles.font.previewHeader};
+					font-family: ${styles.font.serifHeader}; */
 				}
 
 				:global(.main-article blockquote) {
@@ -171,7 +172,7 @@ export default function Article({ article }: Props) {
 				<div className="titleblock">
 					<h1>{article.title}</h1>
 
-					<span>{displayDate(article.year, article.month)}</span>
+					<span style={{fontFamily: styles.font.sans}}>{displayDate(article.year, article.month)}</span>
 
 					{article.authors.length > 0 && (
 						<section className="authors">
@@ -204,6 +205,7 @@ export default function Article({ article }: Props) {
 					</div>
 				)}
 			</section>
+			<SubBanner title="Subscribing helps us make more articles like this."/>
 		</div>
 	);
 }

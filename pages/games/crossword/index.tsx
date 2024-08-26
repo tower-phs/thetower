@@ -8,6 +8,7 @@ import { Direction, PuzzleInput, RuntimeClue } from "~/lib/crossword/types";
 import React from "react";
 import { getCurrentCrossword } from "~/lib/queries";
 import styles from "~/lib/styles";
+import SubBanner from "~/components/subbanner.client";
 
 type Props = { puzzleInput: PuzzleInput };
 
@@ -130,13 +131,13 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 				}
 
 				.title-container h3 {
-					font-family: ${styles.font.stack};
-					font-weight: 300;
+					/* font-family: ${styles.font.stack};
+					font-weight: 300; */
 				}
 			`}</style>
 			<div className="title-container">
 				<h1>The Crossword</h1>
-				<h3 style={{fontFamily: styles.font.text}}>`By ${puzzleInput.author} on {date.toLocaleDateString()}`</h3>
+				<p style={{fontFamily: styles.font.sans}}>By {puzzleInput.author} on {date.toLocaleDateString()}</p>
 			</div>
 			<MenuBar
 				seconds={state.seconds}
@@ -214,6 +215,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 					</div>
 				</div>
 			)}
+		<SubBanner title="Enjoyed the crossword? Consider subscribing."/>
 		</CrosswordDispatchContext.Provider>
 	);
 }
@@ -298,8 +300,8 @@ function MenuBar({ seconds, paused, autocheck, onTogglePaused, onReset, onToggle
 					margin-bottom: 10px;
 				}
 				.timer {
-					font-size: 18px;
-					font-weight: bold;
+					/* font-size: 18px;
+					font-weight: bold; */
 				}
 				.buttons {
 					display: flex;
@@ -327,7 +329,7 @@ function MenuBar({ seconds, paused, autocheck, onTogglePaused, onReset, onToggle
 				<button className="button" onClick={onTogglePaused}>
 					{paused ? "Play" : "Pause"}
 				</button>
-				<div className="timer">{formatSeconds(seconds)}</div>
+				<div className="timer" style={{fontSize: "1.6rem"}}>{formatSeconds(seconds)}</div>
 			</div>
 			<div className="buttons">
 				<button className="button" onClick={() => onToggleAutocheck && onToggleAutocheck()}>
@@ -365,6 +367,7 @@ function CluesSection({ clues, title }: CluesSectionProps): JSX.Element {
 
 				li {
 					margin-bottom: 10px; /* Adjust the margin as needed */
+					font-size: 1.6rem;
 				}
 
 				.clue-number {
@@ -412,7 +415,7 @@ function SelectedCluePanel({ clue, direction }: SelectedCluePanelProps) {
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					font-size: 16px;
+					/* font-size: 16px; */
 				}
 			`}</style>
 			<div className="clue-ref">

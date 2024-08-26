@@ -21,17 +21,17 @@ export default function Spread({ spread }: Props) {
 					padding: 20px;
 					margin-bottom: 10px;
 					margin-top: 10px;
-					border-left: 2px solid ${styles.color.secondary};
+					border-left: 2px solid ${styles.color.accent};
 				}
 				a:hover {
 					text-decoration: underline;
 				}
 				.title {
-					font-weight: bolder;
-					font-size: larger;
+					/* font-weight: bolder;
+					font-size: larger; */
 				}
 				span {
-					font-size: smaller;
+					/* font-size: smaller; */
 				}
 			`}</style>
 			<section className="title">

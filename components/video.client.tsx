@@ -23,7 +23,7 @@ export default function Video({ link, title }: Props) {
 					background-color: #f5f5f5;
 					/*border-radius: 10px;*/
 					border: 1px solid gainsboro;
-					border-left: 2px solid ${styles.color.secondary};
+					border-left: 2px solid ${styles.color.accent};
 				}
 				.video_container {
 					width: 100%;
@@ -41,7 +41,7 @@ export default function Video({ link, title }: Props) {
 				}
 				h3 {
 					padding: 5px;
-					font-family: "Neue Montreal Regular";
+					/* font-family: ${styles.font.sans}; */
 				}
 			`}</style>
 			<div className="video_container">

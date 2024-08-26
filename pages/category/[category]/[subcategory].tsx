@@ -121,8 +121,8 @@ export default function Subcategory(props: Props) {
 
 				#loadmore {
 					border-radius: 2rem;
-					font-family: ${styles.font.previewHeader};
-					font-size: calc(0.25rem + 1vw);
+					/* font-family: ${styles.font.sans};
+					font-size: calc(0.25rem + 1vw); */
 					color: black;
 					background-color: white;
 					border-style: solid;

@@ -105,9 +105,9 @@ export default function Category(props: Props) {
 					text-align: center;
 					border-bottom: 3px double black;
 					margin-bottom: 1vh;
-					font-weight: bold;
-					font-family: ${styles.font.previewHeader};
-					font-size: calc(1.5rem + 1vw);
+					/* font-weight: bold;
+					font-family: ${styles.font.serifHeader};
+					font-size: calc(1.5rem + 1vw); */
 				}
 				.grid {
 					display: grid;
@@ -125,8 +125,8 @@ export default function Category(props: Props) {
 
 				#loadmore {
 					border-radius: 2rem;
-					font-family: ${styles.font.previewHeader};
-					font-size: calc(0.25rem + 1vw);
+					/* font-family: ${styles.font.sans};
+					font-size: calc(0.25rem + 1vw); */
 					color: black;
 					background-color: white;
 					border-style: solid;

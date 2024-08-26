@@ -28,16 +28,14 @@ export default function Button({ name, href, children, className, onClick }: Pro
 					opacity: 1;
 				}
 				.btn {
-					color: /*${styles.color.primary}*/ white;
-					background-color: ${styles.color.navbar};
+					color: ${styles.color.accent};
+					// background-color: ${styles.color.background};
 					display: inline-block;
 					padding: 15px;
-					font-size: medium;
 					transition: 0.1s ease-in;
 					box-sizing: border-box;
 					position: relative;
-					font-family: ${styles.font.folio};
-					font-weight: 400;
+					font-family: ${styles.font.sans};
 				}
 				.btn::after {
 					content: "";
@@ -56,7 +54,7 @@ export default function Button({ name, href, children, className, onClick }: Pro
 				.content {
 					display: block;
 					position: absolute;
-					font-size: medium;
+					/* font-size: medium; */
 					padding: 12px;
 
 					min-width: 14vw;

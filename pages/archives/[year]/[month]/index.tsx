@@ -66,7 +66,7 @@ export default function Index({ articles, year, month }: Props) {
 			</Head>
 			<h1 style={{textAlign: "center"}}>{`${month}/${year} Archives`}</h1>
 			<Link href={`https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/${month}-${year}-full.pdf`}>
-				<h3 style={{textAlign: "center", textDecoration: "underline"}}>View print edition</h3>
+				<p style={{textAlign: "center", textDecoration: "underline"}}>View issue PDF</p>
 			</Link>
 			<div className="mosaic">
 				<div className="one triple">

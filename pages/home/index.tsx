@@ -9,6 +9,7 @@ import Video from "~/components/video.client";
 import Podcast from "~/components/podcast.client";
 import { getFrontpageArticles } from "~/lib/queries";
 import styles from "~/lib/styles";
+import SubBanner from "~/components/subbanner.client";
 
 export async function getServerSideProps() {
 	const articles = await getFrontpageArticles();
@@ -63,7 +64,7 @@ export default function FrontPage({ articles }: Props) {
 
 				.dark-banner {
 					position: relative;
-					background-color: ${styles.color.primary};
+					background-color: ${styles.color.darkAccent};
 					width: 100vw;
 					left: -2.5vw;
 					padding-top: 2.5rem;
@@ -73,9 +74,9 @@ export default function FrontPage({ articles }: Props) {
 				.dark-banner * {
 					color: ${styles.color.background};
 					text-align: center;
-					font-size: 2.5rem;
+					/* font-size: 2.5rem;
 					font-family: "Neue Montreal Medium";
-					// margin-right: 0.75rem;
+					margin-right: 0.75rem; */
 				}
 
 				#dark-banner-content {
@@ -84,14 +85,14 @@ export default function FrontPage({ articles }: Props) {
 				}
 
 				#dark-banner-content h1 {
-					font-size: calc(1rem + 1vw);
+					/* font-size: calc(1rem + 1vw); */
 				}
 
 				.section-header {
-					// font-family: ${styles.font.previewHeader};
-					// font-style: italic;
+					/* font-family: ${styles.font.serifHeader};
+					font-style: italic; */
 					text-align: center;
-					font-weight: bold;
+					/* font-weight: bold; */
 				}
 			`}</style>
 			<Head>
@@ -101,7 +102,7 @@ export default function FrontPage({ articles }: Props) {
 			<div className="mosaic">
 				<div className="triple">
 					<div>
-						<h2 className="section-header">OPINIONS</h2>
+						{/* <h3 className="section-header">OPINIONS</h3> */}
 						<hr />
 						<ArticlePreview article={articles["opinions"][0]} style="box" size="large" />
 						<ArticlePreview article={articles["opinions"][1]} style="box" size="large" />
@@ -111,7 +112,7 @@ export default function FrontPage({ articles }: Props) {
 						<ArticlePreview article={articles["featured"][0]} style="box" size="featured" />
 					</div>
 					<div>
-						<h2 className="section-header">SPORTS</h2>
+						{/* <h3 className="section-header">SPORTS</h3> */}
 						<hr />
 						<ArticlePreview article={articles["sports"][0]} style="box" size="large" />
 						{/* <ArticlePreview article={articles["sports"][1]} style="box" size="large" /> */}
@@ -145,6 +146,7 @@ export default function FrontPage({ articles }: Props) {
 					<hr />
 				</div>
 			</div>
+			<SubBanner title="Consider subscribing to The Tower."/>
 			{/* <Opinions {...articles["opinions"]} /> */}
 		</div>
 	);

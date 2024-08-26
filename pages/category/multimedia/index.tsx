@@ -93,7 +93,7 @@ export default function Category(props : Props) {
 				}
 
 				h2 {
-					font-family: ${styles.font.previewHeader};
+					/* font-family: ${styles.font.serifHeader}; */
 				}
 
 				.grid {
