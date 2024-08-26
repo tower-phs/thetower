@@ -54,21 +54,21 @@ export async function getPublishedArticles() {
 	return articles;
 }
 
-export async function getArticle(year: string, month: string, cat: string, id: string, slug: string): article | null {
+export async function getArticle(year: string, month: string, cat: string, id: string, slug: string): Promise<article> {
 	// new scheme
+	let art = null;
 	if (id !== "null") {
-		const article = await prisma.article.findFirst({
+		art = await prisma.article.findFirst({
 			where: {
 				id: parseInt(id),
 				published: true,
 			},
 		});
 
-		return article;
 	}
 
 	// old scheme
-	const article = await prisma.article.findFirst({
+	art = await prisma.article.findFirst({
 		where: {
 			year: parseInt(year),
 			month: parseInt(month),
@@ -78,7 +78,8 @@ export async function getArticle(year: string, month: string, cat: string, id: s
 		},
 	});
 
-	return article;
+	if (art) return Promise.resolve(art);
+	else return Promise.reject("No article found")
 }
 
 export async function getCurrArticles() {
@@ -373,12 +374,13 @@ export async function getMultiItems(format: string, take: number, offsetCursor: 
 
 export async function uploadArticle(info: {
 	title: string;
-	authors: string;
+	authors: string[];
 	category: string;
 	subcategory: string;
 	month: number;
 	year: number;
 	img: string;
+	content: string;
 }) {
 	await prisma.article.create({ data: info });
 }
