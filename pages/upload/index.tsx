@@ -86,7 +86,7 @@ export default function Upload() {
 			if (!formData.subcategory || formData.subcategory == "") return setUploadResponse("You need to select a subcategory.")
 			fd.append("subcategory", formData.subcategory)
 
-			if (!formData.title && formData.subcategory == "youtube") return setUploadResponse("You need a title.")
+			if (formData.title == null || formData.title == undefined && formData.subcategory == "youtube") return setUploadResponse("You need a title.")
 			else fd.append("title", formData.title);
 
 		} else {
