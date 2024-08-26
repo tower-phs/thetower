@@ -63,6 +63,7 @@ export async function getServerSideProps({ params }: Params) {
 		return { props: { article: processedArticle } };
 	}
 
+	console.log("article from props:", processedArticle)
 	return { props: { article: processedArticle } };
 }
 
@@ -73,12 +74,7 @@ export default function Article({ article }: Props) {
 	// const markedHTML = markedContent.toString()
 	// const paragraphs = article.content.split("\n");
 
-	if (article == null) return (
-		<meta
-			http-equiv="refresh"
-			content="0; URL=https://towerphs.com/404"
-		/>
-	)
+	if (article == null) return <meta http-equiv="refresh" content="0; URL=https://towerphs.com/404" />;
 
 	return (
 		<div className="article">
@@ -86,7 +82,6 @@ export default function Article({ article }: Props) {
 				<title>{article.title} | The Tower</title>
 				<meta property="og:title" content={article.title + " | The Tower"} />
 				<meta property="og:description" content="Read more about this article!" />
-				
 			</Head>
 			<style jsx>{`
 				.article {
@@ -126,7 +121,11 @@ export default function Article({ article }: Props) {
 				
 				:global(.article .content p) {
 					font-family: ${styles.font.serifText};
-					font-size: 1.2rem;
+					// font-size: 1.2rem;
+				}
+
+				:global(.article .content strong) {
+					font-family: ${styles.font.serifHeader};
 				}
 				
 				:global(.article p) {
@@ -149,7 +148,7 @@ export default function Article({ article }: Props) {
 				}
 
 				:global(.main-article blockquote p) {
-					font-size: 1.5rem !important;
+					font-size: 2.5rem !important;
 					font-family: "Neue Montreal Regular" !important;
 					font-weight: normal; !important;
 				}
@@ -160,7 +159,8 @@ export default function Article({ article }: Props) {
 
 				:global(.main-article code) {
 					font-family: monospace;
-					padding-left: 5px;
+					// padding-left: 5px;
+					font-size: 1.6rem;
 				}
 
 				:global(.main-article a) {
@@ -172,7 +172,7 @@ export default function Article({ article }: Props) {
 				<div className="titleblock">
 					<h1>{article.title}</h1>
 
-					<span style={{fontFamily: styles.font.sans}}>{displayDate(article.year, article.month)}</span>
+					<span style={{ fontFamily: styles.font.sans }}>{displayDate(article.year, article.month)}</span>
 
 					{article.authors.length > 0 && (
 						<section className="authors">
@@ -205,7 +205,7 @@ export default function Article({ article }: Props) {
 					</div>
 				)}
 			</section>
-			<SubBanner title="Subscribing helps us make more articles like this."/>
+			<SubBanner title="Subscribing helps us make more articles like this." />
 		</div>
 	);
 }

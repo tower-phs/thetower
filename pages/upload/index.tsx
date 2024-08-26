@@ -3,7 +3,7 @@
 import Head from "next/head";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Link from "next/link";
-import styles from "./index.module.scss"
+import styles from "./index.module.scss";
 
 export default function Upload() {
 	type FormDataType = {
@@ -53,42 +53,42 @@ export default function Upload() {
 
 	function updateSpread(event: ChangeEvent<HTMLInputElement>) {
 		const file = event.target.files ? event.target.files[0] : null;
-		setFormData({...formData, spread: file})
+		setFormData({ ...formData, spread: file });
 	}
 
 	function updateMulti(event: ChangeEvent<HTMLInputElement>) {
-		setFormData({...formData, multi: event.target.value})
+		setFormData({ ...formData, multi: event.target.value });
 	}
 
 	async function submitArticle(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		setUploadResponse("Checking...")
+		setUploadResponse("Checking...");
 
 		if (!formData) return;
 		if (!formData.category) return setUploadResponse("You need to select a category.");
-		
+
 		let fd = new FormData();
 		fd.append("category", formData.category);
 		const authors = formData.authors ? formData.authors.split(", ") : [""];
-		
+
 		if (formData.category == "vanguard") {
 			console.log("vang", formData.spread);
-			if (!formData.spread) return setUploadResponse("You need to upload a spread for Vanguard.")
-			fd.append("spread", formData.spread)
-			
-			if (!formData.title) return setUploadResponse("You need a title.")
+			if (!formData.spread) return setUploadResponse("You need to upload a spread for Vanguard.");
+			fd.append("spread", formData.spread);
+
+			if (!formData.title) return setUploadResponse("You need a title.");
 			fd.append("title", formData.title);
 		} else if (formData.category == "multimedia") {
 			console.log("multi");
-			if (!formData.multi) return setUploadResponse("You need to submit a link.")
-			fd.append("multi", formData.multi)
+			if (!formData.multi) return setUploadResponse("You need to submit a link.");
+			fd.append("multi", formData.multi);
 
-			if (!formData.subcategory || formData.subcategory == "") return setUploadResponse("You need to select a subcategory.")
-			fd.append("subcategory", formData.subcategory)
+			if (!formData.subcategory || formData.subcategory == "") return setUploadResponse("You need to select a subcategory.");
+			fd.append("subcategory", formData.subcategory);
 
-			if (formData.title == null || formData.title == undefined && formData.subcategory == "youtube") return setUploadResponse("You need a title.")
+			if (formData.title == null || (formData.title == undefined && formData.subcategory == "youtube"))
+				return setUploadResponse("You need a title.");
 			else fd.append("title", formData.title);
-
 		} else {
 			if (!formData.title) return setUploadResponse("You need a title.");
 			if (formData.subcategory) {
@@ -96,7 +96,7 @@ export default function Upload() {
 			} else {
 				fd.append("subcategory", formData.category);
 			}
-			
+
 			fd.append("title", formData.title);
 			fd.append("authors", JSON.stringify(authors));
 			if (formData.content) fd.append("content", formData.content);
@@ -115,8 +115,8 @@ export default function Upload() {
 
 		// Handle response if necessary
 		response.json().then(data => {
-			setUploadResponse(data.message)
-			if (response.status == 200) setFormData({}) // Clear for next submission
+			setUploadResponse(data.message);
+			if (response.status == 200) setFormData({}); // Clear for next submission
 		});
 	}
 
@@ -145,24 +145,49 @@ export default function Upload() {
 						<select style={{ display: category == "" ? "inline" : "none" }} disabled={true} onChange={changeSubcategory}>
 							<option>Select subcategory</option>
 						</select>
-						<select id="newfe-subcat" style={{ display: category == "news-features" ? "inline" : "none" }} value={formData && formData.subcategory ? formData.subcategory : ""} onChange={changeSubcategory}>
+						<select
+							id="newfe-subcat"
+							style={{ display: category == "news-features" ? "inline" : "none" }}
+							value={formData && formData.subcategory ? formData.subcategory : ""}
+							onChange={changeSubcategory}
+						>
 							<option value="">None</option>
 							<option value="phs-profiles">PHS Profiles</option>
 						</select>
-						<select id="ops-subcat" style={{ display: category == "opinions" ? "inline" : "none" }} value={formData && formData.subcategory ? formData.subcategory : ""} onChange={changeSubcategory}>
+						<select
+							id="ops-subcat"
+							style={{ display: category == "opinions" ? "inline" : "none" }}
+							value={formData && formData.subcategory ? formData.subcategory : ""}
+							onChange={changeSubcategory}
+						>
 							<option value="">None</option>
 							<option value="editorial">Editorials</option>
 							<option value="cheers-jeers">Cheers & Jeers</option>
 						</select>
-						<select id="ae-subcat" style={{ display: category == "arts-entertainment" ? "inline" : "none" }} value={formData && formData.subcategory ? formData.subcategory : ""} onChange={changeSubcategory}>
+						<select
+							id="ae-subcat"
+							style={{ display: category == "arts-entertainment" ? "inline" : "none" }}
+							value={formData && formData.subcategory ? formData.subcategory : ""}
+							onChange={changeSubcategory}
+						>
 							<option value="">None</option>
 							<option value="student-artists">Student Artists</option>
 						</select>
-						<select id="sports-subcat" style={{ display: category == "sports" ? "inline" : "none" }} value={formData && formData.subcategory ? formData.subcategory : ""} onChange={changeSubcategory}>
+						<select
+							id="sports-subcat"
+							style={{ display: category == "sports" ? "inline" : "none" }}
+							value={formData && formData.subcategory ? formData.subcategory : ""}
+							onChange={changeSubcategory}
+						>
 							<option value="">None</option>
 							<option value="student-atheletes">Student Athletes</option>
 						</select>
-						<select id="multi-subcat" style={{ display: category == "multimedia" ? "inline" : "none" }} value={formData && formData.subcategory ? formData.subcategory : ""} onChange={changeSubcategory}>
+						<select
+							id="multi-subcat"
+							style={{ display: category == "multimedia" ? "inline" : "none" }}
+							value={formData && formData.subcategory ? formData.subcategory : ""}
+							onChange={changeSubcategory}
+						>
 							<option value="">Select subcategory</option>
 							<option value="youtube">YouTube Video</option>
 							<option value="podcast">Podcast</option>
@@ -215,17 +240,22 @@ export default function Upload() {
 								<h2>YouTube Video</h2>
 								<h3>Title</h3>
 								<input type="text" id="title" onChange={updateTitle} value={formData && formData.title ? formData.title : ""} />
-								
 								<br /> <br />
-								<p>Submit just the ID of the video (e.g. https://www.youtube.com/watch?v=<strong style={{textDecoration: "underline"}}>TKfS5zVfGBc</strong>)</p>
+								<p>
+									Submit just the ID of the video (e.g. https://www.youtube.com/watch?v=
+									<strong style={{ textDecoration: "underline" }}>TKfS5zVfGBc</strong>)
+								</p>
 							</div>
 						) : (
 							<div id="podcast">
 								<h2>Podcast</h2>
-								<p>Submit only podcast name and ID from the RSS link (e.g. https://rss.com/podcasts/<strong style={{textDecoration: "underline"}}>towershorts/1484378/</strong>)</p>
+								<p>
+									Submit only podcast name and ID from the RSS link (e.g. https://rss.com/podcasts/
+									<strong style={{ textDecoration: "underline" }}>towershorts/1484378/</strong>)
+								</p>
 							</div>
 						)}
-						<input type="text" onChange={updateMulti}/>
+						<input type="text" onChange={updateMulti} />
 					</div>
 					<br />
 

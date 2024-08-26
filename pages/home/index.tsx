@@ -141,12 +141,18 @@ export default function FrontPage({ articles }: Props) {
 						affect the student body.
 					</h1>
 					<hr /> */}
-					<h1 style={{marginTop: "2.5rem"}}> Thank you to our sponsors for supporting the Tower!</h1>
-					<Image src="/assets/milk-cookies.png" width={2500} height={2500} alt="Milk & Cookies" style={{width: "15rem", height: "auto", marginBottom: "1rem"}} />
+					<h1 style={{ marginTop: "2.5rem" }}> Thank you to our sponsors for supporting the Tower!</h1>
+					<Image
+						src="/assets/milk-cookies.png"
+						width={2500}
+						height={2500}
+						alt="Milk & Cookies"
+						style={{ width: "15rem", height: "auto", marginBottom: "1rem" }}
+					/>
 					<hr />
 				</div>
 			</div>
-			<SubBanner title="Consider subscribing to The Tower."/>
+			<SubBanner title="Consider subscribing to The Tower." />
 			{/* <Opinions {...articles["opinions"]} /> */}
 		</div>
 	);

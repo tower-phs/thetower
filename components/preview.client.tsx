@@ -217,10 +217,34 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				{/* <div className="img-wrapper">
 					{!article.img?.includes(".") ? <></> : <img src={article.img} className={size}></img>}
 				</div> */}
-				<div className="img-wrapper"> {(article.img?.includes("."))
-					? <Image src={article.img} width={1000} height={1000} alt="Image" style={{width: "100%", height: "100%", maxWidth: `${(size == "featured") ? "90%" : "25rem"}`, maxHeight: `${(size == "featured") ? "90%" : "25rem"}`, marginLeft: "5%", marginRight: "5%", objectFit: "cover"}}/>
-					: <Image src="/assets/white-tower.png" width={309} height={721} alt="Image" style={{width: "25rem", height: "25rem", objectFit: "cover", backgroundColor: "black"}} />
-				}</div>
+				<div className="img-wrapper">
+					{" "}
+					{article.img?.includes(".") ? (
+						<Image
+							src={article.img}
+							width={1000}
+							height={1000}
+							alt="Image"
+							style={{
+								width: "100%",
+								height: "100%",
+								maxWidth: `${size == "featured" ? "90%" : "25rem"}`,
+								maxHeight: `${size == "featured" ? "90%" : "25rem"}`,
+								marginLeft: "5%",
+								marginRight: "5%",
+								objectFit: "cover",
+							}}
+						/>
+					) : (
+						<Image
+							src="/assets/white-tower.png"
+							width={309}
+							height={721}
+							alt="Image"
+							style={{ width: "25rem", height: "25rem", objectFit: "cover", backgroundColor: "black" }}
+						/>
+					)}
+				</div>
 				<div>
 					<section className="category">
 						<em>

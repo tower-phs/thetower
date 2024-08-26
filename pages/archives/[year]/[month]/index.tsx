@@ -20,14 +20,14 @@ export async function getServerSideProps({ params }: Params) {
 		props: {
 			articles,
 			year: params.year,
-			month: params.month
+			month: params.month,
 		},
 	};
 }
 
 interface Props {
 	articles: { [name: string]: article[] };
-	year: string,
+	year: string;
 	month: string;
 }
 
@@ -64,9 +64,9 @@ export default function Index({ articles, year, month }: Props) {
 				<meta property="og:title" content="Home | The Tower" />
 				<meta property="og:description" content="The Tower is Princeton High School's newspaper club." />
 			</Head>
-			<h1 style={{textAlign: "center"}}>{`${month}/${year} Archives`}</h1>
+			<h1 style={{ textAlign: "center" }}>{`${month}/${year} Archives`}</h1>
 			<Link href={`https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/${month}-${year}-full.pdf`}>
-				<p style={{textAlign: "center", textDecoration: "underline"}}>View issue PDF</p>
+				<p style={{ textAlign: "center", textDecoration: "underline" }}>View issue PDF</p>
 			</Link>
 			<div className="mosaic">
 				<div className="one triple">

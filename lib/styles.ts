@@ -16,7 +16,7 @@ const styles = {
 		// accent: "#c1d2d9",
 		lightAccent: "#c1d2d9",
 		accent: "#061b40",
-		darkAccent: "#031025"
+		darkAccent: "#031025",
 	},
 	lineHeight: 2,
 };

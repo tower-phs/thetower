@@ -1,15 +1,17 @@
-import Link from "next/link"
-import styles from "~/lib/styles"
+/** @format */
+
+import Link from "next/link";
+import styles from "~/lib/styles";
 
 interface Props {
-    title: String
+	title: String;
 }
 
-export default function SubBanner({title}: Props) {
-    return (
-        <div>
-            <style jsx>{`
-                .sub-banner {
+export default function SubBanner({ title }: Props) {
+	return (
+		<div>
+			<style jsx>{`
+				.sub-banner {
 					text-align: center;
 					align-items: center;
 				}
@@ -40,29 +42,28 @@ export default function SubBanner({title}: Props) {
 					background-color: ${styles.color.darkAccent};
 				}
 
-                hr {
-                    width: 90vw;
+				hr {
+					width: 90vw;
 					align-self: center;
 					background-color: #ccc;
 					border: none;
 					margin-top: 3vh;
 					margin-bottom: 1vh;
 					height: 3px;
-                }
-
-            `}</style>
-            <div className="sub-banner">
-                <hr />
-                <h2>{title}</h2>
-                <p>
-                    For $30.00 a year, subscribers to The Tower will receive all eight issues shipped to their home or business over the course of the
-                    year.
-                </p>
-                <br />
-                <Link href="/subscribe">
-                    <p className="sub-link">Learn more</p>
-                </Link>
-            </div>
-        </div>   
-    )
+				}
+			`}</style>
+			<div className="sub-banner">
+				<hr />
+				<h2>{title}</h2>
+				<p>
+					For $30.00 a year, subscribers to The Tower will receive all eight issues shipped to their home or business over the course of the
+					year.
+				</p>
+				<br />
+				<Link href="/subscribe">
+					<p className="sub-link">Learn more</p>
+				</Link>
+			</div>
+		</div>
+	);
 }

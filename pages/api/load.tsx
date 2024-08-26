@@ -14,5 +14,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			? await getArticlesByCategory(category, 10, cursor, 1)
 			: await getArticlesByCategory(category, 10, await getIdOfNewest(category, null), 0);
 	return res.status(200).json(articles);
-
 }

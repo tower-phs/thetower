@@ -24,12 +24,12 @@ export async function getServerSideProps() {
 	};
 }
 
-export default function Category(props : Props) {
-	const [videos, setVideos] = useState(props.videos)
-	const [vCursor, setVCursor] = useState(videos[videos.length - 1].id)
+export default function Category(props: Props) {
+	const [videos, setVideos] = useState(props.videos);
+	const [vCursor, setVCursor] = useState(videos[videos.length - 1].id);
 
-	const [pods, setPods] = useState(props.pods)
-	const [pCursor, setPCursor] = useState(pods[pods.length - 1].id)
+	const [pods, setPods] = useState(props.pods);
+	const [pCursor, setPCursor] = useState(pods[pods.length - 1].id);
 
 	async function newVideos() {
 		let loading = document.getElementById("loading-videos");
@@ -53,7 +53,8 @@ export default function Category(props : Props) {
 		}
 	}
 
-	async function newPods() { // TODO: get rid of this repetitive code, make load more button into a component
+	async function newPods() {
+		// TODO: get rid of this repetitive code, make load more button into a component
 		let loading = document.getElementById("loading-pods");
 		if (loading == null) return; // to make the compiler happy
 		loading.setAttribute("style", "display: block");
@@ -74,7 +75,6 @@ export default function Category(props : Props) {
 			loading.innerText = "No more podcasts to load.";
 		}
 	}
-
 
 	return (
 		<div className="multimedia">
@@ -130,7 +130,7 @@ export default function Category(props : Props) {
 
 				#loadmore {
 					border-radius: 2rem;
-					font-family: ${styles.font.previewHeader};
+					font-family: ${styles.font.sans};
 					font-size: calc(0.25rem + 1vw);
 					color: black;
 					background-color: white;
@@ -155,15 +155,15 @@ export default function Category(props : Props) {
 			<div className="grid">
 				<NoSSR>
 					<section className="videos">
-						{
-							videos.map(v => (
-								<div key={v.id} className="video-wrapper">
-									<Video key={v.id} link={v.src_id} title={v.title} />
-									<br />
-								</div>
-							))
-						}
-						<h3 id="loading-videos" style={{display: "none"}}>Loading videos, please wait...</h3>
+						{videos.map(v => (
+							<div key={v.id} className="video-wrapper">
+								<Video key={v.id} link={v.src_id} title={v.title} />
+								<br />
+							</div>
+						))}
+						<h3 id="loading-videos" style={{ display: "none" }}>
+							Loading videos, please wait...
+						</h3>
 						<button id="loadmore" onClick={newVideos}>
 							Load more
 						</button>
@@ -185,7 +185,7 @@ export default function Category(props : Props) {
 							<Video link="Z4bZBXoVseo" title="Artist of the Month: Kevin Huang Profile" />
 						</div>*/}
 					</section>
-					
+
 					{/*<section className="papercasts">
 						<h2>Papercasts</h2>
 					</section>*/}
@@ -200,12 +200,12 @@ export default function Category(props : Props) {
 					</section>
 					<section className="rightbar">
 						<h2>Tower Shorts</h2>
-						{
-							pods.map(p => (
-								<Podcast key={p.id} link={p.src_id} />
-							))
-						}
-						<h3 id="loading-pods" style={{display: "none"}}>Loading podcasts, please wait...</h3>
+						{pods.map(p => (
+							<Podcast key={p.id} link={p.src_id} />
+						))}
+						<h3 id="loading-pods" style={{ display: "none" }}>
+							Loading podcasts, please wait...
+						</h3>
 						<button id="loadmore" onClick={newPods}>
 							Load more
 						</button>

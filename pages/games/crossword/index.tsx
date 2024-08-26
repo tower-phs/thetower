@@ -137,7 +137,9 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 			`}</style>
 			<div className="title-container">
 				<h1>The Crossword</h1>
-				<p style={{fontFamily: styles.font.sans}}>By {puzzleInput.author} on {date.toLocaleDateString()}</p>
+				<p style={{ fontFamily: styles.font.sans }}>
+					By {puzzleInput.author} on {date.toLocaleDateString()}
+				</p>
 			</div>
 			<MenuBar
 				seconds={state.seconds}
@@ -215,7 +217,7 @@ export default function CrosswordGame({ puzzleInput }: Props) {
 					</div>
 				</div>
 			)}
-		<SubBanner title="Enjoyed the crossword? Consider subscribing."/>
+			<SubBanner title="Enjoyed the crossword? Consider subscribing." />
 		</CrosswordDispatchContext.Provider>
 	);
 }
@@ -329,7 +331,9 @@ function MenuBar({ seconds, paused, autocheck, onTogglePaused, onReset, onToggle
 				<button className="button" onClick={onTogglePaused}>
 					{paused ? "Play" : "Pause"}
 				</button>
-				<div className="timer" style={{fontSize: "1.6rem"}}>{formatSeconds(seconds)}</div>
+				<div className="timer" style={{ fontSize: "1.6rem" }}>
+					{formatSeconds(seconds)}
+				</div>
 			</div>
 			<div className="buttons">
 				<button className="button" onClick={() => onToggleAutocheck && onToggleAutocheck()}>

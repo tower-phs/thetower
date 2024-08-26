@@ -7,9 +7,9 @@ const categories: { [key: string]: string } = {
 	"phs-profiles": "news-features",
 	"student-athletes": "sports",
 	"cheers-jeers": "opinions",
-	"editorials": "opinions",
-	"youtube": "multimedia",
-	"podcast": "multimedia"
+	editorials: "opinions",
+	youtube: "multimedia",
+	podcast: "multimedia",
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	const subcat = req.body.subcategory;
 	const category = categories[subcat];
 	const cursor = req.body.cursor;
-	
+
 	if (category != "multimedia") {
 		const articles =
 			cursor != null
@@ -26,11 +26,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				: await getArticlesBySubcategory(subcat, 10, await getIdOfNewest(category, subcat), 0);
 		return res.status(200).json(articles);
 	} else {
-		const items = 
-		cursor != null
-			? await getMultiItems(subcat, 5, cursor, 1)
-			: await getMultiItems(subcat, 5, await getIdOfNewest(category, subcat), 0)
+		const items =
+			cursor != null ? await getMultiItems(subcat, 5, cursor, 1) : await getMultiItems(subcat, 5, await getIdOfNewest(category, subcat), 0);
 
-		return res.status(200).json(items)
+		return res.status(200).json(items);
 	}
 }
