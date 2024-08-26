@@ -48,14 +48,14 @@ export async function getServerSideProps({ params }: Params) {
 	// 	},
 	// };
 
-	let processedArticle: article = null;
+	let processedArticle: article | null = null;
 	if (isNaN(Number(article_id))) {
 		processedArticle = await getArticle(params.year, params.month, params.cat, "null", params.slug);
 	} else {
 		processedArticle = await getArticle(params.year, params.month, params.cat, article_id, params.slug);
 	}
 
-	if (processedArticle.markdown) {
+	if (processedArticle?.markdown) {
 		let markedContent = await remark().use(html).process(processedArticle.content);
 		processedArticle.content = markedContent.toString();
 
@@ -72,12 +72,20 @@ export default function Article({ article }: Props) {
 	// const markedHTML = markedContent.toString()
 	// const paragraphs = article.content.split("\n");
 
+	if (article == null) return (
+		<meta
+			http-equiv="refresh"
+			content="0; URL=https://towerphs.com/404"
+		/>
+	)
+
 	return (
 		<div className="article">
 			<Head>
 				<title>{article.title} | The Tower</title>
 				<meta property="og:title" content={article.title + " | The Tower"} />
 				<meta property="og:description" content="Read more about this article!" />
+				
 			</Head>
 			<style jsx>{`
 				.article {

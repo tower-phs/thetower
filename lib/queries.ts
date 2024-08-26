@@ -54,7 +54,7 @@ export async function getPublishedArticles() {
 	return articles;
 }
 
-export async function getArticle(year: string, month: string, cat: string, id: string, slug: string): article {
+export async function getArticle(year: string, month: string, cat: string, id: string, slug: string): article | null {
 	// new scheme
 	if (id !== "null") {
 		const article = await prisma.article.findFirst({
