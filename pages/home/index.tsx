@@ -10,6 +10,7 @@ import Podcast from "~/components/podcast.client";
 import { getFrontpageArticles } from "~/lib/queries";
 import styles from "~/lib/styles";
 import SubBanner from "~/components/subbanner.client";
+import { URL } from "node:url";
 
 export async function getServerSideProps() {
 	const articles = await getFrontpageArticles();
@@ -120,7 +121,7 @@ export default function FrontPage({ articles }: Props) {
 					</div>
 				</div>
 				<div className="one">
-					<ArticlePreview article={articles["news-features"][3]} style="box" size="featured" />
+					<ArticlePreview article={articles["featured"][0]} style="box" size="featured" />
 
 					<ArticlePreview article={articles["opinions"][0]} style="box" size="large" />
 					<ArticlePreview article={articles["opinions"][1]} style="box" size="large" />
@@ -131,29 +132,56 @@ export default function FrontPage({ articles }: Props) {
 					<ArticlePreview article={articles["sports"][2]} style="box" size="large" />
 				</div>
 			</div>
+			{/* <div className="dark-banner">
+				<div id="dark-banner-content">
+					<hr />
+					<div style={{display: "flex", marginLeft: "5vw", marginRight: "5vw", gap: "1rem"}}>
+						<Image src="/assets/white-tower.png" width={309} height={721} alt="Tower logo" style={{ width: "15rem", height: "auto" }} />
+						<div>
+							<h2 style={{ marginTop: "2.5rem", marginBottom: "2.5rem", textAlign: "left"}}>
+								The Tower is Princeton High School&apos;s student-run newspaper.
+							</h2>
+							<p style={{textAlign: "left", fontSize: "2.5rem"}}>
+								Since 1928, the Tower has been reporting on the inner workings of PHS, the district, and the cultural and athletic events that
+								affect the student body.
+								<br />
+
+							</p>
+						</div>
+						
+					</div>
+					<hr />
+				</div>
+			</div> */}
+			<br />
+			<hr />
+			<br />
+			<NewsFeatures {...articles["news-features"]} />
+			<hr />
+			<br />
+			<Opinions {...articles["opinions"]} />
 			<div className="dark-banner">
 				<div id="dark-banner-content">
 					<hr />
-					{/* <h1 style={{ marginTop: "2.5rem", fontSize: "1.5rem"}}>The Tower is Princeton High School&apos;s student-run newspaper.</h1>
-					<Image src="/assets/white-tower.png" width={309} height={721} alt="Tower logo" style={{ width: "7.5rem", height: "auto" }} />
-					<h1 style={{ marginBottom: "2.5rem", fontSize: "1.5rem" }}>
-						Since 1928, the Tower has been reporting on the inner workings of PHS, the district, and the cultural and athletic events that
-						affect the student body.
-					</h1>
-					<hr /> */}
 					<h1 style={{ marginTop: "2.5rem" }}> Thank you to our sponsors for supporting the Tower!</h1>
 					<Image
 						src="/assets/milk-cookies.png"
 						width={2500}
 						height={2500}
 						alt="Milk & Cookies"
-						style={{ width: "15rem", height: "auto", marginBottom: "1rem" }}
+						style={{ width: "25rem", height: "auto", marginBottom: "1rem" }}
 					/>
 					<hr />
 				</div>
 			</div>
+			<br />
+			<hr />
+			<br />
+			<ArtsEntertainment {...articles["arts-entertainment"]} />
+			<hr />
+			<br />
+			<Sports {...articles["sports"]} />
 			<SubBanner title="Consider subscribing to The Tower." />
-			{/* <Opinions {...articles["opinions"]} /> */}
 		</div>
 	);
 }
@@ -162,24 +190,35 @@ export function NewsFeatures(articles: article[]) {
 	return (
 		<div className="newfe">
 			<style jsx>{`
-				.newfe {
-					padding-right: 10px;
-					border-right: 1px solid gainsboro;
+				.newfe-row-container {
+					display: flex;
+					gap: 1.5rem;
+					// margin: 0 auto;
+					list-style: none;
+					overflow-x: scroll;
+					scroll-snap-type: x mandatory;
+					// border: 1px solid black;
 				}
-				.double {
-					display: grid;
-					grid-gap: 10px;
-					grid-template-columns: 1fr 1fr;
+
+				.item {
+					flex-shrink: 0;
+					width: 25rem;
+					height: 100%;
+					background-color: #FFF;
+					scroll-snap-align: center;
 				}
+		
 			`}</style>
-			<ArticlePreview article={articles[0]} style="box" size="large" category />
-			<div className="double">
-				{Object.values(articles)
-					.slice(1)
-					.map(article => (
-						<ArticlePreview key={article.id} article={article} style="box" size="small" category />
-					))}
-			</div>
+			<h3>NEWS & FEATURES</h3>
+			<p>The latest stories on PHS and the district.</p>
+			<ul className="newfe-row-container">
+					{Object.values(articles)
+						.map(article => (
+							<li key={article.id} className="item">
+								<ArticlePreview key={article.id} style="box" size="large" article={article} />
+							</li>
+						))}
+			</ul>
 		</div>
 	);
 }
@@ -187,38 +226,71 @@ export function NewsFeatures(articles: article[]) {
 export function Opinions(articles: article[]) {
 	return (
 		<div className="opinions">
-			<style jsx>{``}</style>
-			<div>
-				<ArticlePreview article={articles[0]} style="box" size="category-list" category />
-				<div>
+			<style jsx>{`
+				.opinions-row-container {
+					display: flex;
+					gap: 1.5rem;
+					// margin: 0 auto;
+					list-style: none;
+					overflow-x: scroll;
+					scroll-snap-type: x mandatory;
+					// border: 1px solid black;
+				}
+
+				.item {
+					flex-shrink: 0;
+					width: 25rem;
+					height: 100%;
+					background-color: #FFF;
+					scroll-snap-align: center;
+				}
+			`}</style>
+			<h3>OPINIONS</h3>
+			<p>Read the opinions of the student body, with topics ranging from school policies to global issues.</p>
+			<ul className="opinions-row-container">
 					{Object.values(articles)
-						.slice(1)
 						.map(article => (
-							<ArticlePreview key={article.id} style="box" size="category-list" category article={article} />
+							<li key={article.id} className="item">
+								<ArticlePreview key={article.id} style="box" size="large" article={article} />
+							</li>
 						))}
-				</div>
-			</div>
+			</ul>
 		</div>
 	);
 }
 
 export function ArtsEntertainment(articles: article[]) {
 	return (
-		<div className="ane">
+		<div className="arts-entertainment">
 			<style jsx>{`
-				.ane {
-					padding-left: 10px;
-					border-left: 1px solid gainsboro;
+				.ae-row-container {
+					display: flex;
+					gap: 1.5rem;
+					// margin: 0 auto;
+					list-style: none;
+					overflow-x: scroll;
+					scroll-snap-type: x mandatory;
+					// border: 1px solid black;
+				}
+
+				.item {
+					flex-shrink: 0;
+					width: 25rem;
+					height: 100%;
+					background-color: #FFF;
+					scroll-snap-align: center;
 				}
 			`}</style>
-			<ArticlePreview article={articles[0]} style="box" size="medium" category />
-			<div>
-				{Object.values(articles)
-					.slice(1)
-					.map(article => (
-						<ArticlePreview key={article.id} style="row" size="medium" article={article} category />
-					))}
-			</div>
+			<h3>ARTS & ENTERTAINMENT</h3>
+			<p>Music, theatre, and more.</p>
+			<ul className="ae-row-container">
+					{Object.values(articles)
+						.map(article => (
+							<li key={article.id} className="item">
+								<ArticlePreview key={article.id} style="box" size="large" article={article} />
+							</li>
+						))}
+			</ul>
 		</div>
 	);
 }
@@ -227,24 +299,34 @@ export function Sports(articles: article[]) {
 	return (
 		<div className="sports">
 			<style jsx>{`
-				.sports {
-					padding-right: 10px;
-					border-right: 1px solid gainsboro;
+				.sports-row-container {
+					display: flex;
+					gap: 1.5rem;
+					// margin: 0 auto;
+					list-style: none;
+					overflow-x: scroll;
+					scroll-snap-type: x mandatory;
+					// border: 1px solid black;
 				}
-				.double {
-					display: grid;
-					grid-gap: 10px;
-					grid-template-columns: 1fr 1fr;
+
+				.item {
+					flex-shrink: 0;
+					width: 25rem;
+					height: 100%;
+					background-color: #FFF;
+					scroll-snap-align: center;
 				}
 			`}</style>
-			<ArticlePreview article={articles[0]} style="box" size="medium" category />
-			<div>
-				{Object.values(articles)
-					.slice(1)
-					.map(article => (
-						<ArticlePreview key={article.id} style="row" size="medium" article={article} category />
-					))}
-			</div>
+			<h3>SPORTS</h3>
+			<p>Updates on PHS sports, tales of sports history, and more.</p>
+			<ul className="sports-row-container">
+					{Object.values(articles)
+						.map(article => (
+							<li key={article.id} className="item">
+								<ArticlePreview key={article.id} style="box" size="large" article={article} />
+							</li>
+						))}
+			</ul>
 		</div>
 	);
 }

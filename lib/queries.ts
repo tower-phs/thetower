@@ -71,7 +71,6 @@ export async function getArticle(year: string, month: string, cat: string, id: s
 			},
 		});
 
-	console.log("before the promise:", art)
 	if (art) return Promise.resolve(art);
 	else return Promise.reject("No article found");
 }

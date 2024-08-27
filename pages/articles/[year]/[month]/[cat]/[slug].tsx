@@ -63,7 +63,6 @@ export async function getServerSideProps({ params }: Params) {
 		return { props: { article: processedArticle } };
 	}
 
-	console.log("article from props:", processedArticle)
 	return { props: { article: processedArticle } };
 }
 
@@ -187,7 +186,7 @@ export default function Article({ article }: Props) {
 				</div>
 				<br></br>
 				<br></br>
-				{article.img && <img src={article.img} width="100%" height="auto"></img>}
+				{article.img && <Image src={article.img} width={1000} height={1000} alt={article.img} style={{width: "100%", height: "auto"}} />}
 
 				{article.markdown ? (
 					<div className="main-article" dangerouslySetInnerHTML={{ __html: article.content }} />

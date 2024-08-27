@@ -159,8 +159,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				}
 
 				.title .category-list {
-					/* font-family: ${styles.font.serifHeader}, ${styles.font.stack};
-					font-size: 3.5rem; */
+					font-size: 2.5rem;
 				}
 
 				.category {
@@ -198,7 +197,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 
 				.article-preview > .category-list-preview {
 					display: grid;
-					grid-template-columns: 0.45fr 1fr;
+					grid-template-columns: 2fr 5fr;
 				}
 
 				@media (max-width: 1000px) {
@@ -247,13 +246,11 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				</div>
 				<div>
 					<section className="category">
-						<em>
 							{category && (
 								<Link href={"/category/" + article.category}>
-									<span style={{ margin: "0px", fontFamily: "Open Sans" }}>{expandCategorySlug(article.category)}</span>
+									<span style={{ margin: "0px", fontFamily: styles.font.sans }}>{expandCategorySlug(article.category)}</span>
 								</Link>
 							)}
-						</em>
 					</section>
 					<section className="title">
 						<Link

@@ -121,12 +121,12 @@ export default function Subcategory(props: Props) {
 
 				#loadmore {
 					border-radius: 2rem;
-					/* font-family: ${styles.font.sans};
-					font-size: calc(0.25rem + 1vw); */
+					font-family: ${styles.font.sans};
+					font-size: 1.6rem;
 					color: black;
 					background-color: white;
 					border-style: solid;
-					border-color: black;
+					border-color: ${styles.color.darkAccent};
 					padding: 0.5rem;
 					padding-left: 0.75rem;
 					padding-right: 0.75rem;
@@ -135,7 +135,7 @@ export default function Subcategory(props: Props) {
 
 				#loadmore:hover {
 					color: white;
-					background-color: black;
+					background-color: ${styles.color.darkAccent};
 				}
 
 				#loading {
@@ -150,7 +150,7 @@ export default function Subcategory(props: Props) {
 							<ArticlePreview key={article.id} article={article} style="row" size="category-list" />
 						))}
 					</section>
-					<h3 id="loading">Loading articles, please wait...</h3>
+					<p id="loading">Loading articles, please wait...</p>
 					<button id="loadmore" onClick={newArticles}>
 						Load more
 					</button>

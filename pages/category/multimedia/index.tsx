@@ -89,12 +89,9 @@ export default function Category(props: Props) {
 					border-bottom: 3px double black;
 					margin-bottom: 1vh;
 					font-weight: bold;
-					font-size: calc(1.5rem + 1vw);
+					// font-size: calc(1.5rem + 1vw);
 				}
 
-				h2 {
-					/* font-family: ${styles.font.serifHeader}; */
-				}
 
 				.grid {
 					display: grid;
@@ -128,23 +125,23 @@ export default function Category(props: Props) {
 					background-color: #f6f6f6;
 				}
 
-				#loadmore {
+				.loadmore {
 					border-radius: 2rem;
 					font-family: ${styles.font.sans};
-					font-size: calc(0.25rem + 1vw);
+					font-size: 1.6rem;
 					color: black;
 					background-color: white;
 					border-style: solid;
-					border-color: black;
+					border-color: ${styles.color.darkAccent};
 					padding: 0.5rem;
 					padding-left: 0.75rem;
 					padding-right: 0.75rem;
 					transition: 0.25s;
 				}
 
-				#loadmore:hover {
+				.loadmore:hover {
 					color: white;
-					background-color: black;
+					background-color: ${styles.color.darkAccent};
 				}
 
 				#loading {
@@ -161,10 +158,10 @@ export default function Category(props: Props) {
 								<br />
 							</div>
 						))}
-						<h3 id="loading-videos" style={{ display: "none" }}>
+						<p id="loading-videos" style={{ display: "none" }}>
 							Loading videos, please wait...
-						</h3>
-						<button id="loadmore" onClick={newVideos}>
+						</p>
+						<button className="loadmore" onClick={newVideos}>
 							Load more
 						</button>
 						{/* <Video link="X6yiU_yupyw" title="Diving into Testing Season at PHS" />
@@ -203,10 +200,10 @@ export default function Category(props: Props) {
 						{pods.map(p => (
 							<Podcast key={p.id} link={p.src_id} />
 						))}
-						<h3 id="loading-pods" style={{ display: "none" }}>
+						<p id="loading-pods" style={{ display: "none" }}>
 							Loading podcasts, please wait...
-						</h3>
-						<button id="loadmore" onClick={newPods}>
+						</p>
+						<button className="loadmore" onClick={newPods}>
 							Load more
 						</button>
 						{/* <Podcast link="towershorts/1484378/" />
