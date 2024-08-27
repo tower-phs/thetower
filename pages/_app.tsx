@@ -226,16 +226,16 @@ function Footer() {
 					<FaFacebookSquare size="2.2em" />
 				</a>
 				<a href="https://www.youtube.com/channel/UCoopcAJbsz-qlTS2xkVWplQ" target="_blank" rel="noopener noreferrer">
-					<FaYoutubeSquare size="2.2rem" />
+					<FaYoutubeSquare size="3.5rem" />
 				</a>
 				<a href="https://open.spotify.com/show/2c0TlU1f01LKoVPaMMDxB8?si=f1fa622c0339438e" target="_blank" rel="noopener noreferrer">
-					<FaSpotify size="2.2rem" />
+					<FaSpotify size="3.5rem" />
 				</a>
 				<a href="https://podcasts.apple.com/us/podcast/phs-talks/id1674696258" target="_blank" rel="noopener noreferrer">
-					<SiApplepodcasts size="2.2rem" />
+					<SiApplepodcasts size="3.5rem" />
 				</a>
-				<Link href="/home" legacyBehavior>
-					<a className="home-btn">Go to home page »</a>
+				<Link href="https://docs.google.com/forms/d/e/1FAIpQLSeine_aZUId0y2OjY2FZyJ93ZliGQZos-6c3VwkPg2IhXsGfg/viewform?usp=sf_link" legacyBehavior>
+					<a className="home-btn">Report problem »</a>
 				</Link>
 			</div>
 			<div className="bottom">

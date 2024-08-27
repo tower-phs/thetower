@@ -72,6 +72,7 @@ export default function Article({ article }: Props) {
 	// })
 	// const markedHTML = markedContent.toString()
 	// const paragraphs = article.content.split("\n");
+	article.content.split("\n").forEach((p) => console.log(`'${p}'` ))
 
 	if (article == null) return <meta http-equiv="refresh" content="0; URL=https://towerphs.com/404" />;
 
@@ -88,6 +89,7 @@ export default function Article({ article }: Props) {
 					flex-direction: column;
 					align-items: center;
 				}
+
 				.article .main-img {
 					width: 55vw;
 					height: 70vh;
@@ -164,6 +166,7 @@ export default function Article({ article }: Props) {
 
 				:global(.main-article a) {
 					text-decoration: underline;
+					font-size: 2rem;
 				}
 			`}</style>
 
@@ -198,7 +201,9 @@ export default function Article({ article }: Props) {
 								paragraph.startsWith("@img=") ? (
 									<img src={paragraph.substring(5)} width="100%" height="auto" key={index}></img>
 								) : (
+									(paragraph.charCodeAt(0) != 13) ?
 									<p key={index}>{paragraph.replace("&lt;", "<").replace("&gt;", ">")}</p>
+									: ""
 								)
 							)}
 					</div>

@@ -128,83 +128,93 @@ export default function Upload() {
 				<meta property="og:description" content="Section editors upload content here." />
 			</Head>
 			<div id={styles.formWrapper}>
-				<h1>PHS Tower Submission Platform</h1>
+				<h2>PHS Tower Submission Platform</h2>
 				<p>Upload articles for the next issue here. For editor use only.</p>
+				<br />
 				<form onSubmit={submitArticle}>
-					<h2>Section</h2>
-					<select id="cat" value={formData && formData.category ? formData.category : ""} onChange={changeCategory}>
-						<option value="">Select category</option>
-						<option value="news-features">News & Features</option>
-						<option value="opinions">Opinions</option>
-						<option value="vanguard">Vanguard</option>
-						<option value="arts-entertainment">Arts & Entertainment</option>
-						<option value="sports">Sports</option>
-						<option value="multimedia">Multimedia</option>
-					</select>
-					<div id="subcats">
-						<select style={{ display: category == "" ? "inline" : "none" }} disabled={true} onChange={changeSubcategory}>
-							<option>Select subcategory</option>
+					<h3>Section</h3>
+					<div id={styles.selectHolder}>
+						<select id="cat" value={formData && formData.category ? formData.category : ""} onChange={changeCategory}>
+							<option value="">Select category</option>
+							<option value="news-features">News & Features</option>
+							<option value="opinions">Opinions</option>
+							<option value="vanguard">Vanguard</option>
+							<option value="arts-entertainment">Arts & Entertainment</option>
+							<option value="sports">Sports</option>
+							<option value="multimedia">Multimedia</option>
 						</select>
-						<select
-							id="newfe-subcat"
-							style={{ display: category == "news-features" ? "inline" : "none" }}
-							value={formData && formData.subcategory ? formData.subcategory : ""}
-							onChange={changeSubcategory}
-						>
-							<option value="">None</option>
-							<option value="phs-profiles">PHS Profiles</option>
-						</select>
-						<select
-							id="ops-subcat"
-							style={{ display: category == "opinions" ? "inline" : "none" }}
-							value={formData && formData.subcategory ? formData.subcategory : ""}
-							onChange={changeSubcategory}
-						>
-							<option value="">None</option>
-							<option value="editorial">Editorials</option>
-							<option value="cheers-jeers">Cheers & Jeers</option>
-						</select>
-						<select
-							id="ae-subcat"
-							style={{ display: category == "arts-entertainment" ? "inline" : "none" }}
-							value={formData && formData.subcategory ? formData.subcategory : ""}
-							onChange={changeSubcategory}
-						>
-							<option value="">None</option>
-							<option value="student-artists">Student Artists</option>
-						</select>
-						<select
-							id="sports-subcat"
-							style={{ display: category == "sports" ? "inline" : "none" }}
-							value={formData && formData.subcategory ? formData.subcategory : ""}
-							onChange={changeSubcategory}
-						>
-							<option value="">None</option>
-							<option value="student-atheletes">Student Athletes</option>
-						</select>
-						<select
-							id="multi-subcat"
-							style={{ display: category == "multimedia" ? "inline" : "none" }}
-							value={formData && formData.subcategory ? formData.subcategory : ""}
-							onChange={changeSubcategory}
-						>
-							<option value="">Select subcategory</option>
-							<option value="youtube">YouTube Video</option>
-							<option value="podcast">Podcast</option>
-						</select>
+						<div id="subcats">
+							<select style={{ display: category == "" ? "inline" : "none" }} disabled={true} onChange={changeSubcategory}>
+								<option>Select subcategory</option>
+							</select>
+							<select
+								id="newfe-subcat"
+								style={{ display: category == "news-features" ? "inline" : "none" }}
+								value={formData && formData.subcategory ? formData.subcategory : ""}
+								onChange={changeSubcategory}
+							>
+								<option value="">None</option>
+								<option value="phs-profiles">PHS Profiles</option>
+							</select>
+							<select
+								id="ops-subcat"
+								style={{ display: category == "opinions" ? "inline" : "none" }}
+								value={formData && formData.subcategory ? formData.subcategory : ""}
+								onChange={changeSubcategory}
+							>
+								<option value="">None</option>
+								<option value="editorial">Editorials</option>
+								<option value="cheers-jeers">Cheers & Jeers</option>
+							</select>
+							<select
+								id="ae-subcat"
+								style={{ display: category == "arts-entertainment" ? "inline" : "none" }}
+								value={formData && formData.subcategory ? formData.subcategory : ""}
+								onChange={changeSubcategory}
+							>
+								<option value="">None</option>
+								<option value="student-artists">Student Artists</option>
+							</select>
+							<select
+								id="sports-subcat"
+								style={{ display: category == "sports" ? "inline" : "none" }}
+								value={formData && formData.subcategory ? formData.subcategory : ""}
+								onChange={changeSubcategory}
+							>
+								<option value="">None</option>
+								<option value="student-atheletes">Student Athletes</option>
+							</select>
+							<select
+								id="multi-subcat"
+								style={{ display: category == "multimedia" ? "inline" : "none" }}
+								value={formData && formData.subcategory ? formData.subcategory : ""}
+								onChange={changeSubcategory}
+							>
+								<option value="">Select subcategory</option>
+								<option value="youtube">YouTube Video</option>
+								<option value="podcast">Podcast</option>
+							</select>
+						</div>
 					</div>
 					<br />
+					<hr />
 					<br />
 
 					<div id="std-sections" style={{ display: category == "vanguard" || category == "multimedia" ? "none" : "block" }}>
-						<h2>Article</h2>
-						<h3>Header image</h3>
+						<h3>Article</h3>
+
+						<strong>Header image</strong>
+						<br />
 						<input type="file" accept="image/*" id="img" onChange={updateImage} />
+
 						<br /> <br />
-						<h3>Title</h3>
+
+						<strong>Title</strong>
+						<br />
 						<input type="text" id="title" onChange={updateTitle} value={formData && formData.title ? formData.title : ""} />
 						<br /> <br />
-						<h3>Author</h3>
+
+						<strong>Author</strong>
 						<p>Separate each author with a comma, and do not include titles. Leave this blank for the editorial.</p>
 						<p>
 							Example: &quot;John Doe, NEWS AND FEATURES CO-EDITOR and Jane Doe, OPINIONS CO-EDITOR&quot; is entered as &quot;John Doe,
@@ -220,25 +230,30 @@ export default function Upload() {
 							>
 								here
 							</Link>{" "}
-							for more info). Format special notes as they appear on the physical paper (usually italics).
+							for more info). Format special notes as they appear on the physical paper.
 							<strong> Separate paragraphs with empty lines (hit enter twice).</strong>
 						</p>
 						<textarea id={styles.contentInput} onChange={updateContent}></textarea>
 					</div>
 					<div id="vanguard" style={{ display: category != "vanguard" ? "none" : "block" }}>
-						<h2>Vanguard</h2>
-						<h3>Title</h3>
+						<h3>Vanguard</h3>
+						
+						<strong>Title</strong>
+						<br />
 						<input type="text" id="title" onChange={updateTitle} value={formData && formData.title ? formData.title : ""} />
+						
 						<br /> <br />
-						<h3>Spread</h3>
+						
+						<strong>Spread</strong>
 						<p>Upload your pages as one PDF (as they appear on the physical issue).</p>
 						<input type="file" accept=".pdf" onChange={updateSpread} />
 					</div>
 					<div id="multimedia" style={{ display: category != "multimedia" ? "none" : "block" }}>
 						{formData && formData.subcategory == "youtube" ? (
 							<div id="yt">
-								<h2>YouTube Video</h2>
-								<h3>Title</h3>
+								<h3>YouTube Video</h3>
+								<strong>Title</strong>
+								<br />
 								<input type="text" id="title" onChange={updateTitle} value={formData && formData.title ? formData.title : ""} />
 								<br /> <br />
 								<p>
@@ -248,9 +263,9 @@ export default function Upload() {
 							</div>
 						) : (
 							<div id="podcast">
-								<h2>Podcast</h2>
+								<h3>Podcast</h3>
 								<p>
-									Submit only podcast name and ID from the RSS link (e.g. https://rss.com/podcasts/
+									Submit only podcast name and ID from the URL (e.g. https://rss.com/podcasts/
 									<strong style={{ textDecoration: "underline" }}>towershorts/1484378/</strong>)
 								</p>
 							</div>

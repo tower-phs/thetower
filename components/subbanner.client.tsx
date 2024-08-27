@@ -14,6 +14,7 @@ export default function SubBanner({ title }: Props) {
 				.sub-banner {
 					text-align: center;
 					align-items: center;
+					// line-height: 1.2;
 				}
 
 				.sub-banner h2 {
@@ -25,7 +26,8 @@ export default function SubBanner({ title }: Props) {
 				.sub-banner p {
 					margin-left: 20%;
 					margin-right: 20%;
-					/* font-size: 1.25rem; */
+					margin-top: 0;
+					margin-bottom: 0;
 				}
 
 				.sub-link {
@@ -35,6 +37,9 @@ export default function SubBanner({ title }: Props) {
 					background-color: white;
 					transition: 0.25s;
 					padding: 0.5rem;
+					font-family: ${styles.font.sans};
+					font-size: 1.6rem;
+					// text-align: center;
 				}
 
 				.sub-link:hover {
@@ -43,6 +48,7 @@ export default function SubBanner({ title }: Props) {
 				}
 
 				hr {
+					position-x: absolute;
 					width: 90vw;
 					align-self: center;
 					background-color: #ccc;
@@ -50,6 +56,9 @@ export default function SubBanner({ title }: Props) {
 					margin-top: 3vh;
 					margin-bottom: 1vh;
 					height: 3px;
+					right: 0;
+					margin-left: 5vw;
+					margin-right: 5vw;
 				}
 			`}</style>
 			<div className="sub-banner">
