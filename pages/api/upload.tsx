@@ -2,36 +2,7 @@
 
 import { NextApiRequest, NextApiResponse } from "next";
 import formidable from "formidable";
-import { createClient } from "@supabase/supabase-js";
-import { readFile } from "fs/promises";
-import { uploadArticle, uploadMulti, uploadSpread } from "~/lib/queries";
-
-// console.log(process.env, process.env.DATABASE_URL, process.env.DATABASE_KEY)
-if (process.env.SERVICE_ROLE == undefined) {
-	throw new Error("Set up your .env!");
-}
-const supabase = createClient("https://yusjougmsdnhcsksadaw.supabase.co/", process.env.SERVICE_ROLE);
-
-async function uploadFile(file: formidable.File, bucket: string) {
-	const fileContent = await readFile(file.filepath);
-	const { data, error } = await supabase.storage
-		.from(bucket)
-		.upload(`unverified/${file.originalFilename}`, fileContent, { contentType: file.mimetype || "file/unknown", upsert: false });
-	if (error) {
-		console.error("we have a problem:", error);
-
-		//@ts-ignore
-		// error.statusCode exists but for some reason ts says it doesn't
-		if (error.statusCode == "409") return { code: 409, message: "A file with that name already exists. Has your co-editor uploaded for you?" };
-
-		//@ts-ignore
-		// error.error & error.message exist but for some reason ts says they don't
-		return { code: 500, message: `Unexpected problem in the server! Message: "${error.error}: ${error.message}". Contact Online editor(s).` };
-	} else {
-		console.log("File uploaded to ", data.fullPath);
-		return { code: 200, message: supabase.storage.from(bucket).getPublicUrl(data.path).data.publicUrl };
-	}
-}
+import { uploadArticle, uploadMulti, uploadSpread, uploadFile } from "~/lib/queries";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method !== "POST") return res.status(400).json({ error: "Invalid method" });

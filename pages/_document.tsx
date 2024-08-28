@@ -14,11 +14,11 @@ export default class TowerDocument extends Document {
 				<Head>
 					<meta name="twitter:site" content="The Tower" />
 					<meta name="twitter:creator" content="The Tower" />
-					<meta name="twitter:title" content={`The Tower - Year ${new Date().getFullYear() - 1996}`} />
+					<meta name="twitter:title" content={`The Tower - Year ${new Date().getFullYear() - 1928}`} />
 					<meta name="twitter:description" content="The Tower is Princeton High School's newspaper club." />
 					<meta property="og:locale" content="en_US" />
 					<meta property="og:site_name" content="The Tower" />
-					<meta property="og:title" content={`The Tower - Year ${new Date().getFullYear() - 1996}`} />
+					<meta property="og:title" content={`The Tower - Year ${new Date().getFullYear() - 1928}`} />
 					<meta property="og:description" content="The Tower is Princeton High School's newspaper club." />
 					<meta property="og:image" content="/assets/default.png" />
 					<meta property="og:type" content="website" />

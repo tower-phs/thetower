@@ -1,32 +1,35 @@
 /** @format */
 
-import { article } from "@prisma/client";
+import { article, spreads } from "@prisma/client";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import ArticlePreview from "~/components/preview.client";
 import Video from "~/components/video.client";
 import Podcast from "~/components/podcast.client";
-import { getFrontpageArticles } from "~/lib/queries";
+import { getFrontpageArticles, getSpreadsByCategory } from "~/lib/queries";
 import styles from "~/lib/styles";
 import SubBanner from "~/components/subbanner.client";
 import { SectionContainer } from "~/components/sectioncontainer.client";
 
 export async function getServerSideProps() {
 	const articles = await getFrontpageArticles();
+	const vang = await getSpreadsByCategory("VANGUARD", 1)
 
 	return {
 		props: {
 			articles,
+			vang
 		},
 	};
 }
 
 interface Props {
 	articles: { [name: string]: article[] };
+	vang: spreads[];
 }
 
-export default function FrontPage({ articles }: Props) {
+export default function FrontPage({ articles, vang }: Props) {
 	return (
 		<div>
 			<style jsx>{`
@@ -94,6 +97,15 @@ export default function FrontPage({ articles }: Props) {
 					font-style: italic; */
 					text-align: center;
 					/* font-weight: bold; */
+				}
+
+				#vang-container h3 {
+					font-family: ${styles.font.sans};
+				}
+
+				#vang-container object {
+					width: 50vw;
+					height: 70vh;
 				}
 			`}</style>
 			<Head>
@@ -168,6 +180,14 @@ export default function FrontPage({ articles }: Props) {
 			<hr />
 			<br />
 			<SectionContainer category="SPORTS" desc="Updates on PHS games, tales of sports history, and more." articles={articles["sports"]} />
+			<hr />
+			<br />
+			<div id="vang-container">
+				<h3>VANGUARD</h3>
+				<object data={vang[0].src} type="application/pdf">
+					<a href={vang[0].src}>If the PDF is not displaying, please access it here.</a>
+				</object>
+			</div>
 			<div className="dark-banner">
 				<div id="dark-banner-content">
 					<hr />

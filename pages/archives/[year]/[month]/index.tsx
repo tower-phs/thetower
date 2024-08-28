@@ -5,6 +5,7 @@ import Head from "next/head";
 import ArticlePreview from "~/components/preview.client";
 import { getArticlesByDate } from "~/lib/queries";
 import Link from "next/link";
+import { displayDate } from "~/lib/utils";
 
 interface Params {
 	params: {
@@ -19,16 +20,16 @@ export async function getServerSideProps({ params }: Params) {
 	return {
 		props: {
 			articles,
-			year: params.year,
-			month: params.month,
+			year: parseInt(params.year),
+			month: parseInt(params.month),
 		},
 	};
 }
 
 interface Props {
 	articles: { [name: string]: article[] };
-	year: string;
-	month: string;
+	year: number;
+	month: number;
 }
 
 export default function Index({ articles, year, month }: Props) {
@@ -64,10 +65,11 @@ export default function Index({ articles, year, month }: Props) {
 				<meta property="og:title" content="Home | The Tower" />
 				<meta property="og:description" content="The Tower is Princeton High School's newspaper club." />
 			</Head>
-			<h1 style={{ textAlign: "center" }}>{`${month}/${year} Archives`}</h1>
-			<Link href={`https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/${month}-${year}-full.pdf`}>
-				<p style={{ textAlign: "center", textDecoration: "underline" }}>View issue PDF</p>
+			<h1 style={{ textAlign: "center" }}>{`${displayDate(year, month)} Archives`}</h1>
+			<Link href={`https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/${month}-${year}.pdf`}>
+				<p style={{ textAlign: "center", textDecoration: "underline" }}>Download digital copy</p>
 			</Link>
+			<br />
 			<div className="mosaic">
 				<div className="one triple">
 					<div>

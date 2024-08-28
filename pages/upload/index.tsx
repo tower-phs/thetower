@@ -225,7 +225,7 @@ export default function Upload() {
 						<p>
 							You can write the article in Markdown (see{" "}
 							<Link
-								href="http://localhost:3000/articles/1970/1/news-features/Writing-in-Markdown-568"
+								href="/articles/1970/1/news-features/Writing-in-Markdown-568"
 								style={{ textDecoration: "underline" }}
 							>
 								here

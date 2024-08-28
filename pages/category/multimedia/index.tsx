@@ -1,6 +1,5 @@
 /** @format */
 
-import { article, spreads } from "@prisma/client";
 import Head from "next/head";
 import Video from "~/components/video.client";
 import Podcast from "~/components/podcast.client";
@@ -27,15 +26,20 @@ export async function getServerSideProps() {
 export default function Category(props: Props) {
 	const [videos, setVideos] = useState(props.videos);
 	const [vCursor, setVCursor] = useState(videos[videos.length - 1].id);
+	const [loadingVDisplay, setLoadingVDisplay] = useState("none")
+	const [loadingVContent, setLoadingVContent] = useState("Loading videos, please wait...")
 
 	const [pods, setPods] = useState(props.pods);
 	const [pCursor, setPCursor] = useState(pods[pods.length - 1].id);
+	const [loadingPDisplay, setLoadingPDisplay] = useState("none")
+	const [loadingPContent, setLoadingPContent] = useState("Loading podcasts, please wait...")
+
 
 	async function newVideos() {
-		let loading = document.getElementById("loading-videos");
-		if (loading == null) return; // to make the compiler happy
-		loading.setAttribute("style", "display: block");
-		const response = await fetch("/api/loadsub", {
+		setLoadingVContent("Loading videos, please wait...")
+		setLoadingVDisplay("block")
+
+		const response = await fetch("/api/load/loadsub", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -47,18 +51,17 @@ export default function Category(props: Props) {
 		if (loaded.length != 0) {
 			setVideos([...videos, ...loaded]);
 			setVCursor(loaded[loaded.length - 1].id);
-			loading.setAttribute("style", "display: none");
+			setLoadingVDisplay("none")
 		} else {
-			loading.innerText = "No more videos to load.";
+			setLoadingVContent("No more videos to load.")
 		}
 	}
 
 	async function newPods() {
-		// TODO: get rid of this repetitive code, make load more button into a component
-		let loading = document.getElementById("loading-pods");
-		if (loading == null) return; // to make the compiler happy
-		loading.setAttribute("style", "display: block");
-		const response = await fetch("/api/loadsub", {
+		setLoadingPContent("Loading podcasts, please wait...")
+		setLoadingPDisplay("block")
+
+		const response = await fetch("/api/load/loadsub", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -70,9 +73,9 @@ export default function Category(props: Props) {
 		if (loaded.length != 0) {
 			setPods([...pods, ...loaded]);
 			setPCursor(loaded[loaded.length - 1].id);
-			loading.setAttribute("style", "display: none");
+			setLoadingPDisplay("none")
 		} else {
-			loading.innerText = "No more podcasts to load.";
+			setLoadingPContent("No more podcasts to load.")
 		}
 	}
 
@@ -158,8 +161,8 @@ export default function Category(props: Props) {
 								<br />
 							</div>
 						))}
-						<p id="loading-videos" style={{ display: "none" }}>
-							Loading videos, please wait...
+						<p id="loading-videos" style={{ display: loadingVDisplay }}>
+							{loadingVContent}
 						</p>
 						<button className="loadmore" onClick={newVideos}>
 							Load more
@@ -200,8 +203,8 @@ export default function Category(props: Props) {
 						{pods.map(p => (
 							<Podcast key={p.id} link={p.src_id} />
 						))}
-						<p id="loading-pods" style={{ display: "none" }}>
-							Loading podcasts, please wait...
+						<p id="loading-pods" style={{ display: loadingPDisplay }}>
+							{loadingPContent}
 						</p>
 						<button className="loadmore" onClick={newPods}>
 							Load more

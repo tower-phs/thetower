@@ -35,15 +35,17 @@ export async function getServerSideProps({ params }: Params) {
 export default function Category(props: Props) {
 	const [articles, setArticles] = useState(props.articles);
 	const [cursor, setCursor] = useState(null);
+	const [loadingDisplay, setLoadingDisplay] = useState("none")
+	const [loadingContent, setLoadingContent] = useState("Loading articles, please wait...")
 	const category = props.category;
 	const route = useRouter().asPath;
 	const sidebar = props.sidebar;
 
 	async function newArticles() {
-		let loading = document.getElementById("loading");
-		if (loading == null) return; // to make the compiler happy
-		loading.setAttribute("style", "display: block");
-		const response = await fetch("/api/load", {
+		setLoadingContent("Loading articles, please wait...")
+		setLoadingDisplay("block")
+
+		const response = await fetch("/api/load/load", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -55,23 +57,21 @@ export default function Category(props: Props) {
 		if (loaded.length != 0) {
 			setArticles([...articles, ...loaded]);
 			setCursor(loaded[loaded.length - 1].id);
-			loading.setAttribute("style", "display: none");
+			setLoadingDisplay("none")
 		} else {
-			loading.innerText = "No more articles to load.";
+			setLoadingContent("No more articles to load.")
 		}
 	}
 
 	useEffect(() => {
 		async function setData() {
 			console.log("route change");
-			let loading = document.getElementById("loading");
-			if (loading == null) return; // make typescript happy
-			loading.innerText = "Loading articles, please wait...";
-			loading.setAttribute("style", "display: block");
+			setLoadingContent("Loading articles, please wait...")
+			setLoadingDisplay("block")
 
 			setCursor(null);
 
-			const articleRes = await fetch("/api/load", {
+			const articleRes = await fetch("/api/load/load", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -84,7 +84,8 @@ export default function Category(props: Props) {
 				setArticles(recvd);
 				setCursor(recvd[recvd.length - 1].id);
 			});
-			loading.setAttribute("style", "display: none;");
+
+			setLoadingDisplay("none")
 		}
 
 		setData();
@@ -154,7 +155,7 @@ export default function Category(props: Props) {
 							<ArticlePreview key={article.id} article={article} style="row" size="category-list" />
 						))}
 					</section>
-					<p id="loading">Loading articles, please wait...</p>
+					<p id="loading" style={{display: loadingDisplay}}>{loadingContent}</p>
 					<button id="loadmore" onClick={newArticles}>
 						Load more
 					</button>

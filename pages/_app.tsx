@@ -2,7 +2,6 @@
 
 import type { AppProps, NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import dayjs from "dayjs";
 import { FaFacebookSquare } from "@react-icons/all-files/fa/FaFacebookSquare";
@@ -11,7 +10,6 @@ import { FaYoutubeSquare } from "@react-icons/all-files/fa/FaYoutubeSquare";
 import { FaSpotify } from "@react-icons/all-files/fa/FaSpotify";
 import { SiApplepodcasts } from "@react-icons/all-files/si/SiApplepodcasts";
 import Button from "~/components/button.client";
-
 import "~/styles/styles.scss";
 import styles from "~/lib/styles";
 
@@ -41,6 +39,11 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 
 function Banner() {
+	const currMonth = dayjs().month()
+	const currYear = dayjs().year()
+	const month = (currMonth == 1) ? 12 : (currMonth == 5) ? 4 : (6 <= currMonth && currMonth < 9) ? 6 : currMonth
+	const year = (currMonth == 1) ? currYear - 1 : currYear
+
 	return (
 		<div className="banner">
 			<style jsx>{`
@@ -117,7 +120,7 @@ function Banner() {
 					<span style={{ color: styles.color.accent, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem" }}>SUBSCRIBE</span>
 				</Link>
 				<br />
-				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/0424-full.pdf">
+				<Link href={`https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/${month}-${year}.pdf`}>
 					<span style={{ color: styles.color.accent, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem" }}>
 						PRINT EDITION
 					</span>
@@ -372,7 +375,9 @@ function NavBar() {
 					<Link href="/category/sports/student-athletes">Student Athletes</Link>
 				</Button>
 
-				<Button name="CROSSWORD" href="/games/crossword"></Button>
+				<Button name="CROSSWORD" href="/games/crossword">
+					<Link href="/games/crossword/archive">Past Crosswords</Link>
+				</Button>
 
 				<Button name="ABOUT" href="/about">
 					<Link href="/about/2024">2024 Staff</Link>

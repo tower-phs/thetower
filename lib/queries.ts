@@ -2,11 +2,20 @@
 
 import { article, PrismaClient, spreads, multimedia } from "@prisma/client";
 import { PuzzleInput } from "./crossword/types";
+import { createClient } from "@supabase/supabase-js";
+import { readFile } from "fs/promises";
+import formidable from "formidable";
+
+if (process.env.SERVICE_ROLE == undefined) {
+	throw new Error("Set up your .env!");
+}
 
 const prisma = new PrismaClient();
 
+const supabase = createClient("https://yusjougmsdnhcsksadaw.supabase.co/", process.env.SERVICE_ROLE);
+
 export async function getFrontpageArticles() {
-	let articles: Record<string, article[]> = { "news-features": [], opinions: [], "arts-entertainment": [], sports: [], featured: [] };
+	let articles: Record<string, article[]> = { "news-features": [], opinions: [], "arts-entertainment": [], sports: [], featured: []};
 	const categories = Object.keys(articles);
 
 	for (let i = 0; i < categories.length - 1; i++) {
@@ -40,6 +49,9 @@ export async function getFrontpageArticles() {
 
 	let a = await prisma.article.findFirst({ where: { featured: true } });
 	if (a != null) articles["featured"].push(a);
+
+	// a = await prisma.spreads.findFirst({orderBy: {year: "desc", month: "desc"}, where: {title: {startsWith: "VANGUARD"}}})
+	// if (a != null) articles.vanguard.push(a)
 
 	return articles;
 }
@@ -302,7 +314,9 @@ export async function getArticlesByAuthor(author: string) {
 	return articles;
 }
 
-export async function getSpreadsByCategory(category: string) {
+export async function getSpreadsByCategory(category: string, take?: number) {
+	if (!take) take = 1;
+
 	const spreads = await prisma.spreads.findMany({
 		orderBy: [
 			{
@@ -341,6 +355,37 @@ export async function getCurrentCrossword(): Promise<PuzzleInput> {
 	};
 }
 
+export async function getCrosswords(take: number, offsetCursor: number, skip: number) {
+	const crosswords = (await prisma.crossword.findMany({
+		orderBy: [{date: "desc"}],
+		cursor: {
+			id: offsetCursor
+		},
+		take,
+		skip,
+		select: {
+			author: true,
+			date: true,
+			id: true
+		}
+	}))
+
+	return crosswords.map(c => ({author: c.author, id: c.id, date: c.date.toLocaleDateString()}))
+}
+
+export async function getIdOfNewestCrossword() {
+	return (await prisma.crossword.findFirst({orderBy: {date: "desc"}, select: {id: true}}))?.id || 1
+}
+
+export async function getCrosswordById(id: number) {
+	const crossword = (await prisma.crossword.findFirst({where: {id}}))!
+	return {
+		author: crossword.author,
+		date: crossword.date.toLocaleDateString(),
+		clues: JSON.parse(crossword.clues)
+	}
+}
+
 export async function getMultiItems(format: string, take: number, offsetCursor: number, skip: number) {
 	const items = await prisma.multimedia.findMany({
 		orderBy: [{ year: "desc" }, { month: "desc" }, { id: "desc" }],
@@ -376,4 +421,25 @@ export async function uploadSpread(info: { title: string; src: string; month: nu
 
 export async function uploadMulti(info: { format: string; src_id: string; month: number; year: number; title: string }) {
 	await prisma.multimedia.create({ data: info });
+}
+
+export async function uploadFile(file: formidable.File, bucket: string) {
+	const fileContent = await readFile(file.filepath);
+	const { data, error } = await supabase.storage
+		.from(bucket)
+		.upload(`unverified/${file.originalFilename}`, fileContent, { contentType: file.mimetype || "file/unknown", upsert: false });
+	if (error) {
+		console.error("we have a problem:", error);
+
+		//@ts-ignore
+		// error.statusCode exists but for some reason ts says it doesn't
+		if (error.statusCode == "409") return { code: 409, message: "A file with that name already exists. Has your co-editor uploaded for you?" };
+
+		//@ts-ignore
+		// error.error & error.message exist but for some reason ts says they don't
+		return { code: 500, message: `Unexpected problem in the server! Message: "${error.error}: ${error.message}". Contact Online editor(s).` };
+	} else {
+		console.log("File uploaded to ", data.fullPath);
+		return { code: 200, message: supabase.storage.from(bucket).getPublicUrl(data.path).data.publicUrl };
+	}
 }
