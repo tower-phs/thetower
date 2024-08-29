@@ -104,7 +104,7 @@ export default function Article({ article }: Props) {
 					margin-top: 5vh;
 					max-width: 50vw;
 				}
-				.main-article::first-letter {
+				.main-article:first-child:not(h1, h2, h3, blockquote p)::first-letter {
 					initial-letter: 3;
 					margin-right: 10px;
 				}
@@ -114,7 +114,7 @@ export default function Article({ article }: Props) {
 						margin-left: 10px;
 						margin-right: 10px;
 					}
-					.main-article::first-letter {
+					.main-article:first-child:not(h1, h2, h3, blockquote p)::first-letter {
 						initial-letter: 1;
 						margin-right: 0px;
 					}

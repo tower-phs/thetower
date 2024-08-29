@@ -4,6 +4,8 @@ import Head from "next/head";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Link from "next/link";
 import styles from "./index.module.scss";
+import { remark } from "remark";
+import html from "remark-html";
 
 export default function Upload() {
 	type FormDataType = {
@@ -19,7 +21,8 @@ export default function Upload() {
 	const [category, setCategory] = useState("");
 	const [formData, setFormData] = useState<FormDataType>();
 	const [uploadResponse, setUploadResponse] = useState("");
-	// const [text, setText] = useState("Type your article here.")
+	const [previewDisplay, setPreviewDisplay] = useState("none")
+	const [previewContent, setPreviewContent] = useState("")
 
 	function changeCategory(event: ChangeEvent<HTMLSelectElement>) {
 		setCategory(event.target.value);
@@ -41,9 +44,10 @@ export default function Upload() {
 		setFormData({ ...formData, authors: event.target.value });
 	}
 
-	function updateContent(event: ChangeEvent<HTMLTextAreaElement>) {
+	async function updateContent(event: ChangeEvent<HTMLTextAreaElement>) {
 		console.log(event.target.value);
 		setFormData({ ...formData, content: event.target.value });
+		setPreviewContent((await remark().use(html).process(event.target.value)).toString())
 	}
 
 	function updateImage(event: ChangeEvent<HTMLInputElement>) {
@@ -118,6 +122,11 @@ export default function Upload() {
 			setUploadResponse(data.message);
 			if (response.status == 200) setFormData({}); // Clear for next submission
 		});
+	}
+
+	function togglePreview(event: FormEvent<HTMLInputElement>) {
+		console.log("click")
+		setPreviewDisplay((previewDisplay == "none") ? "block" : "none")
 	}
 
 	return (
@@ -234,6 +243,13 @@ export default function Upload() {
 							<strong> Separate paragraphs with empty lines (hit enter twice).</strong>
 						</p>
 						<textarea id={styles.contentInput} onChange={updateContent}></textarea>
+						<input type="checkbox" id="preview-checkbox" onClick={togglePreview}/>
+						<label htmlFor="preview-checkbox">Show preview</label>
+						<div id={styles.preview} style={{display: previewDisplay}}>
+							<hr />
+							<p dangerouslySetInnerHTML={{__html: previewContent}} />
+							<hr />
+						</div>
 					</div>
 					<div id="vanguard" style={{ display: category != "vanguard" ? "none" : "block" }}>
 						<h3>Vanguard</h3>
