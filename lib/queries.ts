@@ -66,7 +66,7 @@ export async function getPublishedArticles() {
 	return articles;
 }
 
-export async function getArticle(year: string, month: string, cat: string, id: string, slug: string): Promise<article> {
+export async function getArticle(year: string, month: string, cat: string, id: string, slug: string): Promise<article | null> {
 	// new scheme
 	let art = (id !== "null") ? await prisma.article.findFirst({
 			where: {
@@ -83,8 +83,9 @@ export async function getArticle(year: string, month: string, cat: string, id: s
 			},
 		});
 
-	if (art) return Promise.resolve(art);
-	else return Promise.reject("No article found");
+	// if (art) return Promise.resolve(art);
+	// else return Promise.reject("No article found");
+	return art
 }
 
 export async function getCurrArticles() {
@@ -378,7 +379,8 @@ export async function getIdOfNewestCrossword() {
 }
 
 export async function getCrosswordById(id: number) {
-	const crossword = (await prisma.crossword.findFirst({where: {id}}))!
+	const crossword = (await prisma.crossword.findFirst({where: {id}}))
+	if (!crossword) return null
 	return {
 		author: crossword.author,
 		date: crossword.date.toLocaleDateString(),

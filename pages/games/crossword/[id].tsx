@@ -8,10 +8,15 @@ import { PuzzleInput } from "~/lib/crossword/types";
 type Props = { puzzleInput: PuzzleInput };
 
 interface Params {
-    id: number;
+    params: {
+		id: string;
+	}
 }
 
-export async function getServerSideProps({id}: Params): Promise<GetServerSidePropsResult<Props>> {
+export async function getServerSideProps({ params }: Params): Promise<GetServerSidePropsResult<Props>> {
+	const id = parseInt(params.id)
+	if (isNaN(id)) return {redirect: {permanent: false, destination: "/404"}}
+
 	const crossword = await getCrosswordById(id)
     if (crossword == null) return {redirect: {permanent: false, destination: "/404"}}
     return {

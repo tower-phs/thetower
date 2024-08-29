@@ -56,6 +56,8 @@ export async function getServerSideProps({ params }: Params) {
 		processedArticle = await getArticle(params.year, params.month, params.cat, article_id, params.slug);
 	}
 
+	if (processedArticle == null) return {redirect: {permanent: false, destination: "/404"}}
+
 	if (processedArticle?.markdown) {
 		let markedContent = await remark().use(html).process(processedArticle.content);
 		processedArticle.content = markedContent.toString();
@@ -73,8 +75,6 @@ export default function Article({ article }: Props) {
 	// const markedHTML = markedContent.toString()
 	// const paragraphs = article.content.split("\n");
 	article.content.split("\n").forEach((p) => console.log(`'${p}'` ))
-
-	if (article == null) return <meta http-equiv="refresh" content="0; URL=https://towerphs.com/404" />;
 
 	return (
 		<div className="article">
