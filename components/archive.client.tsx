@@ -21,13 +21,13 @@ export default function VirtualArchive({ month, year }: Props) {
 					background-color: #f0f0f0;
 					padding: 30px;
 					margin: 10px;
-					border-left: 3px solid ${styles.color.secondary};
 				}
 				.archive:hover {
 					background-color: #d0d0d0;
 				}
-				h2 {
+				p {
 					text-align: center;
+					// font-size: 1.5rem;
 				}
 				hr {
 					max-width: 26vw;
@@ -42,7 +42,7 @@ export default function VirtualArchive({ month, year }: Props) {
 			`}</style>
 			<div className="thumbnail">
 				<Link href={`/archives/${year}/${month}`}>
-					<h2>{`${months[month]} ${year}`}</h2>
+					<p>{`${months[month]} ${year}`}</p>
 				</Link>
 			</div>
 		</div>

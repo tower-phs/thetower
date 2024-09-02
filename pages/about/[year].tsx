@@ -81,7 +81,7 @@ export default function Year({ year, sections }: Props) {
 					margin-bottom: 1vh;
 				}
 				p {
-					font-size: larger;
+					/* font-size: larger; */
 				}
 			`}</style>
 			<h1>{year} Staff</h1>

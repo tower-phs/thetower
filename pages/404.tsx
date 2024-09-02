@@ -13,9 +13,9 @@ export default function PageNotFound() {
 			</Head>
 			<style jsx>{`
 				h1 {
-					font-family: ${styles.font.previewHeader};
+					/* font-family: ${styles.font.serifHeader}; */
 					text-align: center;
-					font-size: 3rem;
+					/* font-size: 3rem; */
 				}
 			`}</style>
 			<h1>The page you were looking for does not exist.</h1>

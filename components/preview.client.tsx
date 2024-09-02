@@ -29,11 +29,11 @@ export default function ArticlePreview({ article, category, style = "row", size 
 			case "large":
 				charlen = 200;
 				break;
-			case "medium":
-				charlen = 100;
-				break;
-			case "small":
-				break;
+			// case "medium":
+			// 	charlen = 100;
+			// 	break;
+			// case "small":
+			// 	break;
 
 			case "category-list":
 				charlen = 200;
@@ -48,11 +48,11 @@ export default function ArticlePreview({ article, category, style = "row", size 
 			case "large":
 				charlen = 250;
 				break;
-			case "medium":
-				charlen = 150;
-				break;
-			case "small":
-				break;
+			// case "medium":
+			// 	charlen = 150;
+			// 	break;
+			// case "small":
+			// 	break;
 		}
 	}
 
@@ -93,20 +93,20 @@ export default function ArticlePreview({ article, category, style = "row", size 
 					grid-template-columns: 0.5fr;
 				}
 
-				.img-container {
-					position: relative;
-					max-width: 100%;
-					max-height: 100%;
-				}
-				.img-container.row.large {
-					width: 32vw;
-				}
-				.img-container.row.medium {
-					width: 12vw;
-				}
-				.img-container.row.small {
-					width: 10vw;
-				}
+				// .img-container {
+				// 	position: relative;
+				// 	max-width: 100%;
+				// 	max-height: 100%;
+				// }
+				// .img-container.row.large {
+				// 	width: 32vw;
+				// }
+				// .img-container.row.medium {
+				// 	width: 12vw;
+				// }
+				// .img-container.row.small {
+				// 	width: 10vw;
+				// }
 
 				.img-wrapper .category-list {
 					width: 20vw;
@@ -114,11 +114,12 @@ export default function ArticlePreview({ article, category, style = "row", size 
 
 				span {
 					margin-left: 1vw;
-					font-size: smaller;
+					/* font-size: smaller; */
 				}
 				.title {
-					font-weight: 800;
-					font-family: ${styles.font.previewHeader}, sans-serif;
+					/* font-weight: 800;
+					font-family: ${styles.font.serifHeader}, sans-serif; */
+					font-weight: bold;
 				}
 
 				.title a {
@@ -131,44 +132,43 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				}
 
 				.title .featured {
-					font-family: ${styles.font.previewHeader}, sans-serif;
-					font-size: xx-large;
-					color: ${styles.color.secondary} !important !important !important;
+					/* font-family: ${styles.font.serifHeader}, sans-serif; */
+					font-size: 4rem;
+					color: ${styles.color.primary} !important !important !important;
 				}
 
 				@media (max-width: 1000px) {
 					.title .featured {
-						font-size: x-large;
+						/* font-size: x-large; */
 					}
 				}
 
 				.title .large {
-					font-family: ${styles.font.previewHeader}, sans-serif;
-					font-size: large;
-					color: ${styles.color.secondary} !important !important !important;
+					/* font-family: ${styles.font.serifHeader}, sans-serif; */
+					font-size: 2.5rem;
+					color: ${styles.color.primary} !important !important !important;
 				}
 				.title .medium {
-					font-family: ${styles.font.previewHeader}, sans-serif;
-					font-size: medium;
-					color: ${styles.color.tertiary} !important !important !important;
+					/* font-family: ${styles.font.serifHeader}, sans-serif;
+					font-size: medium; */
+					color: ${styles.color.accent} !important !important !important;
 				}
 				.title .small {
-					font-family: ${styles.font.previewHeader}, sans-serif;
-					font-size: small;
+					/* font-family: ${styles.font.serifHeader}, sans-serif;
+					font-size: small; */
 				}
 
 				.title .category-list {
-					font-family: ${styles.font.previewHeader}, "Courier New";
-					font-size: calc(0.75rem + 1vw);
+					font-size: 2.5rem;
 				}
 
 				.category {
-					font-size: 12pt;
+					/* font-size: 12pt; */
 					margin-bottom: 1vh;
 					margin-top: 1vh;
 				}
 				.preview-text {
-					font-family: ${styles.font.text}, "Courier New";
+					/* font-family: ${styles.font.serifText}, ${styles.font.stack}; */
 					margin-top: 1vh;
 					margin-bottom: 2vh;
 				}
@@ -197,7 +197,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 
 				.article-preview > .category-list-preview {
 					display: grid;
-					grid-template-columns: 0.45fr 1fr;
+					grid-template-columns: 2fr 5fr;
 				}
 
 				@media (max-width: 1000px) {
@@ -216,19 +216,41 @@ export default function ArticlePreview({ article, category, style = "row", size 
 				{/* <div className="img-wrapper">
 					{!article.img?.includes(".") ? <></> : <img src={article.img} className={size}></img>}
 				</div> */}
-				<div className="img-wrapper"> {(article.img?.includes("."))
-					? <Image src={article.img} width={1000} height={1000} alt="Image" style={{width: "100%", height: "100%", maxWidth: `${(size == "featured") ? "100%" : "19rem"}`, maxHeight: `${(size == "featured") ? "100%" : "19rem"}`, objectFit: "cover"}}/>
-					: <Image src="/assets/white-tower.png" width={309} height={721} alt="Image" style={{width: "19rem", height: "19rem", objectFit: "cover", backgroundColor: "black"}} />
-				}</div>
+				<div className="img-wrapper">
+					{" "}
+					{article.img?.includes(".") ? (
+						<Image
+							src={article.img}
+							width={1000}
+							height={1000}
+							alt="Image"
+							style={{
+								width: "100%",
+								height: "100%",
+								maxWidth: `${size == "featured" ? "90%" : "25rem"}`,
+								maxHeight: `${size == "featured" ? "90%" : "25rem"}`,
+								marginLeft: "5%",
+								marginRight: "5%",
+								objectFit: "cover",
+							}}
+						/>
+					) : (
+						<Image
+							src="/assets/white-tower.png"
+							width={309}
+							height={721}
+							alt="Image"
+							style={{ width: "25rem", height: "25rem", objectFit: "cover", backgroundColor: "black" }}
+						/>
+					)}
+				</div>
 				<div>
 					<section className="category">
-						<em>
 							{category && (
 								<Link href={"/category/" + article.category}>
-									<span style={{ margin: "0px", fontFamily: "Open Sans" }}>{expandCategorySlug(article.category)}</span>
+									<span style={{ margin: "0px", fontFamily: styles.font.sans }}>{expandCategorySlug(article.category)}</span>
 								</Link>
 							)}
-						</em>
 					</section>
 					<section className="title">
 						<Link
@@ -252,7 +274,7 @@ export default function ArticlePreview({ article, category, style = "row", size 
 						))}
 					</section>
 
-					<section className="preview-text">{shortenText(article.content, charlen)}</section>
+					{/* <section className="preview-text">{shortenText(article.content, charlen)}</section> */}
 				</div>
 			</div>
 		</div>

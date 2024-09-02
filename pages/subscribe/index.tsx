@@ -14,6 +14,11 @@ export default function Subscribe() {
 					content="0; URL=https://docs.google.com/forms/d/e/1FAIpQLSepzFs9XYC-Dfenzf5Y4xnwfPs5MBzpPhgoRzNYmsBtFAfa5g/viewform"
 				/>
 			</Head>
+			<h1>Please wait to be redirected.</h1>
+			<p>
+				If you are not redirected, please use{" "}
+				<a href="https://docs.google.com/forms/d/e/1FAIpQLSepzFs9XYC-Dfenzf5Y4xnwfPs5MBzpPhgoRzNYmsBtFAfa5g/viewform">this link</a>.
+			</p>
 			{/* <style jsx>{`
 				h1 {
 					text-align: center;

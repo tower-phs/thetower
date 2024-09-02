@@ -2,7 +2,6 @@
 
 import type { AppProps, NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import dayjs from "dayjs";
 import { FaFacebookSquare } from "@react-icons/all-files/fa/FaFacebookSquare";
@@ -11,7 +10,6 @@ import { FaYoutubeSquare } from "@react-icons/all-files/fa/FaYoutubeSquare";
 import { FaSpotify } from "@react-icons/all-files/fa/FaSpotify";
 import { SiApplepodcasts } from "@react-icons/all-files/si/SiApplepodcasts";
 import Button from "~/components/button.client";
-
 import "~/styles/styles.scss";
 import styles from "~/lib/styles";
 
@@ -41,6 +39,11 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 
 function Banner() {
+	const currMonth = dayjs().month()
+	const currYear = dayjs().year()
+	const month = (currMonth == 1) ? 12 : (currMonth == 5) ? 4 : (6 <= currMonth && currMonth < 9) ? 6 : currMonth
+	const year = (currMonth == 1) ? currYear - 1 : currYear
+
 	return (
 		<div className="banner">
 			<style jsx>{`
@@ -48,7 +51,7 @@ function Banner() {
 					margin: 0px;
 					padding-top: 0px;
 					position: relative;
-					background-color: ${styles.color.navbar};
+					background-color: ${styles.color.background};
 				}
 				.image {
 					display: block;
@@ -70,7 +73,6 @@ function Banner() {
 					left: 1vw;
 					top: 5px;
 					bottom: 5px;
-					font-family: ${styles.font.folio};
 				}
 				.search {
 					position: absolute;
@@ -83,13 +85,14 @@ function Banner() {
 					border: 1px solid ${styles.color.accent};
 					border-radius: 5px 0px 0px 5px;
 					padding: 5px;
-					font-family: ${styles.font.folio};
+					font-family: ${styles.font.sans};
+					font-size: 1.6rem;
 					box-sizing: border-box;
 					vertical-align: middle;
 					color: ${styles.color.accent};
 				}
 				.search input::placeholder {
-					color: ${styles.color.accent};
+					color: ${styles.color.lightAccent};
 				}
 				.search button {
 					width: 30px;
@@ -98,8 +101,8 @@ function Banner() {
 					border-radius: 5px 0px 0px 5px;
 					transform: scaleX(-1);
 					background-color: ${styles.color.accent};
-					color: ${styles.color.navbar};
-					font-family: ${styles.font.folio};
+					color: ${styles.color.primary};
+					/* font-family: ${styles.font.sans}; */
 					cursor: pointer;
 					box-sizing: border-box;
 					padding: 5px;
@@ -114,14 +117,18 @@ function Banner() {
 			`}</style>
 			<div className="sub">
 				<Link href="/subscribe">
-					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.folio }}>SUBSCRIBE</span>
+					<span style={{ color: styles.color.accent, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem" }}>SUBSCRIBE</span>
 				</Link>
 				<br />
-				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/6-2024.pdf">
-					<span style={{ color: "white", cursor: "pointer", fontFamily: styles.font.folio }}>PRINT EDITION</span>
+				<Link href={`https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/${month}-${year}.pdf`}>
+					<span style={{ color: styles.color.accent, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem" }}>
+						PRINT EDITION
+					</span>
 				</Link>
 				<br />
-				<span style={{ fontFamily: styles.font.folio, color: "lightgray" }}>{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}</span>
+				<span style={{ fontFamily: styles.font.sans, color: styles.color.accent, fontSize: "1.6rem" }}>
+					{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}
+				</span>
 			</div>
 			<div className="search">
 				<input
@@ -143,7 +150,10 @@ function Banner() {
 			</div>
 			<div className="image">
 				<Link href="/home" passHref>
-					<Image src="/assets/logo.png" alt="Tower banner" width={250} height={75} priority />
+					{/* <Image src="/assets/logo.png" alt="Tower banner" width={250} height={75} priority /> */}
+					<h1 style={{ fontFamily: "Canterbury", fontWeight: "normal", textAlign: "center", color: styles.color.accent, fontSize: "6rem" }}>
+						The Tower
+					</h1>
 				</Link>
 			</div>
 		</div>
@@ -173,6 +183,7 @@ function Footer() {
 					font-size: xxx-large;
 					float: left;
 					padding-right: 10px;
+					font-weight: normal;
 				}
 				.top a {
 					display: inline-block;
@@ -180,13 +191,13 @@ function Footer() {
 					padding-top: 2.5vh;
 				}
 				.top .home-btn {
-					font-size: small;
+					/* font-size: small; */
 					color: #274370;
 					float: right;
 					margin-right: 2.5vh;
 				}
 				.bottom {
-					font-family: "Courier New";
+					/* font-family: "Courier New"; */
 					margin: 1vh;
 					display: grid;
 					grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -197,61 +208,17 @@ function Footer() {
 					}
 				}
 				.bottom b {
-					font-size: 1.1em;
-					font-weight: bolder;
+					/* font-size: 1.1em;
+					font-weight: bolder; */
 				}
 
 				.bottom a {
-					font-size: 0.9em;
+					/* font-size: 0.9em; */
 				}
 				span {
 					padding-bottom: 2vh;
 				}
-
-				.sub {
-					text-align: center;
-					align-items: center;
-				}
-
-				.sub h2 {
-					font-family: ${styles.font.previewHeader};
-					font-weight: bold;
-					font-size: calc(1.25rem + 1vw);
-				}
-
-				.sub p {
-					margin-left: 20%;
-					margin-right: 20%;
-					font-size: 1.25rem;
-				}
-
-				.sub-link {
-					font-size: 1.25rem;
-					border-color: ${styles.color.navbar};
-					border-style: solid;
-					background-color: white;
-					transition: 0.25s;
-					padding: 0.5rem;
-				}
-
-				.sub-link:hover {
-					color: white;
-					background-color: ${styles.color.navbar};
-				}
 			`}</style>
-			<hr />
-			<div className="sub">
-				<h2>Consider subscribing to The Tower.</h2>
-				{/* <p>You'll be supporting an award-winning school newspaper.</p> */}
-				<p>
-					For $30.00 a year, subscribers to The Tower will receive all eight issues shipped to their home or business over the course of the
-					year.
-				</p>
-				<br />
-				<Link href="/subscribe">
-					<p className="sub-link">Learn more</p>
-				</Link>
-			</div>
 			<hr />
 			<div className="top">
 				<h1>The Tower</h1>
@@ -262,22 +229,22 @@ function Footer() {
 					<FaFacebookSquare size="2.2em" />
 				</a>
 				<a href="https://www.youtube.com/channel/UCoopcAJbsz-qlTS2xkVWplQ" target="_blank" rel="noopener noreferrer">
-					<FaYoutubeSquare size="2.2rem" />
+					<FaYoutubeSquare size="3.5rem" />
 				</a>
 				<a href="https://open.spotify.com/show/2c0TlU1f01LKoVPaMMDxB8?si=f1fa622c0339438e" target="_blank" rel="noopener noreferrer">
-					<FaSpotify size="2.2rem" />
+					<FaSpotify size="3.5rem" />
 				</a>
 				<a href="https://podcasts.apple.com/us/podcast/phs-talks/id1674696258" target="_blank" rel="noopener noreferrer">
-					<SiApplepodcasts size="2.2rem" />
+					<SiApplepodcasts size="3.5rem" />
 				</a>
-				<Link href="/home" legacyBehavior>
-					<a className="home-btn">Go to home page »</a>
+				<Link href="https://docs.google.com/forms/d/e/1FAIpQLSeine_aZUId0y2OjY2FZyJ93ZliGQZos-6c3VwkPg2IhXsGfg/viewform?usp=sf_link" legacyBehavior>
+					<a className="home-btn">Report problem »</a>
 				</Link>
 			</div>
 			<div className="bottom">
 				<div>
 					<b>
-						<Link style={{ fontFamily: styles.font.header }} href="/category/news-features">
+						<Link style={{ fontFamily: styles.font.serifHeader }} href="/category/news-features">
 							NEWS & FEATURES
 						</Link>
 						<br />
@@ -287,7 +254,7 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link style={{ fontFamily: styles.font.header }} href="/category/opinions">
+						<Link style={{ fontFamily: styles.font.serifHeader }} href="/category/opinions">
 							OPINIONS
 						</Link>
 						<br />
@@ -299,7 +266,7 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link style={{ fontFamily: styles.font.header }} href="/category/vanguard">
+						<Link style={{ fontFamily: styles.font.serifHeader }} href="/category/vanguard">
 							VANGUARD
 						</Link>
 						<br />
@@ -311,7 +278,7 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link style={{ fontFamily: styles.font.header }} href="/category/arts-entertainment">
+						<Link style={{ fontFamily: styles.font.serifHeader }} href="/category/arts-entertainment">
 							ARTS & ENTERTAINMENT
 						</Link>
 						<br />
@@ -321,7 +288,7 @@ function Footer() {
 				</div>
 				<div>
 					<b>
-						<Link style={{ fontFamily: styles.font.header }} href="/category/sports">
+						<Link style={{ fontFamily: styles.font.serifHeader }} href="/category/sports">
 							SPORTS
 						</Link>
 						<br />
@@ -338,16 +305,16 @@ function Footer() {
 
 function NavBar() {
 	return (
-		<div className="navbar">
+		<div className="navbar" style={{ position: "sticky", top: "0", zIndex: "10" }}>
 			<style jsx>{`
 				.navbar {
 					display: block;
-					background-color: ${styles.color.navbar} !important;
+					background-color: rgba(255, 255, 255, 0.9) !important;
 					margin-bottom: 2vh;
 					text-align: center;
 					width: 100%;
-					border-top: 1px solid ${styles.color.accent};
-					font-family: ${styles.font.folio}, "Courier New";
+					border-bottom: 1px solid ${styles.color.lightAccent};
+					/* font-family: ${styles.font.sans}, "Courier New"; */
 				}
 
 				.navbar hr {
@@ -360,7 +327,6 @@ function NavBar() {
 
 				.menu {
 					display: contents;
-					font-family: ${styles.font.folio}, "Courier New";
 				}
 
 				@media screen and (max-width: 1000px) {
@@ -409,7 +375,9 @@ function NavBar() {
 					<Link href="/category/sports/student-athletes">Student Athletes</Link>
 				</Button>
 
-				<Button name="CROSSWORD" href="/games/crossword"></Button>
+				<Button name="CROSSWORD" href="/games/crossword">
+					<Link href="/games/crossword/archive">Past Crosswords</Link>
+				</Button>
 
 				<Button name="ABOUT" href="/about">
 					<Link href="/about/2024">2024 Staff</Link>

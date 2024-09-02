@@ -15,11 +15,11 @@ export default function Archives() {
 				h1,
 				h2 {
 					text-align: center;
-					font-weight: 600;
+					/* font-weight: 600; */
 				}
 
 				h1 {
-					font-weight: bold;
+					/* font-weight: bold; */
 				}
 
 				.container {
@@ -27,6 +27,13 @@ export default function Archives() {
 					width: 80%;
 					display: grid;
 					grid-template-columns: 1fr 1fr 1fr 1fr;
+				}
+
+				@media (max-width: 1000px) {
+					.container {
+						grid-template-columns: 1fr;
+						margin: 0 auto;
+					}
 				}
 			`}</style>
 			<h1>Archives</h1>

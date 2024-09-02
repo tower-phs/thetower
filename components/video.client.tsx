@@ -23,7 +23,7 @@ export default function Video({ link, title }: Props) {
 					background-color: #f5f5f5;
 					/*border-radius: 10px;*/
 					border: 1px solid gainsboro;
-					border-left: 2px solid ${styles.color.secondary};
+					border-left: 2px solid ${styles.color.accent};
 				}
 				.video_container {
 					width: 100%;
@@ -39,9 +39,9 @@ export default function Video({ link, title }: Props) {
 					height: 100%;
 					/*border-radius: 10px 10px 0px 0px;*/
 				}
-				h3 {
+				p {
 					padding: 5px;
-					font-family: "Neue Montreal Regular";
+					font-family: ${styles.font.sans};
 				}
 			`}</style>
 			<div className="video_container">
@@ -53,7 +53,7 @@ export default function Video({ link, title }: Props) {
 					frameBorder={0}
 				></iframe>
 			</div>
-			<h3>{title}</h3>
+			<p>{title}</p>
 		</div>
 	);
 }

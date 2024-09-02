@@ -1,30 +1,35 @@
 /** @format */
 
-import { article } from "@prisma/client";
+import { article, spreads } from "@prisma/client";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import ArticlePreview from "~/components/preview.client";
 import Video from "~/components/video.client";
 import Podcast from "~/components/podcast.client";
-import { getFrontpageArticles } from "~/lib/queries";
+import { getFrontpageArticles, getSpreadsByCategory } from "~/lib/queries";
 import styles from "~/lib/styles";
+import SubBanner from "~/components/subbanner.client";
+import { SectionContainer, VanguardContainer } from "~/components/sectioncontainer.client";
 
 export async function getServerSideProps() {
 	const articles = await getFrontpageArticles();
+	const vang = await getSpreadsByCategory("VANGUARD", 6)
 
 	return {
 		props: {
 			articles,
+			vang
 		},
 	};
 }
 
 interface Props {
 	articles: { [name: string]: article[] };
+	vang: spreads[];
 }
 
-export default function FrontPage({ articles }: Props) {
+export default function FrontPage({ articles, vang }: Props) {
 	return (
 		<div>
 			<style jsx>{`
@@ -63,7 +68,7 @@ export default function FrontPage({ articles }: Props) {
 
 				.dark-banner {
 					position: relative;
-					background-color: ${styles.color.primary};
+					background-color: ${styles.color.darkAccent};
 					width: 100vw;
 					left: -2.5vw;
 					padding-top: 2.5rem;
@@ -73,9 +78,9 @@ export default function FrontPage({ articles }: Props) {
 				.dark-banner * {
 					color: ${styles.color.background};
 					text-align: center;
-					font-size: 2.5rem;
+					/* font-size: 2.5rem;
 					font-family: "Neue Montreal Medium";
-					// margin-right: 0.75rem;
+					margin-right: 0.75rem; */
 				}
 
 				#dark-banner-content {
@@ -84,14 +89,23 @@ export default function FrontPage({ articles }: Props) {
 				}
 
 				#dark-banner-content h1 {
-					font-size: calc(1rem + 1vw);
+					/* font-size: calc(1rem + 1vw); */
 				}
 
 				.section-header {
-					// font-family: ${styles.font.previewHeader};
-					// font-style: italic;
+					/* font-family: ${styles.font.serifHeader};
+					font-style: italic; */
 					text-align: center;
-					font-weight: bold;
+					/* font-weight: bold; */
+				}
+
+				#vang-container h3 {
+					font-family: ${styles.font.sans};
+				}
+
+				#vang-container object {
+					width: 50vw;
+					height: 70vh;
 				}
 			`}</style>
 			<Head>
@@ -101,7 +115,7 @@ export default function FrontPage({ articles }: Props) {
 			<div className="mosaic">
 				<div className="triple">
 					<div>
-						<h2 className="section-header">OPINIONS</h2>
+						{/* <h3 className="section-header">OPINIONS</h3> */}
 						<hr />
 						<ArticlePreview article={articles["opinions"][0]} style="box" size="large" />
 						<ArticlePreview article={articles["opinions"][1]} style="box" size="large" />
@@ -111,7 +125,7 @@ export default function FrontPage({ articles }: Props) {
 						<ArticlePreview article={articles["featured"][0]} style="box" size="featured" />
 					</div>
 					<div>
-						<h2 className="section-header">SPORTS</h2>
+						{/* <h3 className="section-header">SPORTS</h3> */}
 						<hr />
 						<ArticlePreview article={articles["sports"][0]} style="box" size="large" />
 						<ArticlePreview article={articles["sports"][1]} style="box" size="large" />
@@ -119,7 +133,7 @@ export default function FrontPage({ articles }: Props) {
 					</div>
 				</div>
 				<div className="one">
-					<ArticlePreview article={articles["news-features"][3]} style="box" size="featured" />
+					<ArticlePreview article={articles["featured"][0]} style="box" size="featured" />
 
 					<ArticlePreview article={articles["opinions"][0]} style="box" size="large" />
 					<ArticlePreview article={articles["opinions"][1]} style="box" size="large" />
@@ -130,113 +144,62 @@ export default function FrontPage({ articles }: Props) {
 					<ArticlePreview article={articles["sports"][2]} style="box" size="large" />
 				</div>
 			</div>
+			<br />
+			<hr />
+			<br />
+			<SectionContainer category="NEWS & FEATURES" desc="The latest stories on PHS and its community." articles={articles["news-features"]} />
+			<hr />
+			<br />
+			<SectionContainer category="OPINIONS" desc="Opinions of the student body, from school policies to global issues." articles={articles["opinions"]} />
 			<div className="dark-banner">
 				<div id="dark-banner-content">
 					<hr />
-					{/* <h1 style={{ marginTop: "2.5rem", fontSize: "1.5rem"}}>The Tower is Princeton High School&apos;s student-run newspaper.</h1>
-					<Image src="/assets/white-tower.png" width={309} height={721} alt="Tower logo" style={{ width: "7.5rem", height: "auto" }} />
-					<h1 style={{ marginBottom: "2.5rem", fontSize: "1.5rem" }}>
-						Since 1928, the Tower has been reporting on the inner workings of PHS, the district, and the cultural and athletic events that
-						affect the student body.
-					</h1>
-					<hr /> */}
-					<h1 style={{marginTop: "2.5rem"}}> Thank you to our sponsors for supporting the Tower!</h1>
-					<Image src="/assets/milk-cookies.png" width={2500} height={2500} alt="Milk & Cookies" style={{width: "15rem", height: "auto", marginBottom: "1rem"}} />
+					<div style={{display: "flex", marginLeft: "5vw", marginRight: "5vw", gap: "1rem"}}>
+						<Image src="/assets/white-tower.png" width={309} height={721} alt="Tower logo" style={{ width: "15rem", height: "auto" }} />
+						<div>
+							<h2 style={{ marginTop: "2.5rem", marginBottom: "2.5rem", textAlign: "left"}}>
+								The Tower is Princeton High School&apos;s student-run newspaper.
+							</h2>
+							<p style={{textAlign: "left", fontSize: "2.5rem"}}>
+								Since 1928, the Tower has been reporting on the inner workings of PHS, the district, and the cultural and athletic events that
+								affect the student body.
+								<br /> <br />
+								Each year, the staff produces eight issues to be distributed.
+								Subscribe to have the latest stories delivered to your door.
+							</p>
+						</div>
+						
+					</div>
 					<hr />
 				</div>
 			</div>
-			{/* <Opinions {...articles["opinions"]} /> */}
-		</div>
-	);
-}
-
-export function NewsFeatures(articles: article[]) {
-	return (
-		<div className="newfe">
-			<style jsx>{`
-				.newfe {
-					padding-right: 10px;
-					border-right: 1px solid gainsboro;
-				}
-				.double {
-					display: grid;
-					grid-gap: 10px;
-					grid-template-columns: 1fr 1fr;
-				}
-			`}</style>
-			<ArticlePreview article={articles[0]} style="box" size="large" category />
-			<div className="double">
-				{Object.values(articles)
-					.slice(1)
-					.map(article => (
-						<ArticlePreview key={article.id} article={article} style="box" size="small" category />
-					))}
+			<br />
+			<hr />
+			<br />
+			<SectionContainer category="ARTS & ENTERTAINMENT" desc="Music, theatre, and more." articles={articles["arts-entertainment"]} />
+			<hr />
+			<br />
+			<SectionContainer category="SPORTS" desc="Updates on PHS games, tales of sports history, and more." articles={articles["sports"]} />
+			<hr />
+			<br />
+			<div id="vang-container">
+				<VanguardContainer desc="The most creative section, with the format changing each issue." spreads={vang} />
 			</div>
-		</div>
-	);
-}
-
-export function Opinions(articles: article[]) {
-	return (
-		<div className="opinions">
-			<style jsx>{``}</style>
-			<div>
-				<ArticlePreview article={articles[0]} style="box" size="category-list" category />
-				<div>
-					{Object.values(articles)
-						.slice(1)
-						.map(article => (
-							<ArticlePreview key={article.id} style="box" size="category-list" category article={article} />
-						))}
+			<div className="dark-banner">
+				<div id="dark-banner-content">
+					<hr />
+					<h1 style={{ marginTop: "2.5rem" }}> Thank you to our sponsors for supporting us!</h1>
+					<Image
+						src="/assets/milk-cookies.png"
+						width={2500}
+						height={2500}
+						alt="Milk & Cookies"
+						style={{ width: "25rem", height: "auto", marginBottom: "1rem" }}
+					/>
+					<hr />
 				</div>
 			</div>
-		</div>
-	);
-}
-
-export function ArtsEntertainment(articles: article[]) {
-	return (
-		<div className="ane">
-			<style jsx>{`
-				.ane {
-					padding-left: 10px;
-					border-left: 1px solid gainsboro;
-				}
-			`}</style>
-			<ArticlePreview article={articles[0]} style="box" size="medium" category />
-			<div>
-				{Object.values(articles)
-					.slice(1)
-					.map(article => (
-						<ArticlePreview key={article.id} style="row" size="medium" article={article} category />
-					))}
-			</div>
-		</div>
-	);
-}
-
-export function Sports(articles: article[]) {
-	return (
-		<div className="sports">
-			<style jsx>{`
-				.sports {
-					padding-right: 10px;
-					border-right: 1px solid gainsboro;
-				}
-				.double {
-					display: grid;
-					grid-gap: 10px;
-					grid-template-columns: 1fr 1fr;
-				}
-			`}</style>
-			<ArticlePreview article={articles[0]} style="box" size="medium" category />
-			<div>
-				{Object.values(articles)
-					.slice(1)
-					.map(article => (
-						<ArticlePreview key={article.id} style="row" size="medium" article={article} category />
-					))}
-			</div>
+			<SubBanner title="Consider subscribing to The Tower." />
 		</div>
 	);
 }
