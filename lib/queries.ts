@@ -332,6 +332,7 @@ export async function getSpreadsByCategory(category: string, take?: number) {
 				startsWith: category,
 			},
 		},
+		take
 	});
 
 	return spreads;

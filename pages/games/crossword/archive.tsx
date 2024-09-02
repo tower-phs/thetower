@@ -66,7 +66,7 @@ export default function Archive(props: Props) {
                     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
                 }
 
-                				#loadmore {
+                #loadmore {
 					border-radius: 2rem;
 					font-family: ${styles.font.sans};
 					font-size: 1.6rem;
@@ -88,6 +88,12 @@ export default function Archive(props: Props) {
 				#loading {
 					display: none;
 				}
+
+                @media (max-width: 1000px) {
+                    #crossword-container {
+                        grid-template-columns: 1fr;
+                    }
+                }
             `}</style>
             <Head>
                 <meta property="og:title" content="Crossword Archive | The Tower" />

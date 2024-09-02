@@ -10,11 +10,11 @@ import Podcast from "~/components/podcast.client";
 import { getFrontpageArticles, getSpreadsByCategory } from "~/lib/queries";
 import styles from "~/lib/styles";
 import SubBanner from "~/components/subbanner.client";
-import { SectionContainer } from "~/components/sectioncontainer.client";
+import { SectionContainer, VanguardContainer } from "~/components/sectioncontainer.client";
 
 export async function getServerSideProps() {
 	const articles = await getFrontpageArticles();
-	const vang = await getSpreadsByCategory("VANGUARD", 1)
+	const vang = await getSpreadsByCategory("VANGUARD", 6)
 
 	return {
 		props: {
@@ -183,10 +183,7 @@ export default function FrontPage({ articles, vang }: Props) {
 			<hr />
 			<br />
 			<div id="vang-container">
-				<h3>VANGUARD</h3>
-				<object data={vang[0].src} type="application/pdf">
-					<a href={vang[0].src}>If the PDF is not displaying, please access it here.</a>
-				</object>
+				<VanguardContainer desc="The most creative section, with the format changing each issue." spreads={vang} />
 			</div>
 			<div className="dark-banner">
 				<div id="dark-banner-content">

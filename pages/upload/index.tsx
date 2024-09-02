@@ -245,9 +245,9 @@ export default function Upload() {
 						<textarea id={styles.contentInput} onChange={updateContent}></textarea>
 						<input type="checkbox" id="preview-checkbox" onClick={togglePreview}/>
 						<label htmlFor="preview-checkbox">Show preview</label>
-						<div id={styles.preview} style={{display: previewDisplay}}>
+						<div style={{display: previewDisplay}}>
 							<hr />
-							<p dangerouslySetInnerHTML={{__html: previewContent}} />
+							<div id={styles.preview} dangerouslySetInnerHTML={{__html: previewContent}} />
 							<hr />
 						</div>
 					</div>

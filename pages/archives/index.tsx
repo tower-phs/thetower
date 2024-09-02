@@ -28,6 +28,13 @@ export default function Archives() {
 					display: grid;
 					grid-template-columns: 1fr 1fr 1fr 1fr;
 				}
+
+				@media (max-width: 1000px) {
+					.container {
+						grid-template-columns: 1fr;
+						margin: 0 auto;
+					}
+				}
 			`}</style>
 			<h1>Archives</h1>
 			<br></br>
