@@ -120,7 +120,10 @@ export default function Upload() {
 		// Handle response if necessary
 		response.json().then(data => {
 			setUploadResponse(data.message);
-			if (response.status == 200) setFormData({}); // Clear for next submission
+			if (response.status == 200) { // Clear for next submission
+				setFormData({});
+				setPreviewContent("");
+			}
 		});
 	}
 
@@ -229,7 +232,7 @@ export default function Upload() {
 							Example: &quot;John Doe, NEWS AND FEATURES CO-EDITOR and Jane Doe, OPINIONS CO-EDITOR&quot; is entered as &quot;John Doe,
 							Jane Doe&quot;.
 						</p>
-						<input type="text" id="authors" onChange={updateAuthors} />
+						<input type="text" id="authors" onChange={updateAuthors} value={formData && formData.authors ? formData.authors : ""}/>
 						<br /> <br />
 						<p>
 							You can write the article in Markdown (see{" "}
@@ -242,8 +245,8 @@ export default function Upload() {
 							for more info). Format special notes as they appear on the physical paper.
 							<strong> Separate paragraphs with empty lines (hit enter twice).</strong>
 						</p>
-						<textarea id={styles.contentInput} onChange={updateContent}></textarea>
-						<input type="checkbox" id="preview-checkbox" onClick={togglePreview}/>
+						<textarea id={styles.contentInput} onChange={updateContent} value={formData && formData.content ? formData.content : ""}></textarea>
+						<input type="checkbox" id="preview-checkbox" onChange={togglePreview} checked={previewDisplay == "block" ? true : false}/>
 						<label htmlFor="preview-checkbox">Show preview</label>
 						<div style={{display: previewDisplay}}>
 							<hr />

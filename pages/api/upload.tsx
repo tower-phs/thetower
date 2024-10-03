@@ -49,15 +49,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				return res.status(500).json({ message: `Unexpected problem in the server! Message: ${e}` });
 			}
 		} else {
+			console.log("standard article type")
 			let imgURL = "";
 			if (files.img) {
+				console.log("uploading file...")
 				let upload = await uploadFile(files.img[0], "images");
 				if (upload.code != 200) return res.status(upload.code).json({ message: upload.message });
 				imgURL = upload.message;
+				console.log("upload complete")
 			}
 
-			if (!fields.subcategory || !fields.title || !fields.authors || !fields.content)
+			console.log("passing field checks...")
+			if (!fields.subcategory || !fields.title || !fields.authors || !fields.content) {
 				return res.status(500).json({ message: "you shouldn't be here?" });
+			}
+			console.log("checks completed, creating articleInfo object")
 
 			const articleInfo = {
 				category: fields.category[0],
@@ -72,12 +78,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			};
 
 			try {
-				uploadArticle(articleInfo);
+				console.log("calling uploadArticle")
+				await uploadArticle(articleInfo);
+				console.log("try block complete")
 			} catch (e) {
 				console.log(e);
 				return res.status(500).json({ message: `Unexpected problem in the server! Message: ${e}` });
 			}
 
+			console.log("returning success message")
 			return res.status(200).json({ message: "Uploaded!" });
 		}
 	});

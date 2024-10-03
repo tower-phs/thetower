@@ -415,7 +415,9 @@ export async function uploadArticle(info: {
 	img: string;
 	content: string;
 }) {
+	console.log("uploadArticle called")
 	await prisma.article.create({ data: info });
+	console.log("upload complete from uploadArticle")
 }
 
 export async function uploadSpread(info: { title: string; src: string; month: number; year: number }) {
