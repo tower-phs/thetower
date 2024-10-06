@@ -60,7 +60,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			}
 
 			console.log("passing field checks...")
-			if (!fields.subcategory || !fields.title || !fields.authors || (fields.content != null && fields.content != undefined)) {
+			if (!fields.subcategory || !fields.title || !fields.authors || (fields.content == null && fields.content == undefined)) {
 				return res.status(500).json({ message: 
 					`Some checks that should've already passed failed on the server. Content: ${JSON.stringify(fields)}. Contact online editor(s).`
 				});
