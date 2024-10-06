@@ -430,9 +430,12 @@ export async function uploadMulti(info: { format: string; src_id: string; month:
 
 export async function uploadFile(file: formidable.File, bucket: string) {
 	const fileContent = await readFile(file.filepath);
+	console.log("filename: ", file.originalFilename)
+	let regex = file.originalFilename ? file.originalFilename.replaceAll(/(?!\.png|\.jpg|\.jpeg|\.gif)\.|\s/g, "-") : ""
+	console.log("filename after regex:", regex)
 	const { data, error } = await supabase.storage
 		.from(bucket)
-		.upload(`unverified/${file.originalFilename}`, fileContent, { contentType: file.mimetype || "file/unknown", upsert: false });
+		.upload(regex, fileContent, { contentType: file.mimetype || "file/unknown", upsert: false });
 	if (error) {
 		console.error("we have a problem:", error);
 

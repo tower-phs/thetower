@@ -31,21 +31,17 @@ export default function Upload() {
 
 	function changeSubcategory(event: ChangeEvent<HTMLSelectElement>) {
 		setFormData({ ...formData, subcategory: event.target.value });
-		// console.log(formData)
 	}
 
 	function updateTitle(event: ChangeEvent<HTMLInputElement>) {
-		console.log(event.target.value);
 		setFormData({ ...formData, title: event.target.value });
 	}
 
 	function updateAuthors(event: ChangeEvent<HTMLInputElement>) {
-		console.log(event.target.value);
 		setFormData({ ...formData, authors: event.target.value });
 	}
 
 	async function updateContent(event: ChangeEvent<HTMLTextAreaElement>) {
-		console.log(event.target.value);
 		setFormData({ ...formData, content: event.target.value });
 		setPreviewContent((await remark().use(html).process(event.target.value)).toString())
 	}
@@ -76,14 +72,12 @@ export default function Upload() {
 		const authors = formData.authors ? formData.authors.split(", ") : [""];
 
 		if (formData.category == "vanguard") {
-			console.log("vang", formData.spread);
 			if (!formData.spread) return setUploadResponse("You need to upload a spread for Vanguard.");
 			fd.append("spread", formData.spread);
 
 			if (!formData.title) return setUploadResponse("You need a title.");
 			fd.append("title", formData.title);
 		} else if (formData.category == "multimedia") {
-			console.log("multi");
 			if (!formData.multi) return setUploadResponse("You need to submit a link.");
 			fd.append("multi", formData.multi);
 
@@ -107,11 +101,7 @@ export default function Upload() {
 			if (formData.img) fd.append("img", formData.img);
 		}
 
-		console.log("authors:", authors);
-
-		// if (!formData.subcategory) setFormData({...formData, subcategory: formData.category})
-		// fd.append("subcategory", formData.subcategory)
-		console.log("Sending: ", formData);
+		setUploadResponse("Uploading; please stay on this page...")
 		const response = await fetch("/api/upload", {
 			method: "POST",
 			body: fd,
@@ -128,7 +118,6 @@ export default function Upload() {
 	}
 
 	function togglePreview(event: FormEvent<HTMLInputElement>) {
-		console.log("click")
 		setPreviewDisplay((previewDisplay == "none") ? "block" : "none")
 	}
 

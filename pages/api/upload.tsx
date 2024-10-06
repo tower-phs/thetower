@@ -60,8 +60,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			}
 
 			console.log("passing field checks...")
-			if (!fields.subcategory || !fields.title || !fields.authors || !fields.content) {
-				return res.status(500).json({ message: "you shouldn't be here?" });
+			if (!fields.subcategory || !fields.title || !fields.authors || (fields.content != null && fields.content != undefined)) {
+				return res.status(500).json({ message: 
+					`Some checks that should've already passed failed on the server. Content: ${JSON.stringify(fields)}. Contact online editor(s).`
+				});
 			}
 			console.log("checks completed, creating articleInfo object")
 
@@ -69,8 +71,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				category: fields.category[0],
 				subcategory: fields.subcategory[0],
 				title: fields.title[0],
-				authors: JSON.parse(fields.authors[0]),
-				content: fields.content[0],
+				authors: fields.authors ? JSON.parse(fields.authors[0]) : [],
+				content: fields.content ? fields.content[0] : "",
 				img: imgURL,
 				month: today.getMonth(),
 				year: today.getFullYear(),
