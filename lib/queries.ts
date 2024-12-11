@@ -328,9 +328,7 @@ export async function getSpreadsByCategory(category: string, take?: number) {
 			},
 		],
 		where: {
-			title: {
-				startsWith: category,
-			},
+			category
 		},
 		take
 	});
@@ -420,7 +418,7 @@ export async function uploadArticle(info: {
 	console.log("upload complete from uploadArticle")
 }
 
-export async function uploadSpread(info: { title: string; src: string; month: number; year: number }) {
+export async function uploadSpread(info: { title: string; src: string; month: number; year: number, category: string }) {
 	await prisma.spreads.create({ data: info });
 }
 

@@ -28,6 +28,7 @@ model spreads {
   src   String @db.VarChar
   month Int    @db.SmallInt
   year  Int    @db.SmallInt
+  category String @db.VarChar
 }
 
 model crossword {
