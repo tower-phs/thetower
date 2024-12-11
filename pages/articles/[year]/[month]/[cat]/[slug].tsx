@@ -190,7 +190,10 @@ export default function Article({ article }: Props) {
 				</div>
 				<br></br>
 				<br></br>
-				{article.img && <Image src={article.img} width={1000} height={1000} alt={article.img} style={{width: "100%", height: "auto"}} />}
+				<div>
+					{article.img && <Image src={article.img} width={1000} height={1000} alt={article.img} style={{width: "100%", height: "auto"}} />}
+					{/* {caption exists ? (<p>{caption or whatever}</p>) : () }*/}
+				</div>
 
 				{article.markdown ? (
 					<div className="main-article" dangerouslySetInnerHTML={{ __html: article.content }} />

@@ -183,7 +183,7 @@ export default function Upload() {
 								onChange={changeSubcategory}
 							>
 								<option value="">None</option>
-								<option value="student-atheletes">Student Athletes</option>
+								<option value="student-athletes">Student Athletes</option>
 							</select>
 							<select
 								id="multi-subcat"
