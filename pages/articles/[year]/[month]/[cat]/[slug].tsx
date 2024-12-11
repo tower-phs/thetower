@@ -56,6 +56,8 @@ export async function getServerSideProps({ params }: Params) {
 		processedArticle = await getArticle(params.year, params.month, params.cat, article_id, params.slug);
 	}
 
+	if (processedArticle == null) return {redirect: {permanent: false, destination: "/404"}}
+
 	if (processedArticle?.markdown) {
 		let markedContent = await remark().use(html).process(processedArticle.content);
 		processedArticle.content = markedContent.toString();
@@ -72,13 +74,7 @@ export default function Article({ article }: Props) {
 	// })
 	// const markedHTML = markedContent.toString()
 	// const paragraphs = article.content.split("\n");
-
-	if (article == null) return (
-		<meta
-			http-equiv="refresh"
-			content="0; URL=https://towerphs.com/404"
-		/>
-	)
+	article.content.split("\n").forEach((p) => console.log(`'${p}'` ))
 
 	return (
 		<div className="article">
@@ -86,7 +82,6 @@ export default function Article({ article }: Props) {
 				<title>{article.title} | The Tower</title>
 				<meta property="og:title" content={article.title + " | The Tower"} />
 				<meta property="og:description" content="Read more about this article!" />
-				
 			</Head>
 			<style jsx>{`
 				.article {
@@ -94,6 +89,7 @@ export default function Article({ article }: Props) {
 					flex-direction: column;
 					align-items: center;
 				}
+
 				.article .main-img {
 					width: 55vw;
 					height: 70vh;
@@ -108,7 +104,8 @@ export default function Article({ article }: Props) {
 					margin-top: 5vh;
 					max-width: 50vw;
 				}
-				.main-article::first-letter {
+
+				.main-article:not(h1, h2, h3, blockquote p)::first-letter {
 					initial-letter: 3;
 					margin-right: 10px;
 				}
@@ -118,7 +115,7 @@ export default function Article({ article }: Props) {
 						margin-left: 10px;
 						margin-right: 10px;
 					}
-					.main-article::first-letter {
+					.main-article:not(h1, h2, h3, blockquote p)::first-letter {
 						initial-letter: 1;
 						margin-right: 0px;
 					}
@@ -126,7 +123,11 @@ export default function Article({ article }: Props) {
 				
 				:global(.article .content p) {
 					font-family: ${styles.font.serifText};
-					font-size: 1.2rem;
+					// font-size: 1.2rem;
+				}
+
+				:global(.article .content strong) {
+					font-family: ${styles.font.serifHeader};
 				}
 				
 				:global(.article p) {
@@ -149,7 +150,7 @@ export default function Article({ article }: Props) {
 				}
 
 				:global(.main-article blockquote p) {
-					font-size: 1.5rem !important;
+					font-size: 2.5rem !important;
 					font-family: "Neue Montreal Regular" !important;
 					font-weight: normal; !important;
 				}
@@ -160,11 +161,13 @@ export default function Article({ article }: Props) {
 
 				:global(.main-article code) {
 					font-family: monospace;
-					padding-left: 5px;
+					// padding-left: 5px;
+					font-size: 1.6rem;
 				}
 
 				:global(.main-article a) {
 					text-decoration: underline;
+					font-size: 2rem;
 				}
 			`}</style>
 
@@ -172,7 +175,7 @@ export default function Article({ article }: Props) {
 				<div className="titleblock">
 					<h1>{article.title}</h1>
 
-					<span style={{fontFamily: styles.font.sans}}>{displayDate(article.year, article.month)}</span>
+					<span style={{ fontFamily: styles.font.sans }}>{displayDate(article.year, article.month)}</span>
 
 					{article.authors.length > 0 && (
 						<section className="authors">
@@ -187,7 +190,7 @@ export default function Article({ article }: Props) {
 				</div>
 				<br></br>
 				<br></br>
-				{article.img && <img src={article.img} width="100%" height="auto"></img>}
+				{article.img && <Image src={article.img} width={1000} height={1000} alt={article.img} style={{width: "100%", height: "auto"}} />}
 
 				{article.markdown ? (
 					<div className="main-article" dangerouslySetInnerHTML={{ __html: article.content }} />
@@ -199,13 +202,15 @@ export default function Article({ article }: Props) {
 								paragraph.startsWith("@img=") ? (
 									<img src={paragraph.substring(5)} width="100%" height="auto" key={index}></img>
 								) : (
+									(paragraph.charCodeAt(0) != 13) ?
 									<p key={index}>{paragraph.replace("&lt;", "<").replace("&gt;", ">")}</p>
+									: ""
 								)
 							)}
 					</div>
 				)}
 			</section>
-			<SubBanner title="Subscribing helps us make more articles like this."/>
+			<SubBanner title="Subscribing helps us make more articles like this." />
 		</div>
 	);
 }

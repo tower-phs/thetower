@@ -23,6 +23,11 @@ export default function Spread({ spread }: Props) {
 					margin-top: 10px;
 					border-left: 2px solid ${styles.color.accent};
 				}
+
+				a {
+					font-size: 2.5rem;
+				}
+
 				a:hover {
 					text-decoration: underline;
 				}
@@ -30,10 +35,12 @@ export default function Spread({ spread }: Props) {
 					/* font-weight: bolder;
 					font-size: larger; */
 				}
+
 				span {
-					/* font-size: smaller; */
+					font-family: ${styles.font.sans};
 				}
-			`}</style>
+
+		`}</style>
 			<section className="title">
 				<Link legacyBehavior href={"/spreads/" + spread.year + "/" + spread.month + "/vanguard/" + encodeURI(spread.title)}>
 					<a>{spread.title}</a>

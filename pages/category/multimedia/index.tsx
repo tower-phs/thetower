@@ -1,6 +1,5 @@
 /** @format */
 
-import { article, spreads } from "@prisma/client";
 import Head from "next/head";
 import Video from "~/components/video.client";
 import Podcast from "~/components/podcast.client";
@@ -24,18 +23,23 @@ export async function getServerSideProps() {
 	};
 }
 
-export default function Category(props : Props) {
-	const [videos, setVideos] = useState(props.videos)
-	const [vCursor, setVCursor] = useState(videos[videos.length - 1].id)
+export default function Category(props: Props) {
+	const [videos, setVideos] = useState(props.videos);
+	const [vCursor, setVCursor] = useState(videos[videos.length - 1].id);
+	const [loadingVDisplay, setLoadingVDisplay] = useState("none")
+	const [loadingVContent, setLoadingVContent] = useState("Loading videos, please wait...")
 
-	const [pods, setPods] = useState(props.pods)
-	const [pCursor, setPCursor] = useState(pods[pods.length - 1].id)
+	const [pods, setPods] = useState(props.pods);
+	const [pCursor, setPCursor] = useState(pods[pods.length - 1].id);
+	const [loadingPDisplay, setLoadingPDisplay] = useState("none")
+	const [loadingPContent, setLoadingPContent] = useState("Loading podcasts, please wait...")
+
 
 	async function newVideos() {
-		let loading = document.getElementById("loading-videos");
-		if (loading == null) return; // to make the compiler happy
-		loading.setAttribute("style", "display: block");
-		const response = await fetch("/api/loadsub", {
+		setLoadingVContent("Loading videos, please wait...")
+		setLoadingVDisplay("block")
+
+		const response = await fetch("/api/load/loadsub", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -47,17 +51,17 @@ export default function Category(props : Props) {
 		if (loaded.length != 0) {
 			setVideos([...videos, ...loaded]);
 			setVCursor(loaded[loaded.length - 1].id);
-			loading.setAttribute("style", "display: none");
+			setLoadingVDisplay("none")
 		} else {
-			loading.innerText = "No more videos to load.";
+			setLoadingVContent("No more videos to load.")
 		}
 	}
 
-	async function newPods() { // TODO: get rid of this repetitive code, make load more button into a component
-		let loading = document.getElementById("loading-pods");
-		if (loading == null) return; // to make the compiler happy
-		loading.setAttribute("style", "display: block");
-		const response = await fetch("/api/loadsub", {
+	async function newPods() {
+		setLoadingPContent("Loading podcasts, please wait...")
+		setLoadingPDisplay("block")
+
+		const response = await fetch("/api/load/loadsub", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -69,12 +73,11 @@ export default function Category(props : Props) {
 		if (loaded.length != 0) {
 			setPods([...pods, ...loaded]);
 			setPCursor(loaded[loaded.length - 1].id);
-			loading.setAttribute("style", "display: none");
+			setLoadingPDisplay("none")
 		} else {
-			loading.innerText = "No more podcasts to load.";
+			setLoadingPContent("No more podcasts to load.")
 		}
 	}
-
 
 	return (
 		<div className="multimedia">
@@ -89,12 +92,9 @@ export default function Category(props : Props) {
 					border-bottom: 3px double black;
 					margin-bottom: 1vh;
 					font-weight: bold;
-					font-size: calc(1.5rem + 1vw);
+					// font-size: calc(1.5rem + 1vw);
 				}
 
-				h2 {
-					/* font-family: ${styles.font.serifHeader}; */
-				}
 
 				.grid {
 					display: grid;
@@ -128,23 +128,23 @@ export default function Category(props : Props) {
 					background-color: #f6f6f6;
 				}
 
-				#loadmore {
+				.loadmore {
 					border-radius: 2rem;
-					font-family: ${styles.font.previewHeader};
-					font-size: calc(0.25rem + 1vw);
+					font-family: ${styles.font.sans};
+					font-size: 1.6rem;
 					color: black;
 					background-color: white;
 					border-style: solid;
-					border-color: black;
+					border-color: ${styles.color.darkAccent};
 					padding: 0.5rem;
 					padding-left: 0.75rem;
 					padding-right: 0.75rem;
 					transition: 0.25s;
 				}
 
-				#loadmore:hover {
+				.loadmore:hover {
 					color: white;
-					background-color: black;
+					background-color: ${styles.color.darkAccent};
 				}
 
 				#loading {
@@ -155,16 +155,16 @@ export default function Category(props : Props) {
 			<div className="grid">
 				<NoSSR>
 					<section className="videos">
-						{
-							videos.map(v => (
-								<div key={v.id} className="video-wrapper">
-									<Video key={v.id} link={v.src_id} title={v.title} />
-									<br />
-								</div>
-							))
-						}
-						<h3 id="loading-videos" style={{display: "none"}}>Loading videos, please wait...</h3>
-						<button id="loadmore" onClick={newVideos}>
+						{videos.map(v => (
+							<div key={v.id} className="video-wrapper">
+								<Video key={v.id} link={v.src_id} title={v.title} />
+								<br />
+							</div>
+						))}
+						<p id="loading-videos" style={{ display: loadingVDisplay }}>
+							{loadingVContent}
+						</p>
+						<button className="loadmore" onClick={newVideos}>
 							Load more
 						</button>
 						{/* <Video link="X6yiU_yupyw" title="Diving into Testing Season at PHS" />
@@ -185,7 +185,7 @@ export default function Category(props : Props) {
 							<Video link="Z4bZBXoVseo" title="Artist of the Month: Kevin Huang Profile" />
 						</div>*/}
 					</section>
-					
+
 					{/*<section className="papercasts">
 						<h2>Papercasts</h2>
 					</section>*/}
@@ -200,13 +200,13 @@ export default function Category(props : Props) {
 					</section>
 					<section className="rightbar">
 						<h2>Tower Shorts</h2>
-						{
-							pods.map(p => (
-								<Podcast key={p.id} link={p.src_id} />
-							))
-						}
-						<h3 id="loading-pods" style={{display: "none"}}>Loading podcasts, please wait...</h3>
-						<button id="loadmore" onClick={newPods}>
+						{pods.map(p => (
+							<Podcast key={p.id} link={p.src_id} />
+						))}
+						<p id="loading-pods" style={{ display: loadingPDisplay }}>
+							{loadingPContent}
+						</p>
+						<button className="loadmore" onClick={newPods}>
 							Load more
 						</button>
 						{/* <Podcast link="towershorts/1484378/" />

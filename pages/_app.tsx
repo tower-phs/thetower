@@ -2,7 +2,6 @@
 
 import type { AppProps, NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import dayjs from "dayjs";
 import { FaFacebookSquare } from "@react-icons/all-files/fa/FaFacebookSquare";
@@ -11,7 +10,6 @@ import { FaYoutubeSquare } from "@react-icons/all-files/fa/FaYoutubeSquare";
 import { FaSpotify } from "@react-icons/all-files/fa/FaSpotify";
 import { SiApplepodcasts } from "@react-icons/all-files/si/SiApplepodcasts";
 import Button from "~/components/button.client";
-
 import "~/styles/styles.scss";
 import styles from "~/lib/styles";
 
@@ -41,6 +39,11 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 
 function Banner() {
+	const currMonth = dayjs().month()
+	const currYear = dayjs().year()
+	const month = (currMonth == 1) ? 12 : (currMonth == 5) ? 4 : (6 <= currMonth && currMonth < 9) ? 6 : currMonth
+	const year = (currMonth == 1) ? currYear - 1 : currYear
+
 	return (
 		<div className="banner">
 			<style jsx>{`
@@ -114,14 +117,18 @@ function Banner() {
 			`}</style>
 			<div className="sub">
 				<Link href="/subscribe">
-					<span style={{ color: styles.color.accent, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem"}}>SUBSCRIBE</span>
+					<span style={{ color: styles.color.accent, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem" }}>SUBSCRIBE</span>
 				</Link>
 				<br />
-				<Link href="https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/0424-full.pdf">
-					<span style={{ color: styles.color.accent, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem" }}>PRINT EDITION</span>
+				<Link href={`https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/${month}-${year}.pdf`}>
+					<span style={{ color: styles.color.accent, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem" }}>
+						PRINT EDITION
+					</span>
 				</Link>
 				<br />
-				<span style={{ fontFamily: styles.font.sans, color: styles.color.accent, fontSize: "1.6rem" }}>{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}</span>
+				<span style={{ fontFamily: styles.font.sans, color: styles.color.accent, fontSize: "1.6rem" }}>
+					{dayjs().format("dddd, MMMM D, YYYY ").toUpperCase()}
+				</span>
 			</div>
 			<div className="search">
 				<input
@@ -144,7 +151,9 @@ function Banner() {
 			<div className="image">
 				<Link href="/home" passHref>
 					{/* <Image src="/assets/logo.png" alt="Tower banner" width={250} height={75} priority /> */}
-					<h1 style={{fontFamily: "Canterbury", fontWeight: "normal", textAlign: "center", color: styles.color.accent, fontSize: "6rem"}}>The Tower</h1>
+					<h1 style={{ fontFamily: "Canterbury", fontWeight: "normal", textAlign: "center", color: styles.color.accent, fontSize: "6rem" }}>
+						The Tower
+					</h1>
 				</Link>
 			</div>
 		</div>
@@ -220,16 +229,16 @@ function Footer() {
 					<FaFacebookSquare size="2.2em" />
 				</a>
 				<a href="https://www.youtube.com/channel/UCoopcAJbsz-qlTS2xkVWplQ" target="_blank" rel="noopener noreferrer">
-					<FaYoutubeSquare size="2.2rem" />
+					<FaYoutubeSquare size="3.5rem" />
 				</a>
 				<a href="https://open.spotify.com/show/2c0TlU1f01LKoVPaMMDxB8?si=f1fa622c0339438e" target="_blank" rel="noopener noreferrer">
-					<FaSpotify size="2.2rem" />
+					<FaSpotify size="3.5rem" />
 				</a>
 				<a href="https://podcasts.apple.com/us/podcast/phs-talks/id1674696258" target="_blank" rel="noopener noreferrer">
-					<SiApplepodcasts size="2.2rem" />
+					<SiApplepodcasts size="3.5rem" />
 				</a>
-				<Link href="/home" legacyBehavior>
-					<a className="home-btn">Go to home page »</a>
+				<Link href="https://docs.google.com/forms/d/e/1FAIpQLSeine_aZUId0y2OjY2FZyJ93ZliGQZos-6c3VwkPg2IhXsGfg/viewform?usp=sf_link" legacyBehavior>
+					<a className="home-btn">Report problem »</a>
 				</Link>
 			</div>
 			<div className="bottom">
@@ -296,7 +305,7 @@ function Footer() {
 
 function NavBar() {
 	return (
-		<div className="navbar" style={{position: "sticky", top: "0", zIndex: "10"}}>
+		<div className="navbar" style={{ position: "sticky", top: "0", zIndex: "10" }}>
 			<style jsx>{`
 				.navbar {
 					display: block;
@@ -366,7 +375,9 @@ function NavBar() {
 					<Link href="/category/sports/student-athletes">Student Athletes</Link>
 				</Button>
 
-				<Button name="CROSSWORD" href="/games/crossword"></Button>
+				<Button name="CROSSWORD" href="/games/crossword">
+					<Link href="/games/crossword/archive">Past Crosswords</Link>
+				</Button>
 
 				<Button name="ABOUT" href="/about">
 					<Link href="/about/2024">2024 Staff</Link>

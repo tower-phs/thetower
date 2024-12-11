@@ -1,17 +1,20 @@
-import Link from "next/link"
-import styles from "~/lib/styles"
+/** @format */
+
+import Link from "next/link";
+import styles from "~/lib/styles";
 
 interface Props {
-    title: String
+	title: String;
 }
 
-export default function SubBanner({title}: Props) {
-    return (
-        <div>
-            <style jsx>{`
-                .sub-banner {
+export default function SubBanner({ title }: Props) {
+	return (
+		<div>
+			<style jsx>{`
+				.sub-banner {
 					text-align: center;
 					align-items: center;
+					// line-height: 1.2;
 				}
 
 				.sub-banner h2 {
@@ -23,7 +26,8 @@ export default function SubBanner({title}: Props) {
 				.sub-banner p {
 					margin-left: 20%;
 					margin-right: 20%;
-					/* font-size: 1.25rem; */
+					margin-top: 0;
+					margin-bottom: 0;
 				}
 
 				.sub-link {
@@ -33,6 +37,9 @@ export default function SubBanner({title}: Props) {
 					background-color: white;
 					transition: 0.25s;
 					padding: 0.5rem;
+					font-family: ${styles.font.sans};
+					font-size: 1.6rem;
+					// text-align: center;
 				}
 
 				.sub-link:hover {
@@ -40,29 +47,32 @@ export default function SubBanner({title}: Props) {
 					background-color: ${styles.color.darkAccent};
 				}
 
-                hr {
-                    width: 90vw;
+				hr {
+					position-x: absolute;
+					width: 90vw;
 					align-self: center;
 					background-color: #ccc;
 					border: none;
 					margin-top: 3vh;
 					margin-bottom: 1vh;
 					height: 3px;
-                }
-
-            `}</style>
-            <div className="sub-banner">
-                <hr />
-                <h2>{title}</h2>
-                <p>
-                    For $30.00 a year, subscribers to The Tower will receive all eight issues shipped to their home or business over the course of the
-                    year.
-                </p>
-                <br />
-                <Link href="/subscribe">
-                    <p className="sub-link">Learn more</p>
-                </Link>
-            </div>
-        </div>   
-    )
+					right: 0;
+					margin-left: 5vw;
+					margin-right: 5vw;
+				}
+			`}</style>
+			<div className="sub-banner">
+				<hr />
+				<h2>{title}</h2>
+				<p>
+					For $30.00 a year, subscribers to The Tower will receive all eight issues shipped to their home or business over the course of the
+					year.
+				</p>
+				<br />
+				<Link href="/subscribe">
+					<p className="sub-link">Learn more</p>
+				</Link>
+			</div>
+		</div>
+	);
 }

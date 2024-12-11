@@ -27,7 +27,7 @@ export default function VirtualArchive({ month, year }: Props) {
 				}
 				p {
 					text-align: center;
-					font-size: 1.5rem;
+					// font-size: 1.5rem;
 				}
 				hr {
 					max-width: 26vw;

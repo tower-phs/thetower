@@ -39,9 +39,9 @@ export default function Video({ link, title }: Props) {
 					height: 100%;
 					/*border-radius: 10px 10px 0px 0px;*/
 				}
-				h3 {
+				p {
 					padding: 5px;
-					/* font-family: ${styles.font.sans}; */
+					font-family: ${styles.font.sans};
 				}
 			`}</style>
 			<div className="video_container">
@@ -53,7 +53,7 @@ export default function Video({ link, title }: Props) {
 					frameBorder={0}
 				></iframe>
 			</div>
-			<h3>{title}</h3>
+			<p>{title}</p>
 		</div>
 	);
 }
