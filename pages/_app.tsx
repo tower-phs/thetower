@@ -39,10 +39,13 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 
 function Banner() {
-	const currMonth = dayjs().month()
+	const currMonth = dayjs().month() // 0-based indexing, jan = 0
 	const currYear = dayjs().year()
-	const month = (currMonth == 1) ? 12 : (currMonth == 5) ? 4 : (6 <= currMonth && currMonth < 9) ? 6 : currMonth
-	const year = (currMonth == 1) ? currYear - 1 : currYear
+	const prevIssue = {
+		// months use 1-based indexing in supabase storage, so 2 represents feb in supabase but march in dayjs
+		month: (currMonth == 0) ? 12 : (6 <= currMonth && currMonth <= 8) ? 6 : currMonth,
+		year: (currMonth == 0) ? currYear - 1 : currYear
+	}
 
 	return (
 		<div className="banner">
@@ -120,7 +123,7 @@ function Banner() {
 					<span style={{ color: styles.color.accent, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem" }}>SUBSCRIBE</span>
 				</Link>
 				<br />
-				<Link href={`https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/${month}-${year}.pdf`}>
+				<Link href={`https://yusjougmsdnhcsksadaw.supabase.co/storage/v1/object/public/prints/${prevIssue.month}-${prevIssue.year}.pdf`}>
 					<span style={{ color: styles.color.accent, cursor: "pointer", fontFamily: styles.font.sans, fontSize: "1.6rem" }}>
 						PRINT EDITION
 					</span>
