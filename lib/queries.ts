@@ -150,7 +150,17 @@ export async function getArticlesByDate(year: string, month: string) {
 
 export async function getIdOfNewest(cat: string, subcat: string | null) {
 	let res;
-	if (cat == "multimedia") {
+	if (cat == "spreads") {
+		res = await prisma.spreads.findFirst({
+			orderBy: [{ year: "desc" }, { month: "desc" }, { id: "desc" }],
+			where: {
+				category: (subcat != null) ? subcat : "",
+			},
+			select: {
+				id: true,
+			},
+		})
+	} else if (cat == "multimedia") {
 		subcat = subcat == null ? "youtube" : subcat;
 		res = await prisma.multimedia.findFirst({
 			orderBy: [{ year: "desc" }, { month: "desc" }, { id: "desc" }],
@@ -315,7 +325,7 @@ export async function getArticlesByAuthor(author: string) {
 	return articles;
 }
 
-export async function getSpreadsByCategory(category: string, take?: number) {
+export async function getSpreadsByCategory(category: string, take: number, offsetCursor: number, skip: number) {
 	if (!take) take = 1;
 
 	const spreads = await prisma.spreads.findMany({
@@ -330,7 +340,11 @@ export async function getSpreadsByCategory(category: string, take?: number) {
 		where: {
 			category
 		},
-		take
+		take,
+		cursor: {
+			id: offsetCursor
+		},
+		skip
 	});
 
 	return spreads;
