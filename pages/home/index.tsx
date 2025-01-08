@@ -7,14 +7,14 @@ import Image from "next/image";
 import ArticlePreview from "~/components/preview.client";
 import Video from "~/components/video.client";
 import Podcast from "~/components/podcast.client";
-import { getFrontpageArticles, getSpreadsByCategory } from "~/lib/queries";
+import { getFrontpageArticles, getIdOfNewest, getSpreadsByCategory } from "~/lib/queries";
 import styles from "~/lib/styles";
 import SubBanner from "~/components/subbanner.client";
 import { SectionContainer, VanguardContainer } from "~/components/sectioncontainer.client";
 
 export async function getServerSideProps() {
 	const articles = await getFrontpageArticles();
-	const vang = await getSpreadsByCategory("VANGUARD", 6)
+	const vang = await getSpreadsByCategory("vanguard", 6, await getIdOfNewest("vanguard", null), 0)
 
 	return {
 		props: {

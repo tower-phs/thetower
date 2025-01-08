@@ -28,6 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					src: upload.message,
 					month: today.getMonth(),
 					year: today.getFullYear(),
+					category: "vanguard"
 				});
 				return res.status(200).json({ message: "Uploaded!" });
 			} catch (e) {
@@ -60,7 +61,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			}
 
 			console.log("passing field checks...")
-			if (!fields.subcategory || !fields.title || !fields.authors || (fields.content == null && fields.content == undefined)) {
+			if (!fields.subcategory || !fields.title || !fields.authors) {
 				return res.status(500).json({ message: 
 					`Some checks that should've already passed failed on the server. Content: ${JSON.stringify(fields)}. Contact online editor(s).`
 				});
