@@ -1,0 +1,159 @@
+{
+	"sections": [
+		{
+			"name": "Senior Editors",
+			"members": [
+				{
+					"name": "Kylie Sek",
+					"position": "Co-Editor-in-Chief"
+				},
+				{
+					"name": "Claire Tang",
+					"position": "Co-Editor-in-Chief"
+				},
+				{
+					"name": "Aritra Ray",
+					"position": "Managing Editor"
+				}
+			]
+		},
+		{
+			"name": "Online",
+			"members": [
+				{
+					"name": "Aryan Singla",
+					"position": "Online Co-Editor"
+				},
+				{
+					"name": "Anita Ndubisi",
+					"position": "Online Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "News & Features",
+			"members": [
+				{
+					"name": "Harry Dweck",
+					"position": "News & Features Co-Editor"
+				},
+				{
+					"name": "Angela Chen",
+					"position": "News & Features Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Opinions",
+			"members": [
+				{
+					"name": "Stephanie Liao",
+					"position": "Opinions Co-Editor"
+				},
+				{
+					"name": "Chloe Zhao",
+					"position": "Opinions Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Vanguard",
+			"members": [
+				{
+					"name": "Finn Wedmid",
+					"position": "Vanguard Co-Editor"
+				},
+				{
+					"name": "Anna Petrova",
+					"position": "Vanguard Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Arts & Entertainment",
+			"members": [
+				{
+					"name": "Tessa Silver",
+					"position": "Arts & Entertainment Co-Editor"
+				},
+				{
+					"name": "Chloe Lam",
+					"position": "Arts & Entertainment Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Sports",
+			"members": [
+				{
+					"name": "Kaelan Patel",
+					"position": "Sports Co-Editor"
+				},
+				{
+					"name": "Katie Quin",
+					"position": "Sports Co-Editor"
+				},
+				{
+					"name": "Claire Yang",
+					"position": "Sports Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Visuals",
+			"members": [
+				{
+					"name": "Katherine Chen",
+					"position": "Visuals Co-Editor"
+				},
+				{
+					"name": "Charley Hu",
+					"position": "Visuals Co-Editor"
+				},
+				{
+					"name": "Emily Kim",
+					"position": "Visuals Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Copy",
+			"members": [
+				{
+					"name": "James Bertrand",
+					"position": "Co-Head Copy Editor"
+				},
+				{
+					"name": "Jacob Rogart",
+					"position": "Co-Head Copy Editor"
+				}
+			]
+		},
+		{
+			"name": "Business",
+			"members": [
+				{
+					"name": "Maxime Devico",
+					"position": "Business Co-Editor"
+				},
+				{
+					"name": "Iniya Kariminal",
+					"position": "Business Co-Editor"
+				}
+			]
+		},
+		{
+			"name": "Multimedia",
+			"members": [
+				{
+					"name": "Joy Chen",
+					"position": "Multimedia Co-Editor"
+				},
+				{
+					"name": "Aarna Vachrajani",
+					"position": "Multimedia Co-Editor"
+				}
+			]
+		}
+	]
+}
