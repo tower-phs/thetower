@@ -39,13 +39,13 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 
 function Banner() {
-	const currMonth = dayjs().month() // 0-based indexing, jan = 0
-	const currYear = dayjs().year()
+	const currMonth = dayjs().month(); // 0-based indexing, jan = 0
+	const currYear = dayjs().year();
 	const prevIssue = {
 		// months use 1-based indexing in supabase storage, so 2 represents feb in supabase but march in dayjs
-		month: (currMonth == 0) ? 12 : (6 <= currMonth && currMonth <= 8) ? 6 : currMonth,
-		year: (currMonth == 0) ? currYear - 1 : currYear
-	}
+		month: currMonth == 0 ? 12 : 6 <= currMonth && currMonth <= 8 ? 6 : currMonth,
+		year: currMonth == 0 ? currYear - 1 : currYear,
+	};
 
 	return (
 		<div className="banner">
@@ -240,7 +240,10 @@ function Footer() {
 				<a href="https://podcasts.apple.com/us/podcast/phs-talks/id1674696258" target="_blank" rel="noopener noreferrer">
 					<SiApplepodcasts size="3.5rem" />
 				</a>
-				<Link href="https://docs.google.com/forms/d/e/1FAIpQLSeine_aZUId0y2OjY2FZyJ93ZliGQZos-6c3VwkPg2IhXsGfg/viewform?usp=sf_link" legacyBehavior>
+				<Link
+					href="https://docs.google.com/forms/d/e/1FAIpQLSeine_aZUId0y2OjY2FZyJ93ZliGQZos-6c3VwkPg2IhXsGfg/viewform?usp=sf_link"
+					legacyBehavior
+				>
 					<a className="home-btn">Report problem »</a>
 				</Link>
 			</div>
@@ -300,8 +303,11 @@ function Footer() {
 				</div>
 			</div>
 			<hr />
-			<span>© 2017-2024 The Tower</span>
-			<span>Site by Luke Tong &apos;23, Jieruei Chang &apos;24, Henry Langmack &apos;25, and Ayush Shrivastava &apos;25</span>
+			<span>© 2017-2025 The Tower</span>
+			<span>
+				Site by Luke Tong &apos;23, Jieruei Chang &apos;24, Henry Langmack &apos;25, Ayush Shrivastava &apos;25, Aryan Singla &apos;27, and
+				Anita Ndubisi &apos;26
+			</span>
 		</div>
 	);
 }
@@ -383,6 +389,8 @@ function NavBar() {
 				</Button>
 
 				<Button name="ABOUT" href="/about">
+					<Link href="/about/2025">2025 Staff</Link>
+					<hr />
 					<Link href="/about/2024">2024 Staff</Link>
 					<hr />
 					<Link href="/about/2023">2023 Staff</Link>

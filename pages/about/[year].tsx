@@ -26,34 +26,17 @@ interface Params {
 
 export async function getStaticPaths() {
 	return {
-		paths: [
-			{
-				params: {
-					year: "2022",
-				},
-			},
-			{
-				params: {
-					year: "2023",
-				},
-			},
-			{
-				params: {
-					year: "2024",
-				},
-			},
-		],
+		paths: [{ params: { year: "2022" } }, { params: { year: "2023" } }, { params: { year: "2024" } }, { params: { year: "2025" } }],
 		fallback: false,
 	};
 }
 
 export async function getStaticProps({ params }: Params) {
 	let data = await import(`~/content/${params.year}.json`);
-	let sections: Section[] = data.sections;
 	return {
 		props: {
 			year: params.year,
-			sections: sections,
+			sections: data.sections,
 		},
 	};
 }
