@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import styles from "~/lib/styles";
+import { useState } from "react";
 
 interface Props {
 	name: string;
@@ -12,69 +13,80 @@ interface Props {
 }
 
 export default function Button({ name, href, children, className, onClick }: Props) {
+	const [isHovered, setIsHovered] = useState(false);
+
 	return (
-		<div className={`dropdown ${className}`} onClick={onClick}>
+		<div
+			className={`dropdown ${className}`}
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setTimeout(() => setIsHovered(false), 150)} // Delay to prevent instant disappearance
+		>
 			<style jsx>{`
 				.dropdown {
 					position: relative;
 					display: inline-block;
 					text-decoration: none;
 				}
-				.showMenu {
-					display: none;
-				}
-				.dropdown:hover .content {
-					display: block;
-					opacity: 1;
-				}
 				.btn {
 					color: ${styles.color.accent};
-					// background-color: ${styles.color.background};
 					display: inline-block;
 					padding: 15px;
-					transition: 0.1s ease-in;
+					transition: 0.2s ease-in-out;
 					box-sizing: border-box;
 					position: relative;
 					font-family: ${styles.font.sans};
-				}
-				.btn::after {
-					content: "";
-					display: block;
-					position: absolute;
-					top: 0;
-					right: 0;
+					text-align: center;
+					cursor: pointer;
+					background-color: rgba(255, 255, 255, 0.9);
+					border-radius: 5px;
 					width: 100%;
-					height: 0%;
-					background-color: ${styles.color.background};
-					transition: 0.1s ease-in;
 				}
-				.btn:hover::after {
-					height: 10%;
+				.btn:hover {
+					background-color: rgba(255, 255, 255, 1);
+					transform: translateY(-2px);
+					box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 				}
 				.content {
 					display: block;
 					position: absolute;
-					/* font-size: medium; */
+					left: 50%;
+					transform: translateX(-50%);
 					padding: 12px;
-
 					min-width: 14vw;
 					box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
 					z-index: 1;
-					opacity: 0;
-					transition: 0.1s ease-in opacity;
-
+					opacity: ${isHovered ? "1" : "0"};
+					visibility: ${isHovered ? "visible" : "hidden"};
+					transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, visibility 0.2s linear;
 					background-color: ${styles.color.background};
+					text-align: center;
+					border-radius: 5px;
+				}
+				.content a {
+					display: block;
+					padding: 12px;
+					text-decoration: none;
+					color: inherit;
+					white-space: nowrap;
+					width: 100%;
+					transition: 0.2s ease-in-out;
+					border-radius: 3px;
 				}
 				.content a:hover {
-					cursor: pointer;
-					color: #474747;
+					background-color: rgba(255, 255, 255, 1);
+					transform: translateY(-2px);
+					box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.05);
 				}
 				@media screen and (max-width: 1000px) {
-					.showMenu,
 					.dropdown,
 					.btn {
 						display: block;
 						width: 100%;
+					}
+					.content {
+						left: 0;
+						transform: none;
+						min-width: 100%;
 					}
 				}
 			`}</style>
